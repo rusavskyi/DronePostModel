@@ -11,9 +11,6 @@ namespace DronePost
     /// </summary>
     public class Customer : Person
     {
-        [Required]
-        public int Id { get; set; }
-
         //[Required]
         //public float Balance { get; set; }
     }
