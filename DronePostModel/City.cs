@@ -5,7 +5,7 @@ namespace DronePost
     /// <summary>
     /// Class represents location (city, town, village) with location name and geographical coordinates.
     /// </summary>
-    public class Location
+    public class City
     {
         [Required]
         public int Id { get; set; }
