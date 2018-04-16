@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DronePost.SupportClasses;
 
 namespace DronePost.Interfaces
 {
     interface IDroneAPI
     {
-        // TechInfo GetTechInfo() // - return technical information(GPS, battery status, ?)
-        // void SetTask(Task task); // - set task immediately for drone
+        DroneTechInfo GetTechInfo(); // Return technical information(GPS, battery status, ?)
+        void SetTask(DroneTask task); // Set task immediately for drone
+        
         /*
            Commit arrival 
            Commit departure 
@@ -15,7 +17,6 @@ namespace DronePost.Interfaces
            Give package
            Request (Get) information about next waypoint
            Send technical info every 5 min to core
-           
          */
     }
 }

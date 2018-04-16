@@ -18,9 +18,9 @@ namespace DronePost.Interfaces
         // int RegisterCustumer(Customer customer, Company company); // ?
 
         /*
-        Give task for drone to station (Add package to queue for sending with drone)
-        Get drone technical info
-        Inform client to take package
+            Give task for drone to station (Add package to queue for sending with drone)
+            Get drone technical info
+            Inform client to take package
         */
     }
 }
