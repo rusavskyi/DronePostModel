@@ -6,5 +6,6 @@ namespace DronePost.Interfaces
 {
     interface IClientAPI
     {
+
     }
 }
