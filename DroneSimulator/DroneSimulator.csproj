@@ -94,11 +94,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DronePostModel\DronePostModel.csproj">
-      <Project>{3c8a0c54-39eb-4b24-896e-45150ab107f9}</Project>
-      <Name>DronePostModel</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

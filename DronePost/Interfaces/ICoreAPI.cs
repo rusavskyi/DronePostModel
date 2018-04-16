@@ -15,7 +15,7 @@ namespace DronePost.Interfaces
 
         int RegisterCustumer(Customer customer);
 
-        // int RegisterCustumer(Customer customer, Company company); // Don't 
+        // int RegisterCustumer(Customer customer, Company company); // ?
 
     }
 }
