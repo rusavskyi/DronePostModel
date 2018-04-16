@@ -10,8 +10,7 @@ namespace DroneSimulator
 {
     class Simulator
     {
-
-        List<Drone> =
+        private List<Drone> _drones;
 
         public Simulator(int dronesCount)
         {
