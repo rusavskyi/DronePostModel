@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DronePost
+namespace DronePost.DataModel
 {
     /// <summary>
     /// This class represents customet as business entity. Can be presented as a person or company.

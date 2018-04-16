@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DronePost
+namespace DronePost.DataModel
 {
     /// <summary>
     /// Represents drone model.

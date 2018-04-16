@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DronePost
+namespace DronePost.DataModel
 {
     /// <summary>
     /// This class represents package.

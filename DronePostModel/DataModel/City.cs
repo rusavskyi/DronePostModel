@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DronePost
+namespace DronePost.DataModel
 {
     /// <summary>
     /// Class represents location (city, town, village) with location name and geographical coordinates.
