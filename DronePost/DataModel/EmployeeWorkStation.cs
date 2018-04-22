@@ -12,6 +12,9 @@ namespace DronePost.DataModel
     public class EmployeeWorkStation
     {
         [Required]
+        public int Id { get; set; }
+
+        [Required]
         public Employee Employee { get; set; }
 
         [Required]
