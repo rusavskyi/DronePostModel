@@ -17,6 +17,7 @@ namespace DronePost.DataModel
         [Required]
         public DroneModel Model { get; set; }
 
+        //public DroneTechInfo techInfo {get; set}
 
         [Required]
         public float Longitude { get; set; }
