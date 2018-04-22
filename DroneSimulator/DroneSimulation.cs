@@ -25,9 +25,29 @@ namespace DroneSimulator
             throw new NotImplementedException();
         }
 
-        public void SetTask(DroneTask task)
+        public void AddTask(DroneTask task)
         {
             _tasks.Enqueue(task);
+        }
+
+        public void SetTask(DroneTask task)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DoNextTask(bool force = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Stop()
+        {
+            throw new NotImplementedException();
         }
     }
 }

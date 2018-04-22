@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using DronePost.SupportClasses;
 
@@ -8,8 +9,12 @@ namespace DronePost.Interfaces
     public interface IDroneAPI
     {
         DroneTechInfo GetTechInfo(); // Return technical information(GPS, battery status, ?)
-        void SetTask(DroneTask task); // Set task immediately for drone
-        
+        void AddTask(DroneTask task); // Add task to queue
+        void SetTask(DroneTask task); // Set task to do immediately for drone
+        void DoNextTask(bool force = false);
+        bool Start();
+        bool Stop();
+
         /*
            Commit arrival 
            Commit departure 
