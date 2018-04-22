@@ -13,6 +13,8 @@ namespace DroneSimulator
     {
         public Drone Drone { get; set; }
 
+        private Queue<DroneTask> _tasks;
+
         public DroneSimulation(Drone drone)
         {
             Drone = drone;
@@ -25,7 +27,7 @@ namespace DroneSimulator
 
         public void SetTask(DroneTask task)
         {
-            throw new NotImplementedException();
+            _tasks.Enqueue(task);
         }
     }
 }
