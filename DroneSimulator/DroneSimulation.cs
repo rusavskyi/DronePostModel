@@ -98,7 +98,7 @@ namespace DroneSimulator
 
         private bool GoToStation()
         {
-
+            
             return true;
         }
 

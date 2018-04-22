@@ -8,6 +8,9 @@ namespace DronePost.DataModel
     public class PackageToStation
     {
         [Required]
+        public int Id { get; set; }
+
+        [Required]
         public Package Package { get; set; }
 
         [Required]
