@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "CoreSimulator\Core.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationSimulator", "StationSimulator\StationSimulator.csproj", "{49E5B070-9BE3-49A8-9903-C8CA0DC09C74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreService", "CoreService\CoreService.csproj", "{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,12 @@ Global
 		{49E5B070-9BE3-49A8-9903-C8CA0DC09C74}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{49E5B070-9BE3-49A8-9903-C8CA0DC09C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49E5B070-9BE3-49A8-9903-C8CA0DC09C74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
