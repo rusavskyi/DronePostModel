@@ -14,10 +14,12 @@ namespace DroneSimulator
         public Drone Drone { get; set; }
 
         private Queue<DroneTask> _tasks;
+        private DroneTask _currenTask;
 
         public DroneSimulation(Drone drone)
         {
             Drone = drone;
+            _tasks = new Queue<DroneTask>();
         }
 
         public DroneTechInfo GetTechInfo()
