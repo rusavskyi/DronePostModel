@@ -11,7 +11,8 @@ namespace DronePost.DataModel
     /// </summary>
     public class Customer : Person
     {
-        //[Required]
-        //public float Balance { get; set; }
+        [Required]
+        public bool CompanyAgent { get; set; }
+        public Company Company { get; set; }
     }
 }
