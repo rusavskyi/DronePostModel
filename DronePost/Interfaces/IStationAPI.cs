@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DronePost.Interfaces
 {
-    interface IStationAPI
+    public interface IStationAPI
     {
         // Int CheckInDrone (Drone d) - check-in drone to station
         // ? Void CheckoutDrone(Drone d) - check-out drone from station

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DronePost.SupportClasses
 {
-    class DroneTechInfo
+    public class DroneTechInfo
     {
         // ToDo will be defined later
     }

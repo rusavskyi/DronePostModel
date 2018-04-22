@@ -10,11 +10,11 @@ namespace DroneSimulator
 {
     class Simulator
     {
-        public List<Drone> Drones { get; protected set; }
+        public List<DroneSimulation> Drones { get; protected set; }
 
         public Simulator()
         {
-            Drones = new List<Drone>();
+            Drones = new List<DroneSimulation>();
         }
 
 

@@ -5,7 +5,7 @@ using DronePost.SupportClasses;
 
 namespace DronePost.Interfaces
 {
-    interface IDroneAPI
+    public interface IDroneAPI
     {
         DroneTechInfo GetTechInfo(); // Return technical information(GPS, battery status, ?)
         void SetTask(DroneTask task); // Set task immediately for drone
