@@ -8,6 +8,7 @@ namespace DronePost.SupportClasses
         public Package Package { get; }
         public Station Station { get; }
 
+
         public DroneTask(DroneTaskType type, Package package, Station station)
         {
             Type = type;
