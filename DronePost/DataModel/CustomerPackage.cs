@@ -8,6 +8,9 @@ namespace DronePost.DataModel
     public class CustomerPackage
     {
         [Required]
+        public int Id { get; set; }
+
+        [Required]
         public Customer Sender { get; set; }
 
         [Required]
