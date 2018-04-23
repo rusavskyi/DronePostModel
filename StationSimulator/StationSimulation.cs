@@ -2,22 +2,35 @@
 using DronePost.Interfaces;
 using DronePost.SupportClasses;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StationSimulator
 {
+    // ToDo FIX METHODS to fit IStationAPI
     class StationSimulation : IStationAPI
     {
         public Station Station { get; set; }
 
-        private ArrayList drones = new ArrayList();
-        private ArrayList packagesToSent = new ArrayList();
-        private ArrayList packagesToGive = new ArrayList();
+        private StationTask _currentTask;
+        private bool _currentTaskIsFinished;
+        private List<Drone> _drones;
+        private List<Package> _packagesToSent;
+        private List<Package> _packagesToGive;
+        private Queue<StationTask> _tasks;
+        private List<int> _chargeSlots;
 
+
+        public StationSimulation(Station station)
+        {
+            Station = station;
+            _currentTask = null;
+            _currentTaskIsFinished = true;
+            _drones = new List<Drone>();
+            _packagesToGive = new List<Package>();
+            _packagesToGive = new List<Package>();
+            _tasks = new Queue<StationTask>();
+            _chargeSlots = new List<int>();
+        }
 
         public void ChargeDroneOff(Drone drone)
         {
@@ -31,19 +44,29 @@ namespace StationSimulator
 
         public void CheckInDrone(Drone drone)
         {
-            drones.Add(drone);
+            _drones.Add(drone);
         }
 
         public void CheckOutDrone(Drone drone)
         {
             if (drone.Equals(drone))
             {
-                drones.Remove(drone);
+                _drones.Remove(drone);
             }
             else
             {
-                Console.WriteLine("This drone is not on this station");
+                Console.WriteLine("This drone is not on this station"); // todo WPF - print to log view, somehow
             }
+        }
+
+        public void RequestDroneForPackage(Package package)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RequestDroneForPackages(params Package[] packages)
+        {
+            throw new NotImplementedException();
         }
 
         public DroneTechInfo GetDroneTechInfo(Drone drone)
@@ -52,15 +75,55 @@ namespace StationSimulator
             throw new NotImplementedException();
         }
 
+        public void CheckIn(Drone drone)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CheckOut(Drone drone)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GivePackageToRecipient(Customer customer, Package package)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Package GetPackageFromCustomer(Package package)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetTask(StationTask stationTask)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddTask(StationTask stationTask)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DoNextTask(bool force = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int RequestChargeSlot()
+        {
+            throw new NotImplementedException();
+        }
+
         public Package GetPackage(Package package)
         {
-            packagesToSent.Add(package);
+            _packagesToSent.Add(package);
             return new Package();
         }
 
         public void GivePackage(Customer customer, Package package)
         {
-            packagesToGive.Add(package);
+            _packagesToGive.Add(package);
         }
 
         public void RequestDrone(Package package, Drone drone)

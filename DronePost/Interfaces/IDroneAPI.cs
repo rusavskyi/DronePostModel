@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-using DronePost.SupportClasses;
+﻿using DronePost.SupportClasses;
 
 namespace DronePost.Interfaces
 {

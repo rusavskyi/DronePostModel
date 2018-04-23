@@ -1,30 +1,28 @@
 ﻿using DronePost.DataModel;
 using DronePost.SupportClasses;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DronePost.Interfaces
 {
     public interface IStationAPI
     {
-        void CheckInDrone(Drone drone);
-        void CheckOutDrone(Drone drone);
-        void RequestDrone(Package package, Drone drone);
-        void ChargeDroneOn(Drone drone);
-        void ChargeDroneOff(Drone drone);
-        DroneTechInfo GetDroneTechInfo(Drone drone);
-        void GivePackage(Customer customer, Package package);
-        Package GetPackage(Package package);
-        void SetTask(DroneTask droneTask, Drone drone);
+        void CheckIn(Drone drone);
+        void CheckOut(Drone drone);
+        void GivePackageToRecipient(Customer customer, Package package);
+        Package GetPackageFromCustomer(Package package);
+        void SetTask(StationTask stationTask); // Setting task to do immediately
+        void AddTask(StationTask stationTask); // Adding task to queue
+        void DoNextTask(bool force = false); // Starting next task, if forsed starting immediately
+        int RequestChargeSlot();
+
+        // Connect to slot method?
 
 
         // Int CheckInDrone (Drone d) - check-in drone to station
         // ? Void CheckoutDrone(Drone d) - check-out drone from station
-        
+
         /*
            Request drone to take package
-           Set drone on charge
+           Set drone on charge // ?! core shit?
            Get drone technical info
            Give package to recipient
            Get package from sender
