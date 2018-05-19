@@ -29,6 +29,11 @@ namespace CustomerSimulator
             _random = new Random(DateTime.Now.GetHashCode());
         }
 
+        public void RequestParamsFromCore()
+        {
+            // ToDo
+        }
+
         public void StartSimulation() // param: StationSimulatorClient
         {
             if (NumberOfPackageSizes > 0 &&
