@@ -25,7 +25,14 @@ namespace CoreSimulator
         public MainWindow()
         {
             InitializeComponent();
+            WriteToOutput("test");
+            WriteToOutput("test");
             
+        }
+
+        public void WriteToOutput(string message)
+        {
+            Dispatcher.Invoke(() => { TbOutput.AppendText(message + "\n"); });
         }
     }
 }
