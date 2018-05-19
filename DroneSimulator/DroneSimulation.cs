@@ -15,6 +15,7 @@ namespace DroneSimulator
         public Drone Drone { get; set; }
 		public bool _isWorking { get; set; }
 
+		private Thread thread;
 
 		private Queue<DroneTask> _tasks;
         private DroneTask _currenTask;
@@ -55,20 +56,48 @@ namespace DroneSimulator
 
         public void DoNextTask(bool force = false)
         {
-            throw new NotImplementedException();
+			if (_tasks.Count >= 1)
+			{
+				DroneTask nextTask = _tasks.Dequeue();
+
+				switch (nextTask.Type)
+				{
+					case DroneTaskType.TakePackage:
+						_currentTaskIsFinished = TakePackage();
+						break;
+					case DroneTaskType.GoToStation:
+						_currentTaskIsFinished = GoToStation();
+						break;
+					case DroneTaskType.LeavePackage:
+						_currentTaskIsFinished = LeavePackage();
+						break;
+					case DroneTaskType.ChargeAtStation:
+						_currentTaskIsFinished = ChargeAtStation();
+						break;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+
+			}
+			else {
+				Console.WriteLine("Drone Task queue is empty");
+			}
         }
 
         public bool Start()
         {
             _isWorking = true;
-            Thread thread = new Thread(WorkSimulationThread);
+            thread = new Thread(WorkSimulationThread);
             thread.Start();
             return thread.IsAlive;
         }
 
         public bool Stop()
         {
-            throw new NotImplementedException();
+			_isWorking = false;
+			thread.Abort();
+			return !thread.IsAlive;
+			
         }
 
         private void WorkSimulationThread()
@@ -108,8 +137,8 @@ namespace DroneSimulator
 
         private bool GoToStation()
         {
-            
-            return true;
+		
+	        return true;
         }
 
         private bool TakePackage()
