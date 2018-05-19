@@ -20,7 +20,7 @@ namespace StationSimulator
 		private Queue<StationTask> _tasks;
 		private List<int> _chargeSlots;
 
-		private List<DroneSimulation> _droneSimulations;
+		//private List<DroneSimulation> _droneSimulations;
 
 		public StationSimulation(Station station)
 		{
@@ -65,62 +65,62 @@ namespace StationSimulator
 
 		public void RequestDroneForPackage(Package package)
 		{
-			foreach (DroneSimulation drone in _droneSimulations) {
-				if (!drone._isWorking) {
+			//foreach (DroneSimulation drone in _droneSimulations) {
+			//	if (!drone._isWorking) {
 
-					if (drone.Drone.Model.MaxSizeCarry.Lenght >= package.Size.Lenght && 
-						drone.Drone.Model.MaxSizeCarry.Height >= package.Size.Height && 
-						drone.Drone.Model.MaxSizeCarry.Width >= package.Size.Width && 
-						drone.Drone.Model.MaxWeightCarry >= package.Weight)
-					{
-						DroneTask t = new DroneTask(DroneTaskType.TakePackage, package, package.DestinationStation);
-						drone.AddTask(t);
-					}
-					else {
-						Console.WriteLine("Drone not found 404 :-)");
-					}
+			//		if (drone.Drone.Model.MaxSizeCarry.Lenght >= package.Size.Lenght && 
+			//			drone.Drone.Model.MaxSizeCarry.Height >= package.Size.Height && 
+			//			drone.Drone.Model.MaxSizeCarry.Width >= package.Size.Width && 
+			//			drone.Drone.Model.MaxWeightCarry >= package.Weight)
+			//		{
+			//			DroneTask t = new DroneTask(DroneTaskType.TakePackage, package, package.DestinationStation);
+			//			drone.AddTask(t);
+			//		}
+			//		else {
+			//			Console.WriteLine("Drone not found 404 :-)");
+			//		}
 
 
-				}
-			}
+			//	}
+			//}
 		}
 
 		public void RequestDroneForPackages(params Package[] packages) // проблема с рассчётом габаритов
 		{
-			foreach (DroneSimulation drone in _droneSimulations)
-			{
-				if (!drone._isWorking)
-				{
-					float length = 0; 
-					float height = 0;
-					float width = 0;
-					float weight = 0;
-					foreach(Package package in packages) {
-						length += package.Size.Lenght;
-						height += package.Size.Height;
-						width += package.Size.Width;
-						weight += package.Weight;
-					}
+			//foreach (DroneSimulation drone in _droneSimulations)
+			//{
+			//	if (!drone._isWorking)
+			//	{
+			//		float length = 0; 
+			//		float height = 0;
+			//		float width = 0;
+			//		float weight = 0;
+			//		foreach(Package package in packages) {
+			//			length += package.Size.Lenght;
+			//			height += package.Size.Height;
+			//			width += package.Size.Width;
+			//			weight += package.Weight;
+			//		}
 
 
-					if (drone.Drone.Model.MaxSizeCarry.Lenght >= length &&
-						drone.Drone.Model.MaxSizeCarry.Height >= height &&
-						drone.Drone.Model.MaxSizeCarry.Width >= width &&
-						drone.Drone.Model.MaxWeightCarry >= weight)
-					{
-						foreach(Package package in packages) {
-							DroneTask t = new DroneTask(DroneTaskType.TakePackage, package, package.DestinationStation);
-							drone.AddTask(t);
-						}
-					}
-					else
-					{
-						Console.WriteLine("Drone not found 404 :-)");
-					}
+			//		if (drone.Drone.Model.MaxSizeCarry.Lenght >= length &&
+			//			drone.Drone.Model.MaxSizeCarry.Height >= height &&
+			//			drone.Drone.Model.MaxSizeCarry.Width >= width &&
+			//			drone.Drone.Model.MaxWeightCarry >= weight)
+			//		{
+			//			foreach(Package package in packages) {
+			//				DroneTask t = new DroneTask(DroneTaskType.TakePackage, package, package.DestinationStation);
+			//				drone.AddTask(t);
+			//			}
+			//		}
+			//		else
+			//		{
+			//			Console.WriteLine("Drone not found 404 :-)");
+			//		}
 
 
-				}
-			}
+			//	}
+			//}
 		} 
 		public DroneTechInfo GetDroneTechInfo(Drone drone)
 		{
@@ -187,20 +187,20 @@ namespace StationSimulator
 
 		public void SetTask(DroneTask droneTask, Drone drone) // check method
 		{
-			foreach (DroneSimulation d in _droneSimulations)
-			{
-				if (d.Drone.Equals(drone))
-				{
-					d.AddTask(droneTask);
-					break;
-				}
-				else
-				{
-					DroneSimulation ds = new DroneSimulation(drone);
-					ds.AddTask(droneTask);
-					_droneSimulations.Add(ds);
-				}
-			}
+			//foreach (DroneSimulation d in _droneSimulations)
+			//{
+			//	if (d.Drone.Equals(drone))
+			//	{
+			//		d.AddTask(droneTask);
+			//		break;
+			//	}
+			//	else
+			//	{
+			//		DroneSimulation ds = new DroneSimulation(drone);
+			//		ds.AddTask(droneTask);
+			//		_droneSimulations.Add(ds);
+			//	}
+			//}
 		}
 	}
 }
