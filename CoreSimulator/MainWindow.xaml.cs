@@ -25,8 +25,6 @@ namespace CoreSimulator
         public MainWindow()
         {
             InitializeComponent();
-            WriteToOutput("test");
-            WriteToOutput("test");
             
         }
 
