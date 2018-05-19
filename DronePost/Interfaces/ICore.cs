@@ -5,18 +5,14 @@ namespace DronePost.Interfaces
 {
     public interface ICore
     {
+
         int RegisterPackage(Package package);
-
         int RegisterTransfer(Transfer transfer);
-
         int RegisterDrone(Drone drone);
-
         int RegisterStation(Station station);
-
-        int RegisterCustumer(Customer customer);
-
+        int RegisterCustomer(Customer customer);
         void SendDroneOnCharge(Drone drone, Station station);
-        void RequestDroneForPackage(Package package); 
+        void RequestDroneForPackage(Package package);
         void RequestDroneForPackages(params Package[] packages);
 
 
