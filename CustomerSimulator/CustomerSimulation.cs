@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using DronePost.DataModel;
+using DronePost.SupportClasses;
 
 namespace CustomerSimulator
 {
@@ -20,10 +21,12 @@ namespace CustomerSimulator
         public bool AddPlusBeforePhoneNumber { get; set; }
 
         protected bool _isWorking;
+        Random _random;
+
 
         public CustomerSimulation()
         {
-
+            _random =  = new Random(DateTime.Now.GetHashCode());
         }
 
         public void StartSimulation() // param: StationSimulatorClient
@@ -32,17 +35,26 @@ namespace CustomerSimulator
                 NumberOfStations > 0 &&
                 MaxDelay > MinDelay &&
                 MaxWeight > 0 &&
-                DelayMultiplier > 0)
+                DelayMultiplier > 0 &&
+                MinDelay >= 0 &&
+                PhoneLength >= 7 &&
+                NumberOfCustomers > 0)
             {
                 _isWorking = true;
                 while (_isWorking)
                 {
                     int departureStationId = PickStation();
-                    int destinationStationId = PickStationDifferentFrom(departureStationId);
-                    int sizeId = PickPackageSize();
-                    int senderId = PickCustomer();
-                    float weight = GenerateWeight();
-
+                    GeneratedPackage package = new GeneratedPackage()
+                    {
+                        DepartureStationId = departureStationId,
+                        DestinationStationId = PickStationDifferentFrom(departureStationId),
+                        SenderId = PickPackageSize(),
+                        PackageSizeId = PickCustomer(),
+                        PackageWeight = GenerateWeight(),
+                        RecipientNumber = GenerateRecipientPhoneNumber()
+                    };
+                    // ToDo send package to StationSimulator()
+                    Thread.Sleep(GenerateDelay());
                 }
 
             }
@@ -50,6 +62,11 @@ namespace CustomerSimulator
             {
                 throw new WrongSimulationParamsException();
             }
+        }
+
+        public void StopSimulation()
+        {
+            _isWorking = false;
         }
 
         protected int PickStation()
@@ -79,7 +96,6 @@ namespace CustomerSimulator
 
         protected string GenerateRecipientPhoneNumber()
         {
-            Random random = new Random(DateTime.Now.GetHashCode());
             StringBuilder stringBuilder = new StringBuilder(String.Empty);
             if (AddPlusBeforePhoneNumber)
             {
@@ -87,9 +103,15 @@ namespace CustomerSimulator
             }
             for (int i = 0; i < PhoneLength; i++)
             {
-                stringBuilder.Append(i == 0 ? random.Next(1, 10) : random.Next(10));
+                stringBuilder.Append(i == 0 ? _random.Next(1, 10) : _random.Next(10));
             }
             return stringBuilder.ToString();
+        }
+
+        protected int GenerateDelay()
+        {
+
+            return 0;
         }
 
         // ToDo MB RequestCustomer(int id)
