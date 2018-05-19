@@ -17,19 +17,31 @@ namespace CoreService
 
         [OperationContract]
         int RegisterPackage(Package package);
+
         [OperationContract]
         int RegisterTransfer(Transfer transfer);
+
         [OperationContract]
         int RegisterDrone(Drone drone);
+
         [OperationContract]
         int RegisterStation(Station station);
+
         [OperationContract]
         int RegisterCustomer(Customer customer);
+
         [OperationContract]
         void SendDroneOnCharge(Drone drone, Station station);
+
         [OperationContract]
         void RequestDroneForPackage(Package package);
+
         [OperationContract]
         void RequestDroneForPackages(params Package[] packages);
+
+        [OperationContract]
+        void RegisterPackageFromStation(Package package);
+
+
     }
 }

@@ -60,6 +60,7 @@
     <Compile Include="Interfaces\ICore.cs" />
     <Compile Include="Interfaces\IDrone.cs" />
     <Compile Include="Interfaces\IStation.cs" />
+    <Compile Include="SupportClasses\ChargeRespond.cs" />
     <Compile Include="SupportClasses\DroneTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SupportClasses\DroneTechInfo.cs" />

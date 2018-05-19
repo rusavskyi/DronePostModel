@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using DronePost.DataModel;
+using DronePost.SupportClasses;
 
 namespace StationSimulatorService
 {
@@ -11,10 +13,13 @@ namespace StationSimulatorService
     public interface IStationSimulatorService
     {
         [OperationContract]
-        string GetData(int value);
+        void RegisterPackageFromClient(GeneratedPackage package);
 
+        [OperationContract]
+        void CommitArrival(Drone drone);
 
-        // TODO: Add your service operations here
+        [OperationContract]
+        ChargeRespond RequestCharge();
     }
 
 }
