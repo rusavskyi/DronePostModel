@@ -23,7 +23,7 @@ namespace DronePost.DataModel
         public DateTime BirthDate { get; set; }
 
         [Required]
-        public City City { get; set; } // City, town village
+        public City City { get; set; } // City, town, village
 
         [Required]
         [StringLength(255)]

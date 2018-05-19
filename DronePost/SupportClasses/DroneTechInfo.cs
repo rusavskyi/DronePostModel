@@ -8,12 +8,12 @@ namespace DronePost.SupportClasses
 {
     public class DroneTechInfo
     {
-        private string Name;
-        private string Model;
-        private double Weight; // drone's weight in gramms
-        private double Carrying; // carrying capacity in gramms
-        private double BatteryCapacity; // in mAh
-        private DroneSize Size;
+        private string _name;
+        private string _model;
+        private double _weight; // drone's weight in gramms
+        private double _carrying; // carrying capacity in gramms
+        private double _batteryCapacity; // in mAh
+        private DroneSize _size;
 
 
         // ToDo will be defined later

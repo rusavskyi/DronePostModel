@@ -42,6 +42,17 @@
   <ItemGroup>
     <Compile Include="CustomerSimulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WrongSimulationParamsException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DronePost\DronePost.csproj">
+      <Project>{1eb06752-71d3-4df7-8b4d-7295b4c1a7b8}</Project>
+      <Name>DronePost</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StationSimulator\StationSimulator.csproj">
+      <Project>{49e5b070-9be3-49a8-9903-c8ca0dc09c74}</Project>
+      <Name>StationSimulator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
