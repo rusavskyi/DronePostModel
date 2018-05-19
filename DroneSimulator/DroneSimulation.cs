@@ -10,14 +10,19 @@ using DronePost.SupportClasses;
 
 namespace DroneSimulator
 {
-    public class DroneSimulation : IDrone
+    public class DroneSimulation : Drone, IDrone
     {
         public Drone Drone { get; set; }
+		public bool _isWorking { get; set; }
 
-        private Queue<DroneTask> _tasks;
+
+		private Queue<DroneTask> _tasks;
         private DroneTask _currenTask;
         private bool _currentTaskIsFinished;
-        public bool _isWorking { get; set; }
+        
+
+		
+
 
         public DroneSimulation(Drone drone)
         {
@@ -35,20 +40,17 @@ namespace DroneSimulator
 
         public void AddTask(DroneTask task)
         {
-			if (task.Type.CompareTo(DroneTaskType.TakePackage) == 1 || task.Type.CompareTo(DroneTaskType.GoToStation) == 1 ||
-				task.Type.CompareTo(DroneTaskType.TakePackage) == 1)
-			{
-				_isWorking = true;
-			}
-			else _isWorking = false;
-
-            _tasks.Enqueue(task);
-
+			_tasks.Enqueue(task);
         }
 
         public void SetTask(DroneTask task)
         {
-            throw new NotImplementedException();
+			List<DroneTask> droneTask = _tasks.ToList();
+			_tasks.Clear();
+			_tasks.Enqueue(task);
+			foreach (DroneTask taskItem in droneTask) {
+				_tasks.Enqueue(taskItem);
+			}
         }
 
         public void DoNextTask(bool force = false)
