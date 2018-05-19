@@ -10,14 +10,14 @@ using DronePost.SupportClasses;
 
 namespace DroneSimulator
 {
-    class DroneSimulation : IDroneAPI
+    public class DroneSimulation : IDroneAPI
     {
         public Drone Drone { get; set; }
 
         private Queue<DroneTask> _tasks;
         private DroneTask _currenTask;
         private bool _currentTaskIsFinished;
-        private bool _isWorking;
+        public bool _isWorking { get; set; }
 
         public DroneSimulation(Drone drone)
         {
@@ -35,7 +35,15 @@ namespace DroneSimulator
 
         public void AddTask(DroneTask task)
         {
+			if (task.Type.CompareTo(DroneTaskType.TakePackage) == 1 || task.Type.CompareTo(DroneTaskType.GoToStation) == 1 ||
+				task.Type.CompareTo(DroneTaskType.TakePackage) == 1)
+			{
+				_isWorking = true;
+			}
+			else _isWorking = false;
+
             _tasks.Enqueue(task);
+
         }
 
         public void SetTask(DroneTask task)
