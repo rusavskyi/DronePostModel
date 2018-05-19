@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using DronePost.DataModel;
+﻿using DronePost.DataModel;
 
 namespace DronePost.Interfaces
 {

@@ -3,7 +3,6 @@ using DronePost.Interfaces;
 using DronePost.SupportClasses;
 using System;
 using System.Collections.Generic;
-using DroneSimulator;
 
 namespace StationSimulator
 {
