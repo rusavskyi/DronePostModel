@@ -1,18 +1,18 @@
-namespace Core.Migrations
+namespace Core
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Core.DronePostContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DronePostContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Core.DronePostContext context)
+        protected override void Seed(DronePostContext context)
         {
             //  This method will be called after migrating to the latest version.
 
