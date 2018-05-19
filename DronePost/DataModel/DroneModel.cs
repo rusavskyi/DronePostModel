@@ -22,5 +22,8 @@ namespace DronePost.DataModel
 
         [Required]
         public float MaxFlightDistance { get; set; }
+
+        [Required]
+        public float BatteryCapacity { get; set; }
     }
 }
