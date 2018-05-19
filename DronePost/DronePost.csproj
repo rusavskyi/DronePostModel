@@ -57,9 +57,9 @@
     <Compile Include="DataModel\Person.cs" />
     <Compile Include="DataModel\Station.cs" />
     <Compile Include="DataModel\Transfer.cs" />
-    <Compile Include="Interfaces\ICoreAPI.cs" />
-    <Compile Include="Interfaces\IDroneAPI.cs" />
-    <Compile Include="Interfaces\IStationAPI.cs" />
+    <Compile Include="Interfaces\ICore.cs" />
+    <Compile Include="Interfaces\IDrone.cs" />
+    <Compile Include="Interfaces\IStation.cs" />
     <Compile Include="SupportClasses\DroneTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SupportClasses\DroneTechInfo.cs" />

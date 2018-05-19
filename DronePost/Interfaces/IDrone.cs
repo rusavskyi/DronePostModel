@@ -2,7 +2,7 @@
 
 namespace DronePost.Interfaces
 {
-    public interface IDroneAPI
+    public interface IDrone
     {
         DroneTechInfo GetTechInfo(); // Return technical information(GPS, battery status, ?)
         void AddTask(DroneTask task); // Add task to queue

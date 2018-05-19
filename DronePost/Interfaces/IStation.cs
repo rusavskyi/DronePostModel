@@ -3,7 +3,7 @@ using DronePost.SupportClasses;
 
 namespace DronePost.Interfaces
 {
-    public interface IStationAPI
+    public interface IStation
     {
         void CheckIn(Drone drone);
         void CheckOut(Drone drone);

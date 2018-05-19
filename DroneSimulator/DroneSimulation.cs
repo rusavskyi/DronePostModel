@@ -10,7 +10,7 @@ using DronePost.SupportClasses;
 
 namespace DroneSimulator
 {
-    public class DroneSimulation : IDroneAPI
+    public class DroneSimulation : IDrone
     {
         public Drone Drone { get; set; }
 

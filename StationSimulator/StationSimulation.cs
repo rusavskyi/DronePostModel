@@ -7,8 +7,8 @@ using DroneSimulator;
 
 namespace StationSimulator
 {
-	// ToDo FIX METHODS to fit IStationAPI
-	class StationSimulation : IStationAPI
+	// ToDo FIX METHODS to fit IStation
+	class StationSimulation : IStation
 	{
 		public Station Station { get; set; }
 

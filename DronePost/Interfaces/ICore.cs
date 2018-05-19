@@ -3,7 +3,7 @@ using DronePost.DataModel;
 
 namespace DronePost.Interfaces
 {
-    public interface ICoreAPI
+    public interface ICore
     {
         int RegisterPackage(Package package);
 
