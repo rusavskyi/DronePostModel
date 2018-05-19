@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationSimulator", "Station
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreService", "CoreService\CoreService.csproj", "{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerSimulator1", "CustomerSimulator1\CustomerSimulator1.csproj", "{59093759-572E-4CA3-A712-8871D9DFBF62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,12 @@ Global
 		{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D5EBE3B-A980-4FF1-801A-1363F28A8DB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59093759-572E-4CA3-A712-8871D9DFBF62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59093759-572E-4CA3-A712-8871D9DFBF62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59093759-572E-4CA3-A712-8871D9DFBF62}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{59093759-572E-4CA3-A712-8871D9DFBF62}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{59093759-572E-4CA3-A712-8871D9DFBF62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59093759-572E-4CA3-A712-8871D9DFBF62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
