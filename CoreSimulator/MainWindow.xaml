@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:CoreSimulator"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <StackPanel>
         
-    </Grid>
+        <TextBox Name="TbOutput" IsReadOnly="True" Height="400"></TextBox>
+        
+
+    </StackPanel>
 </Window>
