@@ -13,6 +13,9 @@ namespace CoreService
     public interface ICoreService
     {
         [OperationContract]
+        void AssignCore(ICore core);
+
+        [OperationContract]
         int RegisterPackage(Package package);
         [OperationContract]
         int RegisterTransfer(Transfer transfer);

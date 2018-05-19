@@ -13,6 +13,11 @@ namespace CoreService
     {
         private ICore _core;
 
+        public void AssignCore(ICore core)
+        {
+            _core = core;
+        }
+
 
         public int RegisterPackage(Package package)
         {
