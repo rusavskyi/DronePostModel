@@ -10,7 +10,7 @@ namespace StationSimulatorService
     {
         public IStation Station { get; set; }
 
-        public void RegisterPackageFromClient(GeneratedPackage package)
+        public bool RegisterPackageFromClient(GeneratedPackage package)
         {
             throw new NotImplementedException();
         }

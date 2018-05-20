@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IMessageHandler.cs" />
     <Compile Include="Simulation.cs" />
     <Compile Include="StationSimulation.cs" />
     <Page Include="MainWindow.xaml">

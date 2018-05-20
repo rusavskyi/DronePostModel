@@ -8,7 +8,7 @@ namespace StationSimulatorService
     public interface IStationSimulatorService
     {
         [OperationContract]
-        void RegisterPackageFromClient(GeneratedPackage package);
+        bool RegisterPackageFromClient(GeneratedPackage package);
 
         [OperationContract]
         void CommitArrival(Drone drone);
