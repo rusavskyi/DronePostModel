@@ -25,14 +25,14 @@ namespace CoreSimulator
 
         private void StartHost()
         {
-            Uri baseAddress = new Uri("http:/localhost:8888/Core");
+            Uri baseAddress = new Uri("http://localhost:8888/Core");
             _host = new ServiceHost(typeof(CoreService.CoreService), baseAddress);
 
             try
             {
                 ServiceEndpoint endpoint = _host.AddServiceEndpoint(
                     typeof(ICoreService),
-                    new BasicHttpBinding(),
+                    new WSHttpBinding(),
                     ""
                     );
                 ServiceMetadataBehavior bechavior = new ServiceMetadataBehavior()
@@ -40,12 +40,11 @@ namespace CoreSimulator
                     HttpGetEnabled = true
                 };
                 _host.Description.Behaviors.Add(bechavior);
-
                 _host.Open();
             }
             catch (Exception e)
             {
-
+                
             }
         }
 
