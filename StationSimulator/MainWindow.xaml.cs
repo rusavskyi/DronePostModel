@@ -19,5 +19,20 @@ namespace StationSimulator
         {
             Dispatcher.Invoke(() => { LogTextBox.AppendText(message+"\n");});
         }
+
+        private void StartSimButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _simulation.StartSimulation();
+        }
+
+        private void StopSimButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _simulation.StopSimulation();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _simulation.StopSimulation();
+        }
     }
 }

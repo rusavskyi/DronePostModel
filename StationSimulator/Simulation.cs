@@ -5,6 +5,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
+using DronePost.DataModel;
 using StationSimulatorService;
 
 namespace StationSimulator
@@ -12,11 +13,40 @@ namespace StationSimulator
     class Simulation
     {
         private readonly IMessageHandler _messageHandler;
+        private readonly List<StationSimulation> _stations;
+        private ServiceHost _host;
+
+        private bool _started;
 
         public Simulation(IMessageHandler messageHandler)
         {
-            HostService();
             _messageHandler = messageHandler;
+            _stations = new List<StationSimulation>();
+        }
+
+        public void StartSimulation()
+        {
+            if (!_started)
+            {
+                LoadStations();
+                HostService();
+                _started = true;
+                Log("Simulation has started");
+            }
+        }
+
+        public void StopSimulation()
+        {
+            StopHost();
+            _started = false;
+            Log("Simulation has stopped");
+        }
+
+        public void LoadStations()
+        {
+            _stations.Clear();
+
+            // TODO: Get all stations from DB and 
         }
 
         public void Log(string message)
@@ -28,26 +58,27 @@ namespace StationSimulator
         public void HostService()
         {
             Uri baseAddress = new Uri("http://localhost:5000/StationSimulator");
-            ServiceHost host = new ServiceHost(typeof(StationSimulatorService.StationSimulatorService), baseAddress);
+            _host = new ServiceHost(typeof(StationSimulatorService.StationSimulatorService), baseAddress);
 
             try
             {
                 WSHttpBinding binding = new WSHttpBinding();
-                host.AddServiceEndpoint(typeof(IStationSimulatorService), binding, baseAddress);
+                _host.AddServiceEndpoint(typeof(IStationSimulatorService), binding, baseAddress);
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior() {HttpGetEnabled = true};
-                host.Description.Behaviors.Add(smb);
-                host.Open();
+                _host.Description.Behaviors.Add(smb);
+                _host.Open();
             }
             catch (CommunicationException ce)
             {
                 Log(String.Format("Exception: {0}", ce.Message));
-                host.Abort();
+                _host.Abort();
             }
         }
 
         public void StopHost()
         {
-
+            _host.Close();
+            _host = null;
         }
     }
 }
