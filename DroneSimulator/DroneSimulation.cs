@@ -78,7 +78,7 @@ namespace DroneSimulator
 
 			}
 			else {
-				Console.WriteLine("Drone Task queue is empty");
+				// print "Drone Task queue is empty"
 			}
 		}
 
