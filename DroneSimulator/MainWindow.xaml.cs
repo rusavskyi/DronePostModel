@@ -11,11 +11,8 @@ namespace DroneSimulator
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private string modelName = null;
-		private int maxCarrySize = -1;
-		private float maxWeightSize = -1f;
-		private float maxFlightDistance = -1f;
-		private List<DroneSimulation> droneList = new List<DroneSimulation>();
+		
+		
 
 
 		public MainWindow()

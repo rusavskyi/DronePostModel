@@ -1,6 +1,7 @@
 ﻿using DronePost.DataModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,16 @@ namespace DroneSimulator
 	/// </summary>
 	public partial class AddDrone : Window
 	{
+		public List<DroneSimulation> droneList = new List<DroneSimulation>();
+
+
 		private string modelName = null;
 		private int maxCarrySize = -1;
 		private float maxWeightSize = -1f;
 		private float maxFlightDistance = -1f;
-		private List<DroneSimulation> droneList = new List<DroneSimulation>();
+
+		
+
 		public AddDrone()
 		{
 			InitializeComponent();
@@ -42,12 +48,12 @@ namespace DroneSimulator
 			
 			try
 			{
-				maxWeightSize = float.Parse(textBoxMaxWeightCarry.Text);
-				maxFlightDistance = float.Parse(textBoxMaxFlightDistance.Text);
+				maxWeightSize = float.Parse(textBoxMaxWeightCarry.Text, CultureInfo.InvariantCulture.NumberFormat);
+				maxFlightDistance = float.Parse(textBoxMaxFlightDistance.Text, CultureInfo.InvariantCulture.NumberFormat);
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show("Float conver exeption");
+				MessageBox.Show("Float convert exeption");
 			}
 			if (modelName != null && modelName != "" && maxCarrySize != -1 && maxWeightSize != -1f && maxFlightDistance != -1f)
 			{
@@ -69,8 +75,8 @@ namespace DroneSimulator
 			textBoxMaxWeightCarry.Text = "";
 			comboBoxMaxSizeCarry.SelectedIndex = 0;
 			MessageBox.Show("Drone is added");
-			MainWindow mw = new MainWindow();
-			mw.Show();
+
+			this.Close();
 		}
 	}
 }

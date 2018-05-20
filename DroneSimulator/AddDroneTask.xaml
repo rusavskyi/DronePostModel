@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="AddDroneTask" Height="300" Width="300">
     <Grid>
-        
-    </Grid>
+		<Button x:Name="button" Content="Add" HorizontalAlignment="Left" Margin="194,228,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+		<Label x:Name="label" Content="Drone" HorizontalAlignment="Left" Margin="46,50,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="label1" Content="Task Type" HorizontalAlignment="Left" Margin="28,81,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="label2" Content="Station" HorizontalAlignment="Left" Margin="42,122,0,0" VerticalAlignment="Top"/>
+		<ComboBox x:Name="comboBoxDrone" HorizontalAlignment="Left" Margin="110,50,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBox_SelectionChanged"/>
+		<ComboBox x:Name="comboBoxDroneTask" HorizontalAlignment="Left" Margin="110,84,0,0" VerticalAlignment="Top" Width="120"/>
+		<ComboBox x:Name="comboBoxStation" HorizontalAlignment="Left" Margin="110,125,0,0" VerticalAlignment="Top" Width="120"/>
+
+	</Grid>
 </Window>
