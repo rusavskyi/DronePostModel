@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Threading;
+using CustomerSimulator.StationSimulatorReference;
 using DronePost.SupportClasses;
 
 namespace CustomerSimulator
@@ -55,7 +56,9 @@ namespace CustomerSimulator
                         PackageWeight = (float)GenerateWeight(),
                         RecipientNumber = GenerateRecipientPhoneNumber()
                     };
-                    // ToDo send package to StationSimulator()
+
+                    SendPackageToStationSimulator(package);
+
                     Thread.Sleep(GenerateDelay());
                 }
 
@@ -123,6 +126,25 @@ namespace CustomerSimulator
             int result = _random.Next(MinDelay, MaxDelay + 1);
             result *= DelayMultiplier;
             return result;
+        }
+
+        public void SendPackageToStationSimulator(GeneratedPackage package)
+        {
+            try
+            {
+                StationSimulatorServiceClient client = new StationSimulatorServiceClient();
+                client.RegisterPackageFromClient(package);
+                client.Close();
+            }
+            catch (Exception exception)
+            {
+                Log("Exception: "+exception.Message);
+            }
+        }
+
+        public void Log(string message)
+        {
+            Console.WriteLine(message);
         }
 
         // ToDo MB RequestCustomer(int id)
