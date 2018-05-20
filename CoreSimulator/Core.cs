@@ -1,12 +1,13 @@
 ﻿using System;
 using DronePost.DataModel;
 using DronePost.Interfaces;
+using DronePost.SupportClasses;
 
 namespace Core
 {
     class Core : ICore
     {
-        public int RegisterPackage(Package package)
+        public Package RegisterPackage(GeneratedPackage package)
         {
             throw new NotImplementedException();
         }
