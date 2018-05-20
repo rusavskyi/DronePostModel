@@ -1,0 +1,25 @@
+﻿<Window x:Class="DroneSimulator.AddDrone"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DroneSimulator"
+        mc:Ignorable="d"
+        Title="New drone" Height="300" Width="300">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="67*"/>
+			<ColumnDefinition Width="227*"/>
+		</Grid.ColumnDefinitions>
+		<Button x:Name="button" Content="Add" HorizontalAlignment="Left" Margin="126.056,225,0,0" VerticalAlignment="Top" Width="75" Click="button_Click" Grid.Column="1"/>
+		<Label x:Name="label" Content="Model Name" HorizontalAlignment="Left" Margin="52,47,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+		<Label x:Name="label1" Content="Max Size Carry" HorizontalAlignment="Left" Margin="42,89,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+		<Label x:Name="label2" Content="Max Weight Carry " HorizontalAlignment="Left" Margin="30,131,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+		<Label x:Name="label3" Content="Max Flight Distance" HorizontalAlignment="Left" Margin="16,173,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+		<TextBox x:Name="textBoxModelName" HorizontalAlignment="Left" Height="23" Margin="81.056,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+		<ComboBox x:Name="comboBoxMaxSizeCarry" HorizontalAlignment="Left" Margin="81.056,89,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+		<TextBox x:Name="textBoxMaxWeightCarry" HorizontalAlignment="Left" Height="23" Margin="81.056,135,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+		<TextBox x:Name="textBoxMaxFlightDistance" HorizontalAlignment="Left" Height="23" Margin="81.056,177,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+
+	</Grid>
+</Window>
