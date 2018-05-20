@@ -1,5 +1,6 @@
 ﻿using DronePost.DataModel;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,7 +15,7 @@ namespace DroneSimulator
 		private int maxCarrySize = -1;
 		private float maxWeightSize = -1f;
 		private float maxFlightDistance = -1f;
-
+		private List<DroneSimulation> droneList = new List<DroneSimulation>();
 
 
         public MainWindow()
@@ -25,6 +26,17 @@ namespace DroneSimulator
 			comboBoxMaxSizeCarry.Items.Insert(2, "C");
 			comboBoxMaxSizeCarry.Items.Insert(3, "D");
 
+			comboBoxDroneTask.Items.Insert(0, "TakePackage");
+			comboBoxDroneTask.Items.Insert(1, "GoToStation");
+			comboBoxDroneTask.Items.Insert(2, "LeavePackage");
+			comboBoxDroneTask.Items.Insert(3, "ChargeAtStation");
+
+			comboBoxStation.Items.Insert(0, "StationA");
+			comboBoxStation.Items.Insert(0, "StationB");
+			comboBoxStation.Items.Insert(0, "StationC");
+			comboBoxStation.Items.Insert(0, "StationD");
+			comboBoxStation.Items.Insert(0, "StationE");
+			comboBoxStation.Items.Insert(0, "StationF");
 		}
 
 		private void button_Click_1(object sender, RoutedEventArgs e)
@@ -46,6 +58,13 @@ namespace DroneSimulator
 
 			}
 			DroneSimulation ds = new DroneSimulation(d);
+			droneList.Add(ds);
+			if(modelName!=null && modelName!="")
+			comboBoxDrone.Items.Add(modelName);
+			textBoxModelName.Text = "";
+			textBoxMaxFlightDistance.Text = "";
+			textBoxMaxWeightCarry.Text = "";
+			comboBoxMaxSizeCarry.SelectedIndex = 0;
 			MessageBox.Show("Drone is added");
 		}
 
@@ -57,6 +76,24 @@ namespace DroneSimulator
 		private void comboBoxMaxSizeCarry_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 
+		}
+
+		private void comboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+		{
+
+		}
+
+		private void comboBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
+		{
+
+		}
+
+		private void button_Click(object sender, RoutedEventArgs e)
+		{
+			comboBoxDrone.SelectedIndex = 0;
+			comboBoxDroneTask.SelectedIndex = 0;
+			comboBoxStation.SelectedIndex = 0;
+			MessageBox.Show("Task is added to queue");
 		}
 	}
 }

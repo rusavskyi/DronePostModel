@@ -18,5 +18,13 @@
 		<Label x:Name="label6" Content="Max Flight Distance" HorizontalAlignment="Left" Margin="38,172,0,0" VerticalAlignment="Top"/>
 		<TextBox x:Name="textBoxMaxWeightCarry" HorizontalAlignment="Left" Height="23" Margin="166,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 		<TextBox x:Name="textBoxMaxFlightDistance" HorizontalAlignment="Left" Height="23" Margin="166,176,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+		<Label x:Name="label5" Content="DroneTask" HorizontalAlignment="Center" Height="26" Margin="535,47,184.6,0" VerticalAlignment="Top" Width="74"/>
+		<Label x:Name="label7" Content="TaskType" HorizontalAlignment="Left" Margin="429,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.13,0.25"/>
+		<ComboBox x:Name="comboBoxDroneTask" HorizontalAlignment="Left" Margin="507,113,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBox_SelectionChanged_1"/>
+		<Label x:Name="label8" Content="Drone" HorizontalAlignment="Left" Margin="443,79,0,0" VerticalAlignment="Top"/>
+		<ComboBox x:Name="comboBoxDrone" HorizontalAlignment="Left" Margin="507,82,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBox_SelectionChanged_2"/>
+		<Label x:Name="label9" Content="Station&#xD;&#xA;" HorizontalAlignment="Left" Margin="439,144,0,0" VerticalAlignment="Top" Width="47" Height="30"/>
+		<ComboBox x:Name="comboBoxStation" HorizontalAlignment="Left" Margin="507,145,0,0" VerticalAlignment="Top" Width="120"/>
+		<Button x:Name="button" Content="Add Task" HorizontalAlignment="Left" Margin="575,227,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
 	</Grid>
 </Window>
