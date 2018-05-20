@@ -21,7 +21,7 @@ namespace DroneSimulator
 	/// </summary>
 	public partial class AddDrone : Window
 	{
-		//public List<DroneSimulation> droneList = new List<DroneSimulation>();
+		//public List<String> droneList = new List<String>();
 
 
 		private string modelName = null;
@@ -45,6 +45,8 @@ namespace DroneSimulator
 		{
 		
 			Drone d = new Drone();
+			modelName = textBoxModelName.Text;
+			
 			
 			try
 			{
@@ -57,7 +59,6 @@ namespace DroneSimulator
 			}
 			if (modelName != null && modelName != "" && maxCarrySize != -1 && maxWeightSize != -1f && maxFlightDistance != -1f)
 			{
-
 				d.Model.ModelName = modelName;
 				d.Model.MaxSizeCarry = new PackageSize();
 				d.Model.MaxFlightDistance = maxFlightDistance;
@@ -65,8 +66,10 @@ namespace DroneSimulator
 
 			}
 			DroneSimulation ds = new DroneSimulation(d);
-			droneList.Add(ds);
 
+			((MainWindow)Application.Current.MainWindow).droneList.Add(modelName);
+
+			
 
 
 

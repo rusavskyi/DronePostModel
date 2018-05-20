@@ -12,7 +12,7 @@ namespace DroneSimulator
 	public partial class MainWindow : Window
 	{
 
-		public List<DroneSimulation> droneList = new List<DroneSimulation>();
+		public List<string> droneList = new List<string>();
 
 
 		public MainWindow()
