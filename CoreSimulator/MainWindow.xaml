@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CoreSimulator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
     <StackPanel>
         <Grid Height="420">
             <TextBox Name="LogTextBox" HorizontalAlignment="Left" Height="384" Margin="548,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234"/>
             <Label Content="Log" HorizontalAlignment="Left" Margin="548,-1,0,0" VerticalAlignment="Top"/>
-            <Button Name="StartSimButton" Content="Start simulation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25"/>
-            <Button Name="StopSimButton" Content="Start simulation" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25"/>
+            <Button Name="StartSimButton" Content="Start simulation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimButton_Click"/>
+            <Button Name="StopSimButton" Content="Start simulation" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopSimButton_Click"/>
 
         </Grid>
     </StackPanel>
