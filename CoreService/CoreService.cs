@@ -9,11 +9,15 @@ namespace CoreService
     {
         public ICore Core { get; set; }
 
-        public void AssignCore(ICore core)
+        public CoreService(ICore core)
         {
             Core = core;
         }
 
+        public void AssignCore(ICore core)
+        {
+            Core = core;
+        }
 
         public Package RegisterPackage(GeneratedPackage package)
         {
