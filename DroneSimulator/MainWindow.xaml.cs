@@ -41,16 +41,19 @@ namespace DroneSimulator
 
 		private void button_Click_1(object sender, RoutedEventArgs e)
 		{
+			modelName = textBoxModelName.Text;
 			Drone d = new Drone();
-			try {
-				maxWeightSize = float.Parse(textBoxMaxWeightCarry.ToString());
-				maxFlightDistance = float.Parse(textBoxMaxFlightDistance.ToString());
+			comboBoxDrone.Items.Add(modelName);
+			try { 
+				maxWeightSize = float.Parse(textBoxMaxWeightCarry.Text);
+				maxFlightDistance = float.Parse(textBoxMaxFlightDistance.Text);
 			}
 			catch (Exception ex) {
-
+				MessageBox.Show("Float conver exeption");
 			}
 			if (modelName != null && modelName != "" && maxCarrySize!=-1 && maxWeightSize!=-1f && maxFlightDistance!=-1f)
 			{
+				
 				d.Model.ModelName = modelName;
 				d.Model.MaxSizeCarry = new PackageSize();
 				d.Model.MaxFlightDistance = maxFlightDistance;
@@ -59,8 +62,10 @@ namespace DroneSimulator
 			}
 			DroneSimulation ds = new DroneSimulation(d);
 			droneList.Add(ds);
-			if(modelName!=null && modelName!="")
-			comboBoxDrone.Items.Add(modelName);
+			
+				
+
+
 			textBoxModelName.Text = "";
 			textBoxMaxFlightDistance.Text = "";
 			textBoxMaxWeightCarry.Text = "";
