@@ -22,6 +22,31 @@ namespace DroneSimulator
 		public AddDroneTask()
 		{
 			InitializeComponent();
+
+			comboBoxDroneTask.Items.Insert(0, "TakePackage");
+			comboBoxDroneTask.Items.Insert(1, "GoToStation");
+			comboBoxDroneTask.Items.Insert(2, "LeavePackage");
+			comboBoxDroneTask.Items.Insert(3, "ChargeAtStation");
+
+			comboBoxStation.Items.Insert(0, "StationA");
+			comboBoxStation.Items.Insert(1, "StationB");
+			comboBoxStation.Items.Insert(2, "StationC");
+			comboBoxStation.Items.Insert(3, "StationD");
+			comboBoxStation.Items.Insert(4, "StationE");
+			comboBoxStation.Items.Insert(5, "StationF");
+
+			
+		}
+
+		private void button_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("Task is added");
+			this.Close();
+		}
+
+		private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+
 		}
 	}
 }

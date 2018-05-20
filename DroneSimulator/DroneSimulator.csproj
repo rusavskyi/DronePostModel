@@ -55,8 +55,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddDrone.xaml.cs">
+      <DependentUpon>AddDrone.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddDroneTask.xaml.cs">
+      <DependentUpon>AddDroneTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DroneSimulation.cs" />
     <Compile Include="Simulator.cs" />
+    <Page Include="AddDrone.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddDroneTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
