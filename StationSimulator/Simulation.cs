@@ -37,9 +37,12 @@ namespace StationSimulator
 
         public void StopSimulation()
         {
-            StopHost();
-            _started = false;
-            Log("Simulation has stopped");
+            if (_started)
+            {
+                StopHost();
+                _started = false;
+                Log("Simulation has stopped");
+            }
         }
 
         public void LoadStations()
@@ -77,8 +80,15 @@ namespace StationSimulator
 
         public void StopHost()
         {
-            _host.Close();
-            _host = null;
+            try
+            {
+                _host.Close();
+                _host = null;
+            }
+            catch (Exception exception)
+            {
+                Log("Exception: "+exception.Message);
+            }
         }
     }
 }
