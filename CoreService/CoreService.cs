@@ -1,6 +1,7 @@
 ﻿using System;
 using DronePost.DataModel;
 using DronePost.Interfaces;
+using DronePost.SupportClasses;
 
 namespace CoreService
 {
@@ -14,10 +15,9 @@ namespace CoreService
         }
 
 
-        public int RegisterPackage(Package package)
+        public Package RegisterPackage(GeneratedPackage package)
         {
-            Core.RegisterPackage(package);
-            return 0;
+            return Core.RegisterPackage(package);
         }
 
         public int RegisterTransfer(Transfer transfer)

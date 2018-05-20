@@ -1,11 +1,12 @@
 ﻿using DronePost.DataModel;
+using DronePost.SupportClasses;
 
 namespace DronePost.Interfaces
 {
     public interface ICore
     {
 
-        int RegisterPackage(Package package);
+        Package RegisterPackage(GeneratedPackage package);
         int RegisterTransfer(Transfer transfer);
         int RegisterDrone(Drone drone);
         int RegisterStation(Station station);
