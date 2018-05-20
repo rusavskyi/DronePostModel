@@ -1,5 +1,6 @@
-namespace Core.Migrations
+namespace Core
 {
+    using System;
     using System.Data.Entity.Migrations;
     
     public partial class InitialModel : DbMigration
@@ -47,12 +48,15 @@ namespace Core.Migrations
                         RecipientPhoneNumber = c.String(nullable: false, maxLength: 50),
                         Weight = c.Single(nullable: false),
                         DestinationStation_Id = c.Int(nullable: false),
+                        Sender_Id = c.Int(nullable: false),
                         Size_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Stations", t => t.DestinationStation_Id, cascadeDelete: true)
+                .ForeignKey("dbo.People", t => t.Sender_Id, cascadeDelete: true)
                 .ForeignKey("dbo.PackageSizes", t => t.Size_Id, cascadeDelete: true)
                 .Index(t => t.DestinationStation_Id)
+                .Index(t => t.Sender_Id)
                 .Index(t => t.Size_Id);
             
             CreateTable(
@@ -64,18 +68,6 @@ namespace Core.Migrations
                         Address = c.String(nullable: false, maxLength: 255),
                         Longitude = c.Single(nullable: false),
                         Latitude = c.Single(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.PackageSizes",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        SizeName = c.String(nullable: false, maxLength: 255),
-                        Width = c.Single(nullable: false),
-                        Height = c.Single(nullable: false),
-                        Lenght = c.Single(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -104,6 +96,18 @@ namespace Core.Migrations
                 .Index(t => t.City_Id);
             
             CreateTable(
+                "dbo.PackageSizes",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        SizeName = c.String(nullable: false, maxLength: 255),
+                        Width = c.Single(nullable: false),
+                        Height = c.Single(nullable: false),
+                        Lenght = c.Single(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.DroneModels",
                 c => new
                     {
@@ -111,6 +115,7 @@ namespace Core.Migrations
                         ModelName = c.String(nullable: false, maxLength: 255),
                         MaxWeightCarry = c.Single(nullable: false),
                         MaxFlightDistance = c.Single(nullable: false),
+                        BatteryCapacity = c.Single(nullable: false),
                         MaxSizeCarry_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -206,9 +211,10 @@ namespace Core.Migrations
             DropForeignKey("dbo.Drones", "Model_Id", "dbo.DroneModels");
             DropForeignKey("dbo.DroneModels", "MaxSizeCarry_Id", "dbo.PackageSizes");
             DropForeignKey("dbo.CustomerPackages", "Sender_Id", "dbo.People");
-            DropForeignKey("dbo.People", "Company_Id", "dbo.Companies");
             DropForeignKey("dbo.CustomerPackages", "Package_Id", "dbo.Packages");
             DropForeignKey("dbo.Packages", "Size_Id", "dbo.PackageSizes");
+            DropForeignKey("dbo.Packages", "Sender_Id", "dbo.People");
+            DropForeignKey("dbo.People", "Company_Id", "dbo.Companies");
             DropForeignKey("dbo.Packages", "DestinationStation_Id", "dbo.Stations");
             DropIndex("dbo.Transfers", new[] { "Package_Id" });
             DropIndex("dbo.Transfers", new[] { "Drone_Id" });
@@ -224,6 +230,7 @@ namespace Core.Migrations
             DropIndex("dbo.People", new[] { "WorkPost_Id" });
             DropIndex("dbo.People", new[] { "Company_Id" });
             DropIndex("dbo.Packages", new[] { "Size_Id" });
+            DropIndex("dbo.Packages", new[] { "Sender_Id" });
             DropIndex("dbo.Packages", new[] { "DestinationStation_Id" });
             DropIndex("dbo.CustomerPackages", new[] { "Sender_Id" });
             DropIndex("dbo.CustomerPackages", new[] { "Package_Id" });
@@ -233,8 +240,8 @@ namespace Core.Migrations
             DropTable("dbo.EmployeeTypes");
             DropTable("dbo.Drones");
             DropTable("dbo.DroneModels");
-            DropTable("dbo.People");
             DropTable("dbo.PackageSizes");
+            DropTable("dbo.People");
             DropTable("dbo.Stations");
             DropTable("dbo.Packages");
             DropTable("dbo.CustomerPackages");

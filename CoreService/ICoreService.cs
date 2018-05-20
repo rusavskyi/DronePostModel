@@ -1,6 +1,7 @@
 ﻿using DronePost.Interfaces;
 using System.ServiceModel;
 using DronePost.DataModel;
+using DronePost.SupportClasses;
 
 namespace CoreService
 {
@@ -11,7 +12,7 @@ namespace CoreService
         void AssignCore(ICore core);
 
         [OperationContract]
-        int RegisterPackage(Package package);
+        Package RegisterPackage(GeneratedPackage package);
 
         [OperationContract]
         int RegisterTransfer(Transfer transfer);

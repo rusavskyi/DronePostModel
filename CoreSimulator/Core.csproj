@@ -78,9 +78,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201805191703008_InitialModel.cs" />
-    <Compile Include="Migrations\201805191703008_InitialModel.Designer.cs">
-      <DependentUpon>201805191703008_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\201805202116482_InitialModel.cs" />
+    <Compile Include="Migrations\201805202116482_InitialModel.Designer.cs">
+      <DependentUpon>201805202116482_InitialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -96,8 +96,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201805191703008_InitialModel.resx">
-      <DependentUpon>201805191703008_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805202116482_InitialModel.resx">
+      <DependentUpon>201805202116482_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

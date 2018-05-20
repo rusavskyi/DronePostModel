@@ -99,9 +99,9 @@
       <Project>{1eb06752-71d3-4df7-8b4d-7295b4c1a7b8}</Project>
       <Name>DronePost</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DroneSimulator\DroneSimulator.csproj">
-      <Project>{39880d07-68d4-4555-b610-f5abd6e8ff59}</Project>
-      <Name>DroneSimulator</Name>
+    <ProjectReference Include="..\StationSimulatorService\StationSimulatorService.csproj">
+      <Project>{7b557633-2932-4ee7-b709-c7b9a4c8b98e}</Project>
+      <Name>StationSimulatorService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
