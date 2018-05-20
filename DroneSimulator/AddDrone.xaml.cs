@@ -21,7 +21,7 @@ namespace DroneSimulator
 	/// </summary>
 	public partial class AddDrone : Window
 	{
-		public List<DroneSimulation> droneList = new List<DroneSimulation>();
+		//public List<DroneSimulation> droneList = new List<DroneSimulation>();
 
 
 		private string modelName = null;
@@ -34,7 +34,7 @@ namespace DroneSimulator
 		public AddDrone()
 		{
 			InitializeComponent();
-
+			
 			comboBoxMaxSizeCarry.Items.Insert(0, "A");
 			comboBoxMaxSizeCarry.Items.Insert(1, "B");
 			comboBoxMaxSizeCarry.Items.Insert(2, "C");
