@@ -13,10 +13,10 @@ namespace StationSimulator
 
 		private StationTask _currentTask;
 		private bool _currentTaskIsFinished;
-		private List<Drone> _drones;
-		private List<Package> _packagesToSent;
-		private List<Package> _packagesToGive;
-		private Queue<StationTask> _tasks;
+        public List<Drone> _drones { get; set; }
+        public List<Package> _packagesToSent { get; set; }
+        public List<Package> _packagesToGive { get; set; }
+        private Queue<StationTask> _tasks;
 		private List<int> _chargeSlots;
 
 		public StationSimulation(Station station)
