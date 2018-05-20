@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Core.cs" />
     <Compile Include="DronePostContext.cs" />
+    <Compile Include="IMessageHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

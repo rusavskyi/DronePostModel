@@ -3,13 +3,14 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Windows;
 using CoreService;
+using StationSimulator;
 
 namespace CoreSimulator
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IMessageHandler
     {
         private ServiceHost _host;
 
@@ -66,6 +67,11 @@ namespace CoreSimulator
         private void StopSimButton_Click(object sender, RoutedEventArgs e)
         {
             StopHost();
+        }
+
+        public void Handle(string message)
+        {
+            WriteToOutput(message);
         }
     }
 }
