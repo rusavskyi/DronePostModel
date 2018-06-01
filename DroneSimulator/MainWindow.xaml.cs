@@ -9,11 +9,11 @@ namespace DroneSimulator
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow : Window, IMessageHandlerDrone
 	{
 
 		public List<string> droneList = new List<string>();
-
+		public SimulationDrone _simulationDrone;
 
 		public MainWindow()
 		{
@@ -34,6 +34,23 @@ namespace DroneSimulator
 			AddDroneTask adt = new AddDroneTask();
 			//adt.DataContext = this;
 			adt.Show();
+		}
+
+		public void Handle(string s) {
+		}
+
+		private void button_startSim_Click(object sender, RoutedEventArgs e)
+		{
+			_simulationDrone = new SimulationDrone(this);
+			_simulationDrone.startSimulation();
+			buttonAddDront.Visibility = Visibility.Visible;
+			buttonAddTask.Visibility = Visibility.Visible;
+			
+		}
+
+		private void button_stopSim_Click(object sender, RoutedEventArgs e)
+		{
+			_simulationDrone.StopSimulation();
 		}
 	}
 }

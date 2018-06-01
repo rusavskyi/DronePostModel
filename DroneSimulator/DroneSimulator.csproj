@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,6 +63,8 @@
       <DependentUpon>AddDroneTask.xaml</DependentUpon>
     </Compile>
     <Compile Include="DroneSimulation.cs" />
+    <Compile Include="IMessageHandlerDrone.cs" />
+    <Compile Include="SimulationDrone.cs" />
     <Compile Include="Simulator.cs" />
     <Page Include="AddDrone.xaml">
       <SubType>Designer</SubType>
@@ -114,6 +117,10 @@
     <ProjectReference Include="..\DronePost\DronePost.csproj">
       <Project>{1eb06752-71d3-4df7-8b4d-7295b4c1a7b8}</Project>
       <Name>DronePost</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DroneSimulatorService\DroneSimulatorService.csproj">
+      <Project>{f1943a0f-bb0c-4608-afcb-7df3fae9699e}</Project>
+      <Name>DroneSimulatorService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,12 +1,18 @@
 ﻿using DronePost.DataModel;
+using System.Runtime.Serialization;
+using System.ServiceModel;
 
 namespace DronePost.SupportClasses
 {
-    public class DroneTask
+	[DataContract]
+	public class DroneTask
     {
-        public DroneTaskType Type { get; }
-        public Package Package { get; }
-        public Station Station { get; }
+		[DataMember]
+		public DroneTaskType Type { get; }
+		[DataMember()]
+		public Package Package { get; }
+		[DataMember()]
+		public Station Station { get; }
 
 
         public DroneTask(DroneTaskType type, Package package, Station station)
@@ -24,7 +30,7 @@ namespace DronePost.SupportClasses
 
     }
 
-    public enum DroneTaskType
+	public enum DroneTaskType
     {
         TakePackage, GoToStation, LeavePackage, ChargeAtStation
     }
