@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+
 namespace Core
 {
     using System.Data.Entity.Migrations;
@@ -7,6 +10,7 @@ namespace Core
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
         }
 
         protected override void Seed(DronePostContext context)

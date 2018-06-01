@@ -10,10 +10,8 @@ namespace DronePost.DataModel
         [Required]
         public int Id { get; set; }
 
-        [Required]
         public Package Package { get; set; }
 
-        [Required]
         public Station Station { get; set; }
     }
 }

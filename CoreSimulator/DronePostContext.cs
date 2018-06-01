@@ -21,5 +21,11 @@ namespace Core
         public DbSet<Person> Persons { get; set; }
         public DbSet<Station> Stations { get; set; }
         public DbSet<Transfer> Transfers { get; set; }
+
+        public DronePostContext() : base("name=DronePostConnectionString")
+        {
+            
+        }
     }
+
 }

@@ -23,7 +23,5 @@ namespace DronePost.DataModel
         [Required]
         public Station DestinationStation { get; set; }
 
-        [Required]
-        public Customer Sender { get; set; }
     }
 }
