@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneSimulator", "DroneSimu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DronePost", "DronePost\DronePost.csproj", "{1EB06752-71D3-4DF7-8B4D-7295B4C1A7B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "CoreSimulator\Core.csproj", "{03681661-2973-4FE9-BA51-D40C3BDAE0A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreHost", "CoreSimulator\CoreHost.csproj", "{03681661-2973-4FE9-BA51-D40C3BDAE0A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationSimulator", "StationSimulator\StationSimulator.csproj", "{49E5B070-9BE3-49A8-9903-C8CA0DC09C74}"
 EndProject

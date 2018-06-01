@@ -1,7 +1,8 @@
 using System;
 using System.IO;
 
-namespace Core
+
+namespace CoreHost
 {
     using System.Data.Entity.Migrations;
 

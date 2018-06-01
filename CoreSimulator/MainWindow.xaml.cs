@@ -3,20 +3,22 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Windows;
 using CoreService;
-using StationSimulator;
 
-namespace CoreSimulator
+
+namespace CoreHost
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window, IMessageHandler
     {
-        private ServiceHost _host;
+
+        private Core _core;
 
         public MainWindow()
         {
             InitializeComponent();
+            _core = new Core(this);
         }
 
         public void WriteToOutput(string message)
@@ -24,49 +26,20 @@ namespace CoreSimulator
             Dispatcher.Invoke(() => { LogTextBox.AppendText(message + "\n"); });
         }
 
-        private void StartHost()
-        {
-            Uri baseAddress = new Uri("http://localhost:8888/Core");
-            _host = new ServiceHost(typeof(CoreService.CoreService), baseAddress);
-
-            try
-            {
-                ServiceEndpoint endpoint = _host.AddServiceEndpoint(
-                    typeof(ICoreService),
-                    new WSHttpBinding(),
-                    ""
-                    );
-                ServiceMetadataBehavior bechavior = new ServiceMetadataBehavior()
-                {
-                    HttpGetEnabled = true
-                };
-                _host.Description.Behaviors.Add(bechavior);
-                _host.Open();
-            }
-            catch (Exception e)
-            {
-                
-            }
-        }
-
-        private void StopHost()
-        {
-            _host.Close();
-        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            StopHost();
+            _core.StopHost();
         }
 
         private void StartSimButton_Click(object sender, RoutedEventArgs e)
         {
-            StartHost();
+            _core.StartHost();
         }
 
         private void StopSimButton_Click(object sender, RoutedEventArgs e)
         {
-            StopHost();
+            _core.StopHost();
         }
 
         public void Handle(string message)

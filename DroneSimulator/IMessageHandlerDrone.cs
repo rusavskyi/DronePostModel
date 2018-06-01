@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreHost
+namespace DroneSimulator
 {
-    interface IMessageHandler
-    {
-        void Handle(string message);
-    }
+	public interface IMessageHandlerDrone
+	{
+		void Handle(string s);
+	}
 }
