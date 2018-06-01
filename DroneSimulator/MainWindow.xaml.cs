@@ -37,6 +37,7 @@ namespace DroneSimulator
 		}
 
 		public void Handle(string s) {
+			textBlock_log.Text += s;
 		}
 
 		private void button_startSim_Click(object sender, RoutedEventArgs e)
@@ -51,6 +52,8 @@ namespace DroneSimulator
 		private void button_stopSim_Click(object sender, RoutedEventArgs e)
 		{
 			_simulationDrone.StopSimulation();
+			buttonAddDront.Visibility = Visibility.Hidden;
+			buttonAddTask.Visibility = Visibility.Hidden;
 		}
 	}
 }
