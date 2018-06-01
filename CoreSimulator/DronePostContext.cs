@@ -2,7 +2,7 @@
 using DronePost.DataModel;
 
 
-namespace Core
+namespace CoreHost
 {
     class DronePostContext : DbContext
     {
