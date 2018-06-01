@@ -11,6 +11,7 @@ namespace CoreHost
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            //AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
             AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
         }
 

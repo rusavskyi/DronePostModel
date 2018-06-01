@@ -21,7 +21,7 @@ namespace DronePost.DataModel
         public float Height { get; set; }
 
         [Required]
-        public float Lenght { get; set; }
+        public float Length { get; set; }
 
     }
 }
