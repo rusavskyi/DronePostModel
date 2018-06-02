@@ -56,7 +56,7 @@ namespace CoreHost
             }
         }
 
-
+        // need testing
 
         public Package RegisterPackage(GeneratedPackage package)
         {
