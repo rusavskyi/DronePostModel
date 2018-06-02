@@ -88,13 +88,12 @@ namespace CoreHost
                 if (context.Customers.Count() > package.SenderId)
                 {
                     customer = context.Customers.ToList()[package.SenderId];
-                    context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
                 }
                 else
                 {
                     customer = context.Customers.ToList()[0];
-                    context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
                 }
+                context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
             }
 
             context.SaveChanges();
