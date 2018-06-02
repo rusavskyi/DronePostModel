@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using CoreService;
@@ -12,6 +14,7 @@ namespace CoreHost
     {
         private IMessageHandler _messageHandler;
         private ServiceHost _host;
+        private DronePostContext context;
 
         public Core(IMessageHandler messageHandler)
         {
@@ -25,14 +28,14 @@ namespace CoreHost
 
             try
             {
-                ServiceEndpoint endpoint = _host.AddServiceEndpoint(typeof(ICoreService),new WSHttpBinding(),"");
+                ServiceEndpoint endpoint = _host.AddServiceEndpoint(typeof(ICoreService), new WSHttpBinding(), "");
                 ServiceMetadataBehavior bechavior = new ServiceMetadataBehavior()
                 {
                     HttpGetEnabled = true
                 };
                 _host.Description.Behaviors.Add(bechavior);
                 _host.Open();
-                _messageHandler.Handle("Core has started on address: "+baseAddress.ToString());
+                _messageHandler.Handle("Core has started on address: " + baseAddress.ToString());
             }
             catch (Exception e)
             {
@@ -46,9 +49,10 @@ namespace CoreHost
             {
                 _host.Close();
                 _messageHandler.Handle("Core has stopped");
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
-                _messageHandler.Handle("Error: "+e.Message);
+                _messageHandler.Handle("Error: " + e.Message);
             }
         }
 
@@ -56,7 +60,46 @@ namespace CoreHost
 
         public Package RegisterPackage(GeneratedPackage package)
         {
-            throw new NotImplementedException();
+            Package result = new Package
+            {
+                DestinationStation = context.Stations.First(s => s.Id == package.DestinationStationId),
+                //Id = context.Stations.ToList().Count,
+                RecipientPhoneNumber = package.RecipientNumber,
+                Size = context.PackageSizes.First(ps => ps.Id == package.PackageSizeId),
+                Weight = package.PackageWeight
+            };
+
+            context.Packages.Add(result);
+            context.SaveChanges();
+            //List<Package> tmp =
+            result = context.Packages.Include("Stations").Include("PackageSizes").First(p =>
+                p.DestinationStation.Id == package.DestinationStationId &&
+                p.RecipientPhoneNumber == package.RecipientNumber &&
+                p.Size.Id == package.PackageSizeId &&
+                p.Weight == package.PackageWeight);
+
+            Customer customer = context.Customers.First(c => c.Id == package.SenderId);
+            if (customer != null)
+            {
+                context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
+            }
+            else
+            {
+                if (context.Customers.Count() > package.SenderId)
+                {
+                    customer = context.Customers.ToList()[package.SenderId];
+                    context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
+                }
+                else
+                {
+                    customer = context.Customers.ToList()[0];
+                    context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
+                }
+            }
+
+            context.SaveChanges();
+
+            return result;
         }
 
         public int RegisterTransfer(Transfer transfer)
