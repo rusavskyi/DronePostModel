@@ -68,7 +68,6 @@ namespace CoreHost
                 Size = context.PackageSizes.First(ps => ps.Id == package.PackageSizeId),
                 Weight = package.PackageWeight
             };
-
             context.Packages.Add(result);
             context.SaveChanges();
             //List<Package> tmp =
@@ -77,7 +76,6 @@ namespace CoreHost
                 p.RecipientPhoneNumber == package.RecipientNumber &&
                 p.Size.Id == package.PackageSizeId &&
                 p.Weight == package.PackageWeight);
-
             Customer customer = context.Customers.First(c => c.Id == package.SenderId);
             if (customer != null)
             {
@@ -95,30 +93,44 @@ namespace CoreHost
                 }
                 context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
             }
-
             context.SaveChanges();
-
+            Transfer transfer = new Transfer()
+            {
+                ArrivalStation = context.Stations.First(s => s.Id == package.DestinationStationId),
+                ArrivalTime = DateTime.Now,
+                Package = result
+            };
+            _messageHandler.Handle(@"Package from " + customer.Id + " to " + package.RecipientNumber + " registred with id: " + result.Id + ".");
+            RegisterTransfer(transfer);
             return result;
         }
 
         public int RegisterTransfer(Transfer transfer)
         {
-            throw new NotImplementedException();
+            context.Transfers.Add(transfer);
+            context.SaveChanges();
+            return 0;
         }
 
         public int RegisterDrone(Drone drone)
         {
-            throw new NotImplementedException();
+            context.Drones.Add(drone);
+            context.SaveChanges();
+            return 0;
         }
 
         public int RegisterStation(Station station)
         {
-            throw new NotImplementedException();
+            context.Stations.Add(station);
+            context.SaveChanges();
+            return 0;
         }
 
         public int RegisterCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            context.Customers.Add(customer);
+            context.SaveChanges();
+            return 0;
         }
 
         public void SendDroneOnCharge(Drone drone, Station station)
@@ -128,7 +140,8 @@ namespace CoreHost
 
         public void RequestDroneForPackage(Package package)
         {
-            throw new NotImplementedException();
+            context.Packages.Add(package);
+            context.SaveChanges();
         }
 
         public void RequestDroneForPackages(params Package[] packages)
