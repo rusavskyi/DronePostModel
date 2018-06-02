@@ -6,7 +6,7 @@ namespace DronePost.SupportClasses
 {
 	[DataContract]
 	public class DroneTask
-    {
+	{
 		[DataMember]
 		public DroneTaskType Type { get; }
 		[DataMember()]
@@ -15,23 +15,23 @@ namespace DronePost.SupportClasses
 		public Station Station { get; }
 
 
-        public DroneTask(DroneTaskType type, Package package, Station station)
-        {
-            Type = type;
-            Package = package;
-            Station = station;
-        }
+		public DroneTask(DroneTaskType type, Package package, Station station)
+		{
+			Type = type;
+			Package = package;
+			Station = station;
+		}
 
-        public DroneTask(DroneTaskType type, Station station)
-        {
-            Type = type;
-            Station = station;
-        }
+		public DroneTask(DroneTaskType type, Station station)
+		{
+			Type = type;
+			Station = station;
+		}
 
-    }
+	}
 
 	public enum DroneTaskType
-    {
-        TakePackage, GoToStation, LeavePackage, ChargeAtStation
-    }
+	{
+		TakePackage, GoToStation, LeavePackage, ChargeAtStation
+	}
 }
