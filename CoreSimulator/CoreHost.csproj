@@ -96,21 +96,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201806012313276_InitialModel.cs" />
-    <Compile Include="Migrations\201806012313276_InitialModel.Designer.cs">
-      <DependentUpon>201806012313276_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\201806021224562_InitialModel.cs" />
+    <Compile Include="Migrations\201806021224562_InitialModel.Designer.cs">
+      <DependentUpon>201806021224562_InitialModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806021013347_PopulateSizes.cs" />
-    <Compile Include="Migrations\201806021013347_PopulateSizes.Designer.cs">
-      <DependentUpon>201806021013347_PopulateSizes.cs</DependentUpon>
+    <Compile Include="Migrations\201806021226062_PopulateSizes.cs" />
+    <Compile Include="Migrations\201806021226062_PopulateSizes.Designer.cs">
+      <DependentUpon>201806021226062_PopulateSizes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806021046175_PopulateCities.cs" />
-    <Compile Include="Migrations\201806021046175_PopulateCities.Designer.cs">
-      <DependentUpon>201806021046175_PopulateCities.cs</DependentUpon>
+    <Compile Include="Migrations\201806021227235_PopulateCities.cs" />
+    <Compile Include="Migrations\201806021227235_PopulateCities.Designer.cs">
+      <DependentUpon>201806021227235_PopulateCities.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806021049031_PopulateModels.cs" />
-    <Compile Include="Migrations\201806021049031_PopulateModels.Designer.cs">
-      <DependentUpon>201806021049031_PopulateModels.cs</DependentUpon>
+    <Compile Include="Migrations\201806021228027_PopulateModels.cs" />
+    <Compile Include="Migrations\201806021228027_PopulateModels.Designer.cs">
+      <DependentUpon>201806021228027_PopulateModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806021229105_PopulateStations.cs" />
+    <Compile Include="Migrations\201806021229105_PopulateStations.Designer.cs">
+      <DependentUpon>201806021229105_PopulateStations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806021231420_PopulateDrones.cs" />
+    <Compile Include="Migrations\201806021231420_PopulateDrones.Designer.cs">
+      <DependentUpon>201806021231420_PopulateDrones.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -126,17 +134,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201806012313276_InitialModel.resx">
-      <DependentUpon>201806012313276_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806021224562_InitialModel.resx">
+      <DependentUpon>201806021224562_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806021013347_PopulateSizes.resx">
-      <DependentUpon>201806021013347_PopulateSizes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806021226062_PopulateSizes.resx">
+      <DependentUpon>201806021226062_PopulateSizes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806021046175_PopulateCities.resx">
-      <DependentUpon>201806021046175_PopulateCities.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806021227235_PopulateCities.resx">
+      <DependentUpon>201806021227235_PopulateCities.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806021049031_PopulateModels.resx">
-      <DependentUpon>201806021049031_PopulateModels.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806021228027_PopulateModels.resx">
+      <DependentUpon>201806021228027_PopulateModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806021229105_PopulateStations.resx">
+      <DependentUpon>201806021229105_PopulateStations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806021231420_PopulateDrones.resx">
+      <DependentUpon>201806021231420_PopulateDrones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -168,15 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppData\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DronePostDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DronePostDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>DronePostDB.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

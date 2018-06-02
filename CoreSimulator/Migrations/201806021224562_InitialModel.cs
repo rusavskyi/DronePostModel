@@ -36,7 +36,7 @@ namespace CoreHost
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Packages", t => t.Package_Id, cascadeDelete: true)
-                .ForeignKey("dbo.People", t => t.Sender_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Customers", t => t.Sender_Id, cascadeDelete: true)
                 .Index(t => t.Package_Id)
                 .Index(t => t.Sender_Id);
             
@@ -81,28 +81,24 @@ namespace CoreHost
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.People",
+                "dbo.Customers",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        CompanyAgent = c.Boolean(nullable: false),
                         FirstName = c.String(nullable: false, maxLength: 50),
                         LastName = c.String(nullable: false, maxLength: 50),
                         BirthDate = c.DateTime(nullable: false),
                         Address = c.String(nullable: false, maxLength: 255),
                         Address2 = c.String(maxLength: 255),
-                        CompanyAgent = c.Boolean(),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
-                        Company_Id = c.Int(),
-                        WorkPost_Id = c.Int(),
                         City_Id = c.Int(nullable: false),
+                        Company_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Companies", t => t.Company_Id)
-                .ForeignKey("dbo.EmployeeTypes", t => t.WorkPost_Id, cascadeDelete: true)
                 .ForeignKey("dbo.Cities", t => t.City_Id, cascadeDelete: true)
-                .Index(t => t.Company_Id)
-                .Index(t => t.WorkPost_Id)
-                .Index(t => t.City_Id);
+                .ForeignKey("dbo.Companies", t => t.Company_Id)
+                .Index(t => t.City_Id)
+                .Index(t => t.Company_Id);
             
             CreateTable(
                 "dbo.DroneModels",
@@ -133,6 +129,25 @@ namespace CoreHost
                 .Index(t => t.Model_Id);
             
             CreateTable(
+                "dbo.Employees",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false, maxLength: 50),
+                        LastName = c.String(nullable: false, maxLength: 50),
+                        BirthDate = c.DateTime(nullable: false),
+                        Address = c.String(nullable: false, maxLength: 255),
+                        Address2 = c.String(maxLength: 255),
+                        City_Id = c.Int(nullable: false),
+                        WorkPost_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Cities", t => t.City_Id, cascadeDelete: true)
+                .ForeignKey("dbo.EmployeeTypes", t => t.WorkPost_Id, cascadeDelete: true)
+                .Index(t => t.City_Id)
+                .Index(t => t.WorkPost_Id);
+            
+            CreateTable(
                 "dbo.EmployeeTypes",
                 c => new
                     {
@@ -150,7 +165,7 @@ namespace CoreHost
                         Station_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.People", t => t.Employee_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Employees", t => t.Employee_Id, cascadeDelete: true)
                 .ForeignKey("dbo.Stations", t => t.Station_Id, cascadeDelete: true)
                 .Index(t => t.Employee_Id)
                 .Index(t => t.Station_Id);
@@ -199,16 +214,17 @@ namespace CoreHost
             DropForeignKey("dbo.Transfers", "Drone_Id", "dbo.Drones");
             DropForeignKey("dbo.Transfers", "DepartureStation_Id", "dbo.Stations");
             DropForeignKey("dbo.Transfers", "ArrivalStation_Id", "dbo.Stations");
-            DropForeignKey("dbo.People", "City_Id", "dbo.Cities");
             DropForeignKey("dbo.PackageToStations", "Station_Id", "dbo.Stations");
             DropForeignKey("dbo.PackageToStations", "Package_Id", "dbo.Packages");
             DropForeignKey("dbo.EmployeeWorkStations", "Station_Id", "dbo.Stations");
-            DropForeignKey("dbo.EmployeeWorkStations", "Employee_Id", "dbo.People");
-            DropForeignKey("dbo.People", "WorkPost_Id", "dbo.EmployeeTypes");
+            DropForeignKey("dbo.EmployeeWorkStations", "Employee_Id", "dbo.Employees");
+            DropForeignKey("dbo.Employees", "WorkPost_Id", "dbo.EmployeeTypes");
+            DropForeignKey("dbo.Employees", "City_Id", "dbo.Cities");
             DropForeignKey("dbo.Drones", "Model_Id", "dbo.DroneModels");
             DropForeignKey("dbo.DroneModels", "MaxSizeCarry_Id", "dbo.PackageSizes");
-            DropForeignKey("dbo.CustomerPackages", "Sender_Id", "dbo.People");
-            DropForeignKey("dbo.People", "Company_Id", "dbo.Companies");
+            DropForeignKey("dbo.CustomerPackages", "Sender_Id", "dbo.Customers");
+            DropForeignKey("dbo.Customers", "Company_Id", "dbo.Companies");
+            DropForeignKey("dbo.Customers", "City_Id", "dbo.Cities");
             DropForeignKey("dbo.CustomerPackages", "Package_Id", "dbo.Packages");
             DropForeignKey("dbo.Packages", "Size_Id", "dbo.PackageSizes");
             DropForeignKey("dbo.Packages", "DestinationStation_Id", "dbo.Stations");
@@ -220,11 +236,12 @@ namespace CoreHost
             DropIndex("dbo.PackageToStations", new[] { "Package_Id" });
             DropIndex("dbo.EmployeeWorkStations", new[] { "Station_Id" });
             DropIndex("dbo.EmployeeWorkStations", new[] { "Employee_Id" });
+            DropIndex("dbo.Employees", new[] { "WorkPost_Id" });
+            DropIndex("dbo.Employees", new[] { "City_Id" });
             DropIndex("dbo.Drones", new[] { "Model_Id" });
             DropIndex("dbo.DroneModels", new[] { "MaxSizeCarry_Id" });
-            DropIndex("dbo.People", new[] { "City_Id" });
-            DropIndex("dbo.People", new[] { "WorkPost_Id" });
-            DropIndex("dbo.People", new[] { "Company_Id" });
+            DropIndex("dbo.Customers", new[] { "Company_Id" });
+            DropIndex("dbo.Customers", new[] { "City_Id" });
             DropIndex("dbo.Packages", new[] { "Size_Id" });
             DropIndex("dbo.Packages", new[] { "DestinationStation_Id" });
             DropIndex("dbo.CustomerPackages", new[] { "Sender_Id" });
@@ -233,9 +250,10 @@ namespace CoreHost
             DropTable("dbo.PackageToStations");
             DropTable("dbo.EmployeeWorkStations");
             DropTable("dbo.EmployeeTypes");
+            DropTable("dbo.Employees");
             DropTable("dbo.Drones");
             DropTable("dbo.DroneModels");
-            DropTable("dbo.People");
+            DropTable("dbo.Customers");
             DropTable("dbo.PackageSizes");
             DropTable("dbo.Stations");
             DropTable("dbo.Packages");

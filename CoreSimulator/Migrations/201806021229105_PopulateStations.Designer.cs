@@ -7,13 +7,13 @@ namespace CoreHost
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class PopulateCities : IMigrationMetadata
+    public sealed partial class PopulateStations : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PopulateCities));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PopulateStations));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806021046175_PopulateCities"; }
+            get { return "201806021229105_PopulateStations"; }
         }
         
         string IMigrationMetadata.Source

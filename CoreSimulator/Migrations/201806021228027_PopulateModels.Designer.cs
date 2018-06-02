@@ -7,13 +7,13 @@ namespace CoreHost
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class PopulateSizes : IMigrationMetadata
+    public sealed partial class PopulateModels : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PopulateSizes));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PopulateModels));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806021013347_PopulateSizes"; }
+            get { return "201806021228027_PopulateModels"; }
         }
         
         string IMigrationMetadata.Source

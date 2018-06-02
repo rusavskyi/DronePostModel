@@ -2,7 +2,7 @@ namespace CoreHost
 {
     using System;
     using System.Data.Entity.Migrations;
-
+    
     public partial class PopulateSizes : DbMigration
     {
         public override void Up()
@@ -15,9 +15,8 @@ namespace CoreHost
                             ('E',250,250,250),
                             ('F',500,500,500),
                             ('G',50,50,100)");
-
         }
-
+        
         public override void Down()
         {
         }

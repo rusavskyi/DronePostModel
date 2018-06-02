@@ -18,7 +18,6 @@ namespace CoreHost
         public DbSet<Package> Packages { get; set; }
         public DbSet<PackageSize> PackageSizes { get; set; }
         public DbSet<PackageToStation> PackageToStation { get; set; }
-        public DbSet<Person> Persons { get; set; }
         public DbSet<Station> Stations { get; set; }
         public DbSet<Transfer> Transfers { get; set; }
 
