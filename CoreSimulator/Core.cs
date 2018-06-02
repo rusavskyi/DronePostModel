@@ -101,7 +101,7 @@ namespace CoreHost
                 ArrivalTime = DateTime.Now,
                 Package = result
             };
-            _messageHandler.Handle(@"Package from " + customer.Id + " to " + package.RecipientNumber + " registred with id: " + result.Id + ".");
+            _messageHandler.Handle("Package from " + customer.Id + " to " + package.RecipientNumber + " registred with id: " + result.Id + ".");
             RegisterTransfer(transfer);
             return result;
         }
@@ -110,6 +110,7 @@ namespace CoreHost
         {
             _context.Transfers.Add(transfer);
             _context.SaveChanges();
+            _messageHandler.Handle("Transfer registred.");
             return 0;
         }
 
@@ -117,6 +118,7 @@ namespace CoreHost
         {
             _context.Drones.Add(drone);
             _context.SaveChanges();
+            _messageHandler.Handle("Drone registred.");
             return 0;
         }
 
@@ -124,6 +126,7 @@ namespace CoreHost
         {
             _context.Stations.Add(station);
             _context.SaveChanges();
+            _messageHandler.Handle("Station registred.");
             return 0;
         }
 
@@ -131,6 +134,7 @@ namespace CoreHost
         {
             _context.Customers.Add(customer);
             _context.SaveChanges();
+            _messageHandler.Handle("Customer registred.");
             return 0;
         }
 
@@ -141,8 +145,7 @@ namespace CoreHost
 
         public void RequestDroneForPackage(Package package)
         {
-            _context.Packages.Add(package);
-            _context.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public void RequestDroneForPackages(params Package[] packages)
