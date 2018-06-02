@@ -11,8 +11,7 @@ namespace CoreHost
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            //AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
-            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
+            AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetDirectoryName("AppData"));
         }
 
         protected override void Seed(DronePostContext context)
