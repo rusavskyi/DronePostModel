@@ -14,11 +14,12 @@ namespace CoreHost
     {
         private IMessageHandler _messageHandler;
         private ServiceHost _host;
-        private DronePostContext context;
+        private DronePostContext _context;
 
         public Core(IMessageHandler messageHandler)
         {
             _messageHandler = messageHandler;
+            _context = new DronePostContext();
         }
 
         public void StartHost()
@@ -62,41 +63,41 @@ namespace CoreHost
         {
             Package result = new Package
             {
-                DestinationStation = context.Stations.First(s => s.Id == package.DestinationStationId),
+                DestinationStation = _context.Stations.First(s => s.Id == package.DestinationStationId),
                 //Id = context.Stations.ToList().Count,
                 RecipientPhoneNumber = package.RecipientNumber,
-                Size = context.PackageSizes.First(ps => ps.Id == package.PackageSizeId),
+                Size = _context.PackageSizes.First(ps => ps.Id == package.PackageSizeId),
                 Weight = package.PackageWeight
             };
-            context.Packages.Add(result);
-            context.SaveChanges();
+            _context.Packages.Add(result);
+            _context.SaveChanges();
             //List<Package> tmp =
-            result = context.Packages.Include("Stations").Include("PackageSizes").First(p =>
+            result = _context.Packages.Include("Stations").Include("PackageSizes").First(p =>
                 p.DestinationStation.Id == package.DestinationStationId &&
                 p.RecipientPhoneNumber == package.RecipientNumber &&
                 p.Size.Id == package.PackageSizeId &&
                 p.Weight == package.PackageWeight);
-            Customer customer = context.Customers.First(c => c.Id == package.SenderId);
+            Customer customer = _context.Customers.First(c => c.Id == package.SenderId);
             if (customer != null)
             {
-                context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
+                _context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
             }
             else
             {
-                if (context.Customers.Count() > package.SenderId)
+                if (_context.Customers.Count() > package.SenderId)
                 {
-                    customer = context.Customers.ToList()[package.SenderId];
+                    customer = _context.Customers.ToList()[package.SenderId];
                 }
                 else
                 {
-                    customer = context.Customers.ToList()[0];
+                    customer = _context.Customers.ToList()[0];
                 }
-                context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
+                _context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
             }
-            context.SaveChanges();
+            _context.SaveChanges();
             Transfer transfer = new Transfer()
             {
-                ArrivalStation = context.Stations.First(s => s.Id == package.DestinationStationId),
+                ArrivalStation = _context.Stations.First(s => s.Id == package.DestinationStationId),
                 ArrivalTime = DateTime.Now,
                 Package = result
             };
@@ -107,29 +108,29 @@ namespace CoreHost
 
         public int RegisterTransfer(Transfer transfer)
         {
-            context.Transfers.Add(transfer);
-            context.SaveChanges();
+            _context.Transfers.Add(transfer);
+            _context.SaveChanges();
             return 0;
         }
 
         public int RegisterDrone(Drone drone)
         {
-            context.Drones.Add(drone);
-            context.SaveChanges();
+            _context.Drones.Add(drone);
+            _context.SaveChanges();
             return 0;
         }
 
         public int RegisterStation(Station station)
         {
-            context.Stations.Add(station);
-            context.SaveChanges();
+            _context.Stations.Add(station);
+            _context.SaveChanges();
             return 0;
         }
 
         public int RegisterCustomer(Customer customer)
         {
-            context.Customers.Add(customer);
-            context.SaveChanges();
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
             return 0;
         }
 
@@ -140,8 +141,8 @@ namespace CoreHost
 
         public void RequestDroneForPackage(Package package)
         {
-            context.Packages.Add(package);
-            context.SaveChanges();
+            _context.Packages.Add(package);
+            _context.SaveChanges();
         }
 
         public void RequestDroneForPackages(params Package[] packages)
