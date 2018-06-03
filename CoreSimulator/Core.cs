@@ -141,16 +141,19 @@ namespace CoreHost
 
         public void SendDroneOnCharge(int idDrone)
         {
+
             throw new NotImplementedException();
         }
 
         public void RequestDroneForPackage(Package package)
         {
+            // todo add task for drone to take package
             throw new NotImplementedException();
         }
 
         public void RequestDroneForPackages(params Package[] packages)
         {
+            // todo add tasks for drones to take packages
             throw new NotImplementedException();
         }
 
@@ -196,6 +199,21 @@ namespace CoreHost
                 _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
             }
             return customers;
+        }
+
+        public List<PackageSize> GetSizes()
+        {
+            _messageHandler.Handle("GetStatios request...");
+            List<PackageSize> sizes = null;
+            try
+            {
+                sizes = _context.PackageSizes.ToList();
+            }
+            catch (Exception e)
+            {
+                _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
+            }
+            return sizes;
         }
     }
 }

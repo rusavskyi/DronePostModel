@@ -18,6 +18,7 @@ namespace DronePost.Interfaces
         List<Drone> GetDrones();
         List<Station> GetStations();
         List<Customer> GetCustomers();
+        List<PackageSize> GetSizes();
 
         // int RegisterCustumer(Customer customer, Company company); // ?
 

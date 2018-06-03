@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using CustomerSimulator.CoreServiceReference;
 using CustomerSimulator.StationSimulatorReference;
+using DronePost.DataModel;
 using DronePost.SupportClasses;
 
 namespace CustomerSimulator
@@ -21,19 +24,28 @@ namespace CustomerSimulator
         protected bool _isWorking;
         Random _random;
 
+        private CoreServiceClient _coreServiceClient;
+        private List<Customer> _customers;
+        private List<Station> _stations;
 
         public CustomerSimulation()
         {
             _random = new Random(DateTime.Now.GetHashCode());
+            _coreServiceClient = new CoreServiceClient();
+            _customers = new List<Customer>();
+            _stations = new List<Station>();
         }
 
         public void RequestParamsFromCore()
         {
-            // ToDo
+            _customers = new List<Customer>(_coreServiceClient.GetCustomers());
+            _stations = new List<Station>(_coreServiceClient.GetStations());
+            
         }
 
         public void StartSimulation() // param: StationSimulatorClient
         {
+            
             if (NumberOfPackageSizes > 0 &&
                 NumberOfStations > 0 &&
                 MaxDelay > MinDelay &&
