@@ -8,7 +8,7 @@ namespace DronePost.Interfaces
         void CheckIn(Drone drone);
         void CheckOut(Drone drone);
         void GivePackageToRecipient(Customer customer, Package package);
-        Package GetPackageFromCustomer(Package package);
+        bool GetPackageFromCustomer(Package package);
         void SetTask(StationTask stationTask); // Setting task to do immediately
         void AddTask(StationTask stationTask); // Adding task to queue
         void DoNextTask(bool force = false); // Starting next task, if forsed starting immediately
