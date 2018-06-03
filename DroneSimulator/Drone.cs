@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,8 @@ namespace DroneSimulator
 
         public void DoNextTask(bool force = false)
         {
-            throw new NotImplementedException();
+            Debug.WriteLine("ITS ALL RIGHT");
+            
         }
 
         public bool Start()

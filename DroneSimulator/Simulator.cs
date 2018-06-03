@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
@@ -96,7 +97,13 @@ namespace DroneSimulator
 				_host.AddServiceEndpoint(typeof(DroneService.IDroneService), binding, baseAddress);
 				ServiceMetadataBehavior smb = new ServiceMetadataBehavior(){ HttpGetEnabled = true};
 				_host.Description.Behaviors.Add(smb);
-				_host.Open();
+			    _host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
+
+          
+
+
+
+                    _host.Open();
 				Log("Drone hosted: "+baseAddress);
 			}
 			catch (CommunicationException ce)
