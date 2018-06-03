@@ -187,6 +187,10 @@
       <Project>{1eb06752-71d3-4df7-8b4d-7295b4c1a7b8}</Project>
       <Name>DronePost</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StationSimulatorService\StationService.csproj">
+      <Project>{7B557633-2932-4EE7-B709-C7B9A4C8B98E}</Project>
+      <Name>StationService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

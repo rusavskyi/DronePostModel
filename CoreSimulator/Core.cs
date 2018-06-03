@@ -56,9 +56,16 @@ namespace CoreHost
         {
             try
             {
-                string address = "http://localhost:4999/Drone/2";
+                /*
+                 string address = "http://localhost:4999/Drone/2";
                 DroneServiceClient _client =
                     new DroneServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
+                _client.DoNextTask(true);
+                */
+
+                string address = "http://localhost:5000/Station/2";
+                StationServiceClient _client =
+                    new StationServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
                 _client.DoNextTask(true);
 
             }
