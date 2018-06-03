@@ -156,7 +156,15 @@ namespace CoreHost
         public List<Drone> GetDrones()
         {
             _messageHandler.Handle("GetDrones request...");
-            return _context.Drones.Include("DroneModels").ToList();
+            List<Drone> drones = null;
+            try
+            {
+                drones = _context.Drones.Include("DroneModels").ToList();
+            } catch (Exception e)
+            {
+                _messageHandler.Handle("Error: "+e.Message + "\nStack trace: " + e.StackTrace);
+            }
+            return drones;
         }
     }
 }
