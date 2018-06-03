@@ -11,6 +11,20 @@ namespace StationSimulator
 {
     class Station : DronePost.DataModel.Station, IStation
     {
+        public Station()
+        {
+
+        }
+
+        public Station(DronePost.DataModel.Station station)
+        {
+            Id = station.Id;
+            Address = station.Address;
+            Longitude = station.Longitude;
+            Latitude = station.Latitude;
+            Name = station.Name;
+        }
+
         public void CheckIn(Drone drone)
         {
             throw new NotImplementedException();

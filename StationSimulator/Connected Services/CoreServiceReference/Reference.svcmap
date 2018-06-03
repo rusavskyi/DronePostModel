@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="78b55464-9b5b-4a80-b637-f3c85a35fcdc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8888/Core" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Core.xsd" MetadataType="Schema" ID="6c832053-e644-446b-b3f8-e79f1f4671da" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd0" />
+    <MetadataFile FileName="Core1.xsd" MetadataType="Schema" ID="1159cdf7-9247-48a2-bfce-2a364f932318" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd1" />
+    <MetadataFile FileName="Core.disco" MetadataType="Disco" ID="43aef054-2924-4e1e-ba16-f178bbb73f64" SourceId="1" SourceUrl="http://localhost:8888/Core?disco" />
+    <MetadataFile FileName="Core2.xsd" MetadataType="Schema" ID="eede628f-e0cc-40eb-9208-5be85c92b113" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd2" />
+    <MetadataFile FileName="Core3.xsd" MetadataType="Schema" ID="a13437d8-902d-41df-8cb6-367d18a854ad" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd3" />
+    <MetadataFile FileName="CoreService.wsdl" MetadataType="Wsdl" ID="cf3a6dd1-c9e8-4ef4-8147-3fff2f274983" SourceId="1" SourceUrl="http://localhost:8888/Core?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

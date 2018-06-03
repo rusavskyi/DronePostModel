@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.Xml" />
@@ -56,6 +57,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\CoreServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="Simulation.cs" />
     <Compile Include="Station.cs" />
@@ -92,6 +98,24 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\CoreServiceReference\Core.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CoreServiceReference\Core1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CoreServiceReference\Core2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CoreServiceReference\Core3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CoreServiceReference\CoreService.wsdl" />
+    <None Include="Properties\DataSources\DronePost.DataModel.Customer.datasource" />
+    <None Include="Properties\DataSources\DronePost.DataModel.Drone.datasource" />
+    <None Include="Properties\DataSources\DronePost.DataModel.Package.datasource" />
+    <None Include="Properties\DataSources\DronePost.DataModel.PackageSize.datasource" />
+    <None Include="Properties\DataSources\DronePost.DataModel.Station.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -109,6 +133,27 @@
       <Project>{7b557633-2932-4ee7-b709-c7b9a4c8b98e}</Project>
       <Name>StationService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\CoreServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CoreServiceReference\Core.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CoreServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CoreServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CoreServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
