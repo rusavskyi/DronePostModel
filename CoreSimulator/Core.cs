@@ -155,6 +155,7 @@ namespace CoreHost
 
         public List<Drone> GetDrones()
         {
+            _messageHandler.Handle("GetDrones request...");
             return _context.Drones.Include("DroneModels").ToList();
         }
     }

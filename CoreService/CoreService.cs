@@ -69,7 +69,7 @@ namespace CoreService
 
         public List<Drone> GetDrones()
         {
-            throw new NotImplementedException();
+            return Core.GetDrones();
         }
     }
 }

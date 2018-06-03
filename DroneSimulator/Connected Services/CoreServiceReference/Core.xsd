@@ -122,4 +122,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetDrones">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDronesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DronePost.DataModel" minOccurs="0" name="GetDronesResult" nillable="true" type="q9:ArrayOfDrone" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

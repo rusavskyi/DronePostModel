@@ -13,10 +13,10 @@ namespace StationSimulator
 
 		private StationTask _currentTask;
 		private bool _currentTaskIsFinished;
-        public List<Drone> _drones { get; set; }
-        public List<Package> _packagesToSent { get; set; }
-        public List<Package> _packagesToGive { get; set; }
-        private Queue<StationTask> _tasks;
+		public List<Drone> _drones { get; set; }
+		public List<Package> _packagesToSent { get; set; }
+		public List<Package> _packagesToGive { get; set; }
+		private Queue<StationTask> _tasks;
 		private List<int> _chargeSlots;
 
 		public StationSimulation(Station station)
@@ -135,6 +135,11 @@ namespace StationSimulator
 		public void SetTask(DroneTask droneTask, Drone drone) // check method
 		{
 			
+		}
+
+		bool IStation.GetPackageFromCustomer(Package package)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

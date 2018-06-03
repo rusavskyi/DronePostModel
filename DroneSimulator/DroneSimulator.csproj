@@ -123,6 +123,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\CoreServiceReference\CoreService.wsdl" />
+    <None Include="Properties\DataSources\DronePost.DataModel.Drone.datasource" />
     <None Include="Properties\DataSources\DronePost.DataModel.Package.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

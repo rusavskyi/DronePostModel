@@ -6,6 +6,8 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using DronePost.DataModel;
 using DroneSimulator.CoreServiceReference;
 
 namespace DroneSimulator
@@ -13,7 +15,7 @@ namespace DroneSimulator
 	public class Simulator
 	{
 		private readonly IMessageHandlerDrone _messageHandler;
-		private readonly List<DroneSimulation> _drones;
+		private List<DroneSimulation> _drones;
 		private ServiceHost _host;
 		private CoreServiceClient _coreServiceClient;
 		private bool _started;
@@ -25,15 +27,26 @@ namespace DroneSimulator
 			_coreServiceClient = new CoreServiceClient();
 		}
 
-		public void startSimulation()
+		public async Task StartSimulation()
 		{
 
 			if (!_started)
 			{
-				LoadDronesFromCore();
 				HostService();
 				_started = true;
-				Log("Simulation has started");
+				_messageHandler.Handle("Simulation has started\n");
+				try
+				{
+					await LoadDronesFromCore();
+				}
+				catch (Exception e)
+				{
+					_messageHandler.Handle(String.Format("Exception: {0}\n",e.Message));
+					_messageHandler.Handle("Failed to load drones.\n");
+					_messageHandler.Handle(String.Format("Core client is null: {0}\n", _coreServiceClient == null));
+					return;
+				}
+				_messageHandler.Handle("Drones loaded from core, count: " + _drones.Count);
 			}
 		}
 
@@ -43,14 +56,20 @@ namespace DroneSimulator
 
 				StopHost();
 				_started = false;
-				Log("Simualtion has stopped");
+				_messageHandler.Handle("Simualtion has stopped");
 			}
 
 		}
 
-		public void LoadDronesFromCore() {
+		public async Task LoadDronesFromCore() {
 			_drones.Clear();
 
+			List<Drone> tmpDrones = new List<Drone>(await _coreServiceClient.GetDronesAsync());//await _coreServiceClient.GetDronesAsync();
+			foreach (Drone drone in tmpDrones)
+			{
+				_drones.Add(new DroneSimulation(drone));
+			}
+			_messageHandler.Handle("Count: " + _drones.Count);
 		}
 
 		public void HostService()

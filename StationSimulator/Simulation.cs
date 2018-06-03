@@ -6,7 +6,7 @@ using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 using DronePost.DataModel;
-using StationSimulatorService;
+using StationService;
 
 namespace StationSimulator
 {
@@ -61,7 +61,7 @@ namespace StationSimulator
         public void HostService()
         {
             Uri baseAddress = new Uri("http://localhost:5000/StationSimulator");
-            _host = new ServiceHost(typeof(StationSimulatorService.StationService), baseAddress);
+            _host = new ServiceHost(typeof(StationService.StationService), baseAddress);
 
             try
             {

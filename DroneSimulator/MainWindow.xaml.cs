@@ -43,7 +43,7 @@ namespace DroneSimulator
 		private void button_startSim_Click(object sender, RoutedEventArgs e)
 		{
 			Simulator = new Simulator(this);
-			Simulator.startSimulation();
+			Simulator.StartSimulation();
 			buttonAddDront.Visibility = Visibility.Visible;
 			buttonAddTask.Visibility = Visibility.Visible;
 			

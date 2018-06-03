@@ -106,4 +106,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfPackage" nillable="true" type="tns:ArrayOfPackage" />
+  <xs:complexType name="ArrayOfDrone">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Drone" nillable="true" type="tns:Drone" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDrone" nillable="true" type="tns:ArrayOfDrone" />
 </xs:schema>

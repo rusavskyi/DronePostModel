@@ -28,6 +28,7 @@ namespace DroneSimulator.CoreServiceReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.City))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Company))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Package[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Drone[]))]
         void AssignCore(object core);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/AssignCore", ReplyAction="http://tempuri.org/ICoreService/AssignCoreResponse")]
@@ -80,6 +81,12 @@ namespace DroneSimulator.CoreServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/RequestChargeForDrone", ReplyAction="http://tempuri.org/ICoreService/RequestChargeForDroneResponse")]
         System.Threading.Tasks.Task<int> RequestChargeForDroneAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetDrones", ReplyAction="http://tempuri.org/ICoreService/GetDronesResponse")]
+        DronePost.DataModel.Drone[] GetDrones();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetDrones", ReplyAction="http://tempuri.org/ICoreService/GetDronesResponse")]
+        System.Threading.Tasks.Task<DronePost.DataModel.Drone[]> GetDronesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -179,6 +186,14 @@ namespace DroneSimulator.CoreServiceReference {
         
         public System.Threading.Tasks.Task<int> RequestChargeForDroneAsync(int id) {
             return base.Channel.RequestChargeForDroneAsync(id);
+        }
+        
+        public DronePost.DataModel.Drone[] GetDrones() {
+            return base.Channel.GetDrones();
+        }
+        
+        public System.Threading.Tasks.Task<DronePost.DataModel.Drone[]> GetDronesAsync() {
+            return base.Channel.GetDronesAsync();
         }
     }
 }
