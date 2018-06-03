@@ -1,0 +1,21 @@
+﻿<Window x:Class="StationSimulator.AddStation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StationSimulator"
+        mc:Ignorable="d"
+        Title="New Station" Height="300" Width="300">
+    <Grid>
+        <TextBox Name="NameTextBox" HorizontalAlignment="Left" Height="23" Margin="136,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="AddressTextBox" HorizontalAlignment="Left" Height="23" Margin="136,80,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="LongitudeTextBox" HorizontalAlignment="Left" Height="23" Margin="136,125,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="LatitudeTextBox" HorizontalAlignment="Left" Height="23" Margin="136,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="136,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Station Name&#xD;&#xA;" HorizontalAlignment="Left" Margin="40,35,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label Content="Station Address&#xA;" HorizontalAlignment="Left" Margin="29,79,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label Content="Longitude&#xA;" HorizontalAlignment="Left" Margin="59,125,0,0" VerticalAlignment="Top" Height="29"/>
+        <Label Content="Latitude&#xA;" HorizontalAlignment="Left" Margin="69,169,0,0" VerticalAlignment="Top" Height="23"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="181,217,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+    </Grid>
+</Window>

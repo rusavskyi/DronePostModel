@@ -11,7 +11,7 @@ namespace StationSimulator
     /// </summary>
     public partial class MainWindow : Window, IMessageHandler
     {
-        private List<string> stationList = new List<string>();
+        public List<string> stationList = new List<string>();
         private Simulation _simulation;
 
         public MainWindow()
@@ -50,8 +50,10 @@ namespace StationSimulator
 
         private void AddStationButton_Click(object sender, RoutedEventArgs e)
         {
-            Station station = new Station(){Id = 1, Address = "Śląska 88"};
-            _simulation.AddStation(station);
+            //Station station = new Station(){Id = 1, Address = "Śląska 88"};
+            //_simulation.AddStation(station);
+            AddStation ads = new AddStation();
+            ads.Show();
         }
     }
 }
