@@ -37,7 +37,7 @@ namespace DroneSimulator
 		}
 
 		public void Handle(string s) {
-			textBlock_log.Text += s;
+			textBlock_log.Text += s + "\n";
 		}
 
 		private void button_startSim_Click(object sender, RoutedEventArgs e)
