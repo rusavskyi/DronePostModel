@@ -47,9 +47,7 @@ namespace CoreHost
             {
                 _messageHandler.Handle("Error: " + e.Message);
             }
-
-
-
+            StartSimulation();
         }
 
         public void Test()
@@ -71,12 +69,12 @@ namespace CoreHost
             }
             catch (Exception e)
             {
-                _messageHandler.Handle("ERROR: "+e.Message);
+                _messageHandler.Handle("ERROR: " + e.Message);
             }
 
         }
 
-    public void StopHost()
+        public void StopHost()
         {
             try
             {
@@ -87,6 +85,8 @@ namespace CoreHost
             {
                 _messageHandler.Handle("Error: " + e.Message);
             }
+
+            _isWorking = false;
         }
 
         // need testing
@@ -195,9 +195,10 @@ namespace CoreHost
             try
             {
                 drones = _context.Drones.Include("Model").ToList();
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
-                _messageHandler.Handle("Error: "+e.Message + "\nStack trace: " + e.StackTrace);
+                _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
             }
             return drones;
         }
@@ -266,7 +267,23 @@ namespace CoreHost
                     switch (task.Type)
                     {
                         case CoreTaskType.CheckDronesStatus:
-
+                            List<Drone> drones = _context.Drones.Include("Model").ToList();
+                            foreach (Drone drone in drones)
+                            {
+                                DroneServiceClient client = new DroneServiceClient();
+                                DroneTechInfo info = client.GetTechInfo();
+                                if (info.CountOfTasks == 0)
+                                {
+                                    Station station = _context.Stations.First(s =>
+                                        s.Latitude == info.Latitude && s.Longitude == info.Longitude);
+                                    if (station == null)
+                                    {
+                                        station = _context.Stations.First(s =>
+                                            s.Id == FindClosestStation(info.Longitude, info.Latitude));
+                                    }
+                                    client.AddTask(new DroneTask(DroneTaskType.GoToStation, station));
+                                }
+                            }
                             break;
                         case CoreTaskType.CheckStationsStatus:
 
@@ -275,12 +292,40 @@ namespace CoreHost
                 }
                 else
                 {
-                   _tasks.Enqueue(new CoreTask(CoreTaskType.CheckDronesStatus));
-                   _tasks.Enqueue(new CoreTask(CoreTaskType.CheckStationsStatus));
+                    _tasks.Enqueue(new CoreTask(CoreTaskType.CheckDronesStatus));
+                    _tasks.Enqueue(new CoreTask(CoreTaskType.CheckStationsStatus));
                 }
             }
         }
 
+        int FindClosestStation(float longitude, float latitude)
+        {
+            Station station = null;
+            float x = float.MaxValue, y = float.MaxValue, dist = float.MaxValue, bestDist = float.MaxValue;
 
+            foreach (Station s in _context.Stations.ToList())
+            {
+                if (station == null)
+                {
+                    station = s;
+                    x = Math.Abs(station.Longitude - longitude);
+                    y = Math.Abs(station.Latitude - latitude);
+                    bestDist = (float)Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+                }
+                else
+                {
+                    x = Math.Abs(s.Longitude - longitude);
+                    y = Math.Abs(s.Latitude - latitude);
+                    dist = (float)Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+                    if (bestDist > dist)
+                    {
+                        bestDist = dist;
+                        station = s;
+                    }
+                }
+            }
+            if(station == null) return -1;
+            return station.Id;
+        }
     }
 }
