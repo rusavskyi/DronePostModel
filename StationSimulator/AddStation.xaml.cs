@@ -55,7 +55,7 @@ namespace StationSimulator
                 s.Latitude = latitude;
 
             }
-            StationSimulation ss = new StationSimulation(s);
+            // StationSimulation ss = new StationSimulation(s);
 
             ((MainWindow)Application.Current.MainWindow).stationList.Add(name);
             ((MainWindow)Application.Current.MainWindow).Simulation.AddStation(s);

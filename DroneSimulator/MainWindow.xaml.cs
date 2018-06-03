@@ -18,8 +18,6 @@ namespace DroneSimulator
 		public MainWindow()
 		{
 			InitializeComponent();
-			
-
 		}
 
 		private void buttonAddDront_Click(object sender, RoutedEventArgs e)
