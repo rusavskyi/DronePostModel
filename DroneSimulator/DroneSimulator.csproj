@@ -64,7 +64,6 @@
     </Compile>
     <Compile Include="DroneSimulation.cs" />
     <Compile Include="IMessageHandlerDrone.cs" />
-    <Compile Include="SimulationDrone.cs" />
     <Compile Include="Simulator.cs" />
     <Page Include="AddDrone.xaml">
       <SubType>Designer</SubType>
@@ -114,6 +113,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreSimulator\CoreHost.csproj">
+      <Project>{03681661-2973-4fe9-ba51-d40c3bdae0a0}</Project>
+      <Name>CoreHost</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DronePost\DronePost.csproj">
       <Project>{1eb06752-71d3-4df7-8b4d-7295b4c1a7b8}</Project>
       <Name>DronePost</Name>

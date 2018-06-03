@@ -138,7 +138,7 @@ namespace CoreHost
             return 0;
         }
 
-        public void SendDroneOnCharge(Drone drone, Station station)
+        public void SendDroneOnCharge(int idDrone)
         {
             throw new NotImplementedException();
         }

@@ -11,7 +11,7 @@ namespace DronePost.Interfaces
         int RegisterDrone(Drone drone);
         int RegisterStation(Station station);
         int RegisterCustomer(Customer customer);
-        void SendDroneOnCharge(Drone drone, Station station);
+        void SendDroneOnCharge(int idDrone);
         void RequestDroneForPackage(Package package);
         void RequestDroneForPackages(params Package[] packages);
 

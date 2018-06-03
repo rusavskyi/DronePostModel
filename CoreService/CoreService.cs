@@ -50,11 +50,6 @@ namespace CoreService
             return 0;
         }
 
-        public void SendDroneOnCharge(Drone drone, Station station)
-        {
-            Core.SendDroneOnCharge(drone, station);
-        }
-
         public void RequestDroneForPackage(Package package)
         {
             Core.RequestDroneForPackage(package);
@@ -65,9 +60,10 @@ namespace CoreService
             Core.RequestDroneForPackages(packages);
         }
 
-        public void RegisterPackageFromStation(Package package)
+        public int RequestChargeForDrone(int id)
         {
-            throw new NotImplementedException();
+            Core.SendDroneOnCharge(id);
+            return 0;
         }
     }
 }
