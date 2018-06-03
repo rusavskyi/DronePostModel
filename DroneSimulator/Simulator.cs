@@ -56,14 +56,17 @@ namespace DroneSimulator
 
 		}
 
+	    public void AddDrone(Drone d)
+	    {
+
+	    }
 		public async Task LoadDronesFromCore() {
 			_drones.Clear();
 
 		    DronePost.DataModel.Drone[] arrTmpDrones = await _coreServiceClient.GetDronesAsync();
 		    foreach (var drone in arrTmpDrones)
 		    {
-                var tDrone = new Drone(drone);
-		        _drones.Add();
+                _drones.Add(new Drone(drone));
 		    }
 
             /*List<Drone> tmpDrones = new List<Drone>(await _coreServiceClient.GetDronesAsync());//await _coreServiceClient.GetDronesAsync();

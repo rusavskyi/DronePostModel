@@ -10,6 +10,18 @@ namespace DroneSimulator
 {
     public class Drone : DronePost.DataModel.Drone, IDrone
     {
+        public Drone()
+        {
+            
+        }
+
+        public Drone(DronePost.DataModel.Drone drone)
+        {
+            Id = drone.Id;
+            Latitude = drone.Latitude;
+            Longitude = drone.Longitude;
+            Model = drone.Model;
+        }
         public DroneTechInfo GetTechInfo()
         {
             throw new NotImplementedException();
