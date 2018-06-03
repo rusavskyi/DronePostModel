@@ -104,6 +104,7 @@
     <None Include="Properties\DataSources\DronePost.DataModel.Customer.datasource" />
     <None Include="Properties\DataSources\DronePost.DataModel.Drone.datasource" />
     <None Include="Properties\DataSources\DronePost.DataModel.Package.datasource" />
+    <None Include="Properties\DataSources\DronePost.DataModel.PackageSize.datasource" />
     <None Include="Properties\DataSources\DronePost.DataModel.Station.datasource" />
     <None Include="Properties\DataSources\DronePost.SupportClasses.ChargeRespond.datasource" />
   </ItemGroup>
