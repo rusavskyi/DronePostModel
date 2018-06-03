@@ -39,6 +39,7 @@ namespace DroneSimulator
 				catch (Exception e)
 				{
 					_messageHandler.Handle(String.Format("Exception: {0}\n",e.Message));
+                    _messageHandler.Handle("Stack trace: "+e.StackTrace);
 					_messageHandler.Handle("Failed to load drones.\n");
 					_messageHandler.Handle(String.Format("Core client is null: {0}\n", _coreServiceClient == null));
 					return;
@@ -92,7 +93,7 @@ namespace DroneSimulator
 			try
 			{
 				WSHttpBinding binding = new WSHttpBinding();
-				_host.AddServiceEndpoint(typeof(IDroneService), binding, baseAddress);
+				_host.AddServiceEndpoint(typeof(DroneService.IDroneService), binding, baseAddress);
 				ServiceMetadataBehavior smb = new ServiceMetadataBehavior(){ HttpGetEnabled = true};
 				_host.Description.Behaviors.Add(smb);
 				_host.Open();
