@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="Simulation.cs" />
+    <Compile Include="StationServiceHost.cs" />
     <Compile Include="StationSimulation.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
