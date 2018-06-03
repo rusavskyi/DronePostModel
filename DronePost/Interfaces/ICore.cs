@@ -1,4 +1,5 @@
-﻿using DronePost.DataModel;
+﻿using System.Collections.Generic;
+using DronePost.DataModel;
 using DronePost.SupportClasses;
 
 namespace DronePost.Interfaces
@@ -14,7 +15,7 @@ namespace DronePost.Interfaces
         void SendDroneOnCharge(int idDrone);
         void RequestDroneForPackage(Package package);
         void RequestDroneForPackages(params Package[] packages);
-
+        List<Drone> GetDrones();
 
         // int RegisterCustumer(Customer customer, Company company); // ?
 

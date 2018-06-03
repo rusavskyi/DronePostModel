@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DronePost.DataModel;
 using DronePost.Interfaces;
 using DronePost.SupportClasses;
@@ -64,6 +65,11 @@ namespace CoreService
         {
             Core.SendDroneOnCharge(id);
             return 0;
+        }
+
+        public List<Drone> GetDrones()
+        {
+            throw new NotImplementedException();
         }
     }
 }

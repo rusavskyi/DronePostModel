@@ -1,4 +1,5 @@
-﻿using DronePost.Interfaces;
+﻿using System.Collections.Generic;
+using DronePost.Interfaces;
 using System.ServiceModel;
 using DronePost.DataModel;
 using DronePost.SupportClasses;
@@ -34,5 +35,8 @@ namespace CoreService
 
         [OperationContract]
         int RequestChargeForDrone(int id);
+
+        [OperationContract]
+        List<Drone> GetDrones();
     }
 }

@@ -152,5 +152,10 @@ namespace CoreHost
         {
             throw new NotImplementedException();
         }
+
+        public List<Drone> GetDrones()
+        {
+            return _context.Drones.Include("DroneModels").ToList();
+        }
     }
 }

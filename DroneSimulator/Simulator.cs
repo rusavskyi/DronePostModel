@@ -51,7 +51,6 @@ namespace DroneSimulator
 		public void LoadDronesFromCore() {
 			_drones.Clear();
 
-			//TODO
 		}
 
 		public void HostService()
