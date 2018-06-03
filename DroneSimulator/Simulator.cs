@@ -14,14 +14,14 @@ namespace DroneSimulator
 	public class Simulator
 	{
 		private readonly IMessageHandlerDrone _messageHandler;
-		private List<DroneSimulation> _drones;
+		private List<Drone> _drones;
 		private CoreServiceClient _coreServiceClient;
 		private bool _started;
 
 		public Simulator(IMessageHandlerDrone messageHandler)
 		{
 			_messageHandler = messageHandler;
-			_drones = new List<DroneSimulation>();
+			_drones = new List<Drone>();
 			_coreServiceClient = new CoreServiceClient();
 		}
 
@@ -50,8 +50,6 @@ namespace DroneSimulator
 		public void StopSimulation() {
 
 			if (_started) {
-
-				//StopHost();
 				_started = false;
 				_messageHandler.Handle("Simualtion has stopped");
 			}
@@ -61,19 +59,32 @@ namespace DroneSimulator
 		public async Task LoadDronesFromCore() {
 			_drones.Clear();
 
-			List<Drone> tmpDrones = new List<Drone>((IEnumerable<Drone>) await _coreServiceClient.GetDronesAsync());//await _coreServiceClient.GetDronesAsync();
-			foreach (Drone drone in tmpDrones)
+		    DronePost.DataModel.Drone[] arrTmpDrones = await _coreServiceClient.GetDronesAsync();
+		    foreach (var drone in arrTmpDrones)
+		    {
+                var tDrone = new Drone(drone);
+		        _drones.Add();
+		    }
+
+            /*List<Drone> tmpDrones = new List<Drone>(await _coreServiceClient.GetDronesAsync());//await _coreServiceClient.GetDronesAsync();
+            foreach (Drone drone in tmpDrones)
 			{
-				_drones.Add(new DroneSimulation(drone));
+				_drones.Add(drone);
 			}
 			_messageHandler.Handle("Count: " + _drones.Count);
+            */
+
+		    foreach (var drone in _drones)
+		    {
+		        HostDrone(drone);
+		    }
 		}
 
 		public void HostDrone(Drone drone)
 		{
 			ServiceHost _host;
 			Uri baseAddress = new Uri("http://localhost:4999/Drone/"+drone.Id);
-			_host = new ServiceHost(typeof(DroneService.DroneService), baseAddress);
+			_host = new DroneServiceHost(drone, typeof(DroneService.DroneService), baseAddress);
 
 			try
 			{

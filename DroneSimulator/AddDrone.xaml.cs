@@ -65,15 +65,13 @@ namespace DroneSimulator
 				d.Model.MaxWeightCarry = maxWeightSize;
 
 			}
-			DroneSimulation ds = new DroneSimulation(d);
+
 
 			((MainWindow)Application.Current.MainWindow).droneList.Add(modelName);
 
-			
 
 
-
-			textBoxModelName.Text = "";
+            textBoxModelName.Text = "";
 			textBoxMaxFlightDistance.Text = "";
 			textBoxMaxWeightCarry.Text = "";
 			comboBoxMaxSizeCarry.SelectedIndex = 0;

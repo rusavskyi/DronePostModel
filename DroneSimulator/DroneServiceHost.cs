@@ -24,13 +24,13 @@ namespace DroneSimulator
         protected override ServiceHost CreateServiceHost(Type serviceType,
             Uri[] baseAddresses)
         {
-            return new DronServiceHost(this.dep, serviceType, baseAddresses);
+            return new DroneServiceHost(this.dep, serviceType, baseAddresses);
         }
     }
 
-    public class DronServiceHost : ServiceHost
+    public class DroneServiceHost : ServiceHost
     {
-        public DronServiceHost(IDrone dep, Type serviceType, params Uri[] baseAddresses)
+        public DroneServiceHost(IDrone dep, Type serviceType, params Uri[] baseAddresses)
             : base(serviceType, baseAddresses)
         {
             if (dep == null)
