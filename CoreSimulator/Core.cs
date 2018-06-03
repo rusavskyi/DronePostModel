@@ -238,7 +238,12 @@ namespace CoreHost
                     switch (task.Type)
                     {
                         case CoreTaskType.CheckDronesStatus:
-
+                            List<Drone> drones = _context.Drones.Include("Model").ToList();
+                            foreach (Drone drone in drones)
+                            {
+                                Uri uri = new Uri("http://localhost:5000/Drone/" + drone.Id);
+                                
+                            }
                             break;
                         case CoreTaskType.CheckStationsStatus:
 

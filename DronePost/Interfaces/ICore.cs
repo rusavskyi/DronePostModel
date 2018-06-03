@@ -6,7 +6,6 @@ namespace DronePost.Interfaces
 {
     public interface ICore
     {
-
         Package RegisterPackage(GeneratedPackage package);
         int RegisterTransfer(Transfer transfer);
         int RegisterDrone(Drone drone);
