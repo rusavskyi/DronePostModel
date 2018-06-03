@@ -200,5 +200,20 @@ namespace CoreHost
             }
             return customers;
         }
+
+        public List<PackageSize> GetSizes()
+        {
+            _messageHandler.Handle("GetStatios request...");
+            List<PackageSize> sizes = null;
+            try
+            {
+                sizes = _context.PackageSizes.ToList();
+            }
+            catch (Exception e)
+            {
+                _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
+            }
+            return sizes;
+        }
     }
 }

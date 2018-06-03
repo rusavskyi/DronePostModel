@@ -81,5 +81,10 @@ namespace CoreService
         {
             return Core.GetCustomers();
         }
+
+        public List<PackageSize> GetSizes()
+        {
+            return Core.GetSizes();
+        }
     }
 }

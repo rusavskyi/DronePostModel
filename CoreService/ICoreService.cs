@@ -44,5 +44,8 @@ namespace CoreService
 
         [OperationContract]
         List<Customer> GetCustomers();
+
+        [OperationContract]
+        List<PackageSize> GetSizes();
     }
 }

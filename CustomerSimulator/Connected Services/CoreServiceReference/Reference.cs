@@ -8,6 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using DronePost.DataModel;
+
 namespace CustomerSimulator.CoreServiceReference {
     
     
@@ -97,7 +100,7 @@ namespace CustomerSimulator.CoreServiceReference {
         System.Threading.Tasks.Task<DronePost.DataModel.Station[]> GetStationsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetCustomers", ReplyAction="http://tempuri.org/ICoreService/GetCustomersResponse")]
-        DronePost.DataModel.Customer[] GetCustomers();
+        List<Customer> GetCustomers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetCustomers", ReplyAction="http://tempuri.org/ICoreService/GetCustomersResponse")]
         System.Threading.Tasks.Task<DronePost.DataModel.Customer[]> GetCustomersAsync();
@@ -218,7 +221,7 @@ namespace CustomerSimulator.CoreServiceReference {
             return base.Channel.GetStationsAsync();
         }
         
-        public DronePost.DataModel.Customer[] GetCustomers() {
+        public List<Customer> GetCustomers() {
             return base.Channel.GetCustomers();
         }
         
