@@ -39,6 +39,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +69,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="DroneServiceHost.cs" />
     <Compile Include="DroneSimulation.cs" />
     <Compile Include="IMessageHandlerDrone.cs" />
     <Compile Include="Simulator.cs" />
@@ -142,9 +144,9 @@
       <Project>{1eb06752-71d3-4df7-8b4d-7295b4c1a7b8}</Project>
       <Name>DronePost</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DroneSimulatorService\DroneSimulatorService.csproj">
+    <ProjectReference Include="..\DroneSimulatorService\DroneService.csproj">
       <Project>{f1943a0f-bb0c-4608-afcb-7df3fae9699e}</Project>
-      <Name>DroneSimulatorService</Name>
+      <Name>DroneService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

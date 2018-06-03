@@ -1,13 +1,12 @@
-﻿using DroneSimulatorService;
-using System;
+﻿using System;
 using System.Collections.Generic;
-
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using DronePost.DataModel;
+using DroneService;
 using DroneSimulator.CoreServiceReference;
 
 namespace DroneSimulator
@@ -75,12 +74,12 @@ namespace DroneSimulator
 		public void HostService()
 		{
 			Uri baseAddress = new Uri("http://localhost:4999/DroneSimulator");
-			_host = new ServiceHost(typeof(DroneSimulatorService.DroneSimulatorRevice), baseAddress);
+			_host = new ServiceHost(typeof(DroneService.DroneService), baseAddress);
 
 			try
 			{
 				WSHttpBinding binding = new WSHttpBinding();
-				_host.AddServiceEndpoint(typeof(IDroneSimulatorRevice), binding, baseAddress);
+				_host.AddServiceEndpoint(typeof(IDroneService), binding, baseAddress);
 				ServiceMetadataBehavior smb = new ServiceMetadataBehavior(){ HttpGetEnabled = true};
 				_host.Description.Behaviors.Add(smb);
 				_host.Open();
