@@ -27,6 +27,7 @@ namespace CustomerSimulator
         private CoreServiceClient _coreServiceClient;
         private List<Customer> _customers;
         private List<Station> _stations;
+        private List<PackageSize> _sizes;
 
         public CustomerSimulation()
         {
@@ -34,18 +35,22 @@ namespace CustomerSimulator
             _coreServiceClient = new CoreServiceClient();
             _customers = new List<Customer>();
             _stations = new List<Station>();
+            _sizes = new List<PackageSize>();
         }
 
         public void RequestParamsFromCore()
         {
             _customers = new List<Customer>(_coreServiceClient.GetCustomers());
             _stations = new List<Station>(_coreServiceClient.GetStations());
-            
+            _sizes = new List<PackageSize>(_coreServiceClient.GetSizes());
+            NumberOfPackageSizes = _sizes.Count;
+            NumberOfCustomers = _customers.Count;
+            NumberOfStations = _stations.Count;
         }
 
         public void StartSimulation() // param: StationSimulatorClient
         {
-            
+            RequestParamsFromCore();
             if (NumberOfPackageSizes > 0 &&
                 NumberOfStations > 0 &&
                 MaxDelay > MinDelay &&
@@ -61,10 +66,10 @@ namespace CustomerSimulator
                     int departureStationId = PickStation();
                     GeneratedPackage package = new GeneratedPackage()
                     {
-                        DepartureStationId = departureStationId,
-                        DestinationStationId = PickStationDifferentFrom(departureStationId),
-                        SenderId = PickPackageSize(),
-                        PackageSizeId = PickCustomer(),
+                        DepartureStationId = _stations[departureStationId].Id,
+                        DestinationStationId = _stations[PickStationDifferentFrom(departureStationId)].Id,
+                        SenderId = PickCustomer(),
+                        PackageSizeId = PickPackageSize(),
                         PackageWeight = (float)GenerateWeight(),
                         RecipientNumber = GenerateRecipientPhoneNumber()
                     };

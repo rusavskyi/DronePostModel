@@ -158,4 +158,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetSizes">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSizesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DronePost.DataModel" minOccurs="0" name="GetSizesResult" nillable="true" type="q12:ArrayOfPackageSize" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

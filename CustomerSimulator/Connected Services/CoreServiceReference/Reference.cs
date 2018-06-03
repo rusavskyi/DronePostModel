@@ -8,9 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using DronePost.DataModel;
-
 namespace CustomerSimulator.CoreServiceReference {
     
     
@@ -34,6 +31,7 @@ namespace CustomerSimulator.CoreServiceReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Drone[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Station[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Customer[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.PackageSize[]))]
         void AssignCore(object core);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/AssignCore", ReplyAction="http://tempuri.org/ICoreService/AssignCoreResponse")]
@@ -100,10 +98,16 @@ namespace CustomerSimulator.CoreServiceReference {
         System.Threading.Tasks.Task<DronePost.DataModel.Station[]> GetStationsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetCustomers", ReplyAction="http://tempuri.org/ICoreService/GetCustomersResponse")]
-        List<Customer> GetCustomers();
+        DronePost.DataModel.Customer[] GetCustomers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetCustomers", ReplyAction="http://tempuri.org/ICoreService/GetCustomersResponse")]
         System.Threading.Tasks.Task<DronePost.DataModel.Customer[]> GetCustomersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetSizes", ReplyAction="http://tempuri.org/ICoreService/GetSizesResponse")]
+        DronePost.DataModel.PackageSize[] GetSizes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetSizes", ReplyAction="http://tempuri.org/ICoreService/GetSizesResponse")]
+        System.Threading.Tasks.Task<DronePost.DataModel.PackageSize[]> GetSizesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -221,12 +225,20 @@ namespace CustomerSimulator.CoreServiceReference {
             return base.Channel.GetStationsAsync();
         }
         
-        public List<Customer> GetCustomers() {
+        public DronePost.DataModel.Customer[] GetCustomers() {
             return base.Channel.GetCustomers();
         }
         
         public System.Threading.Tasks.Task<DronePost.DataModel.Customer[]> GetCustomersAsync() {
             return base.Channel.GetCustomersAsync();
+        }
+        
+        public DronePost.DataModel.PackageSize[] GetSizes() {
+            return base.Channel.GetSizes();
+        }
+        
+        public System.Threading.Tasks.Task<DronePost.DataModel.PackageSize[]> GetSizesAsync() {
+            return base.Channel.GetSizesAsync();
         }
     }
 }

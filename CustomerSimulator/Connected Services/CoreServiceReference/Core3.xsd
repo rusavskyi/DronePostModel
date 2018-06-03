@@ -124,4 +124,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCustomer" nillable="true" type="tns:ArrayOfCustomer" />
+  <xs:complexType name="ArrayOfPackageSize">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PackageSize" nillable="true" type="tns:PackageSize" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPackageSize" nillable="true" type="tns:ArrayOfPackageSize" />
 </xs:schema>
