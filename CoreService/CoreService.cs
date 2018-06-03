@@ -9,7 +9,7 @@ namespace CoreService
     {
         public ICore Core { get; set; }
 
-        public CoreService() { }
+        //public CoreService() { }
 
         public CoreService(ICore core)
         {

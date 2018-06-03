@@ -25,7 +25,7 @@ namespace CoreHost
         public void StartHost()
         {
             Uri baseAddress = new Uri("http://localhost:8888/Core");
-            _host = new ServiceHost(typeof(CoreService.CoreService), baseAddress);
+            _host = new MyServiceHost(this, typeof(CoreService.CoreService), baseAddress);
 
             try
             {
