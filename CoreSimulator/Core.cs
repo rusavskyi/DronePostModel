@@ -47,30 +47,30 @@ namespace CoreHost
             {
                 _messageHandler.Handle("Error: " + e.Message);
             }
-            StartSimulation();
         }
 
         public void Test()
         {
-            try
-            {
-                /*
-                 string address = "http://localhost:4999/Drone/2";
-                DroneServiceClient _client =
-                    new DroneServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
-                _client.DoNextTask(true);
-                */
+            //try
+            //{
+            //    /*
+            //     string address = "http://localhost:4999/Drone/2";
+            //    DroneServiceClient _client =
+            //        new DroneServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
+            //    _client.DoNextTask(true);
+            //    */
 
-                string address = "http://localhost:5000/Station/2";
-                StationServiceClient _client =
-                    new StationServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
-                _client.DoNextTask(true);
+            //    string address = "http://localhost:5000/Station/2";
+            //    StationServiceClient _client =
+            //        new StationServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
+            //    _client.DoNextTask(true);
 
-            }
-            catch (Exception e)
-            {
-                _messageHandler.Handle("ERROR: " + e.Message);
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    _messageHandler.Handle("ERROR: " + e.Message);
+            //}
+            StartSimulation();
 
         }
 

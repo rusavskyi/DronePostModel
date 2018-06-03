@@ -59,12 +59,18 @@ namespace DroneSimulator
 
         public bool Start()
         {
-            throw new NotImplementedException();
+            _isWorking = true;
+            _thread = new Thread(() =>
+            {
+                Simulation();
+            });
+            return true;
         }
 
         public bool Stop()
         {
-            throw new NotImplementedException();
+            _isWorking = false;
+            return true;
         }
 
         private void Simulation()
