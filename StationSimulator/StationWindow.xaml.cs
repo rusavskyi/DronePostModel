@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DronePost.DataModel;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +34,42 @@ namespace StationSimulator
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Station s = new Station();
+            name = NameTextBox.Text;
 
+
+            try
+            {
+                longitude = float.Parse(LongitudeTextBox.Text, CultureInfo.InvariantCulture.NumberFormat);
+                latitude = float.Parse(LatitudeTextBox.Text, CultureInfo.InvariantCulture.NumberFormat);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Float convert exeption");
+            }
+            if (name != null && name != "" && address != null && address != "" && longitude != -1f && latitude != -1f)
+            {
+                s.Name = name;
+                s.Address = address;
+                s.Longitude = longitude;
+                s.Latitude = latitude;
+
+            }
+            StationSimulation ss = new StationSimulation(s);
+
+            ((MainWindow)Application.Current.MainWindow).droneList.Add(modelName);
+
+
+
+
+
+            textBoxModelName.Text = "";
+            textBoxMaxFlightDistance.Text = "";
+            textBoxMaxWeightCarry.Text = "";
+            comboBoxMaxSizeCarry.SelectedIndex = 0;
+            MessageBox.Show("Drone is added");
+
+            this.Close();
         }
     }
 }
