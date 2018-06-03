@@ -270,7 +270,8 @@ namespace CoreHost
                             List<Drone> drones = _context.Drones.Include("Model").ToList();
                             foreach (Drone drone in drones)
                             {
-                                DroneServiceClient client = new DroneServiceClient();
+                                string address = "http://localhost:4999/Drone/" + drone.Id;
+                                DroneServiceClient client = new DroneServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
                                 DroneTechInfo info = client.GetTechInfo();
                                 if (info.CountOfTasks == 0)
                                 {
