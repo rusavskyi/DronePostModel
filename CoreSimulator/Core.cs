@@ -141,16 +141,19 @@ namespace CoreHost
 
         public void SendDroneOnCharge(int idDrone)
         {
+
             throw new NotImplementedException();
         }
 
         public void RequestDroneForPackage(Package package)
         {
+            // todo add task for drone to take package
             throw new NotImplementedException();
         }
 
         public void RequestDroneForPackages(params Package[] packages)
         {
+            // todo add tasks for drones to take packages
             throw new NotImplementedException();
         }
 

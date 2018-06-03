@@ -34,6 +34,7 @@ namespace CustomerSimulator
 
         public void StartSimulation() // param: StationSimulatorClient
         {
+            
             if (NumberOfPackageSizes > 0 &&
                 NumberOfStations > 0 &&
                 MaxDelay > MinDelay &&
