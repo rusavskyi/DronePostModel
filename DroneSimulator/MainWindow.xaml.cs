@@ -13,7 +13,7 @@ namespace DroneSimulator
 	{
 
 		public List<string> droneList = new List<string>();
-		public SimulationDrone _simulationDrone;
+		public Simulator Simulator;
 
 		public MainWindow()
 		{
@@ -42,8 +42,8 @@ namespace DroneSimulator
 
 		private void button_startSim_Click(object sender, RoutedEventArgs e)
 		{
-			_simulationDrone = new SimulationDrone(this);
-			_simulationDrone.startSimulation();
+			Simulator = new Simulator(this);
+			Simulator.startSimulation();
 			buttonAddDront.Visibility = Visibility.Visible;
 			buttonAddTask.Visibility = Visibility.Visible;
 			
@@ -51,7 +51,7 @@ namespace DroneSimulator
 
 		private void button_stopSim_Click(object sender, RoutedEventArgs e)
 		{
-			_simulationDrone.StopSimulation();
+			Simulator.StopSimulation();
 			buttonAddDront.Visibility = Visibility.Hidden;
 			buttonAddTask.Visibility = Visibility.Hidden;
 		}

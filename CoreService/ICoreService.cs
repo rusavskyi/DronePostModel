@@ -1,4 +1,5 @@
-﻿using DronePost.Interfaces;
+﻿using System.Collections.Generic;
+using DronePost.Interfaces;
 using System.ServiceModel;
 using DronePost.DataModel;
 using DronePost.SupportClasses;
@@ -27,17 +28,15 @@ namespace CoreService
         int RegisterCustomer(Customer customer);
 
         [OperationContract]
-        void SendDroneOnCharge(Drone drone, Station station);
-
-        [OperationContract]
         void RequestDroneForPackage(Package package);
 
         [OperationContract]
         void RequestDroneForPackages(params Package[] packages);
 
         [OperationContract]
-        void RegisterPackageFromStation(Package package);
+        int RequestChargeForDrone(int id);
 
-
+        [OperationContract]
+        List<Drone> GetDrones();
     }
 }

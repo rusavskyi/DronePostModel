@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,9 +63,13 @@
     <Compile Include="AddDroneTask.xaml.cs">
       <DependentUpon>AddDroneTask.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\CoreServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="DroneSimulation.cs" />
     <Compile Include="IMessageHandlerDrone.cs" />
-    <Compile Include="SimulationDrone.cs" />
     <Compile Include="Simulator.cs" />
     <Page Include="AddDrone.xaml">
       <SubType>Designer</SubType>
@@ -105,6 +110,20 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\CoreServiceReference\Core.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CoreServiceReference\Core1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CoreServiceReference\Core2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CoreServiceReference\Core3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CoreServiceReference\CoreService.wsdl" />
+    <None Include="Properties\DataSources\DronePost.DataModel.Package.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,6 +133,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreSimulator\CoreHost.csproj">
+      <Project>{03681661-2973-4fe9-ba51-d40c3bdae0a0}</Project>
+      <Name>CoreHost</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DronePost\DronePost.csproj">
       <Project>{1eb06752-71d3-4df7-8b4d-7295b4c1a7b8}</Project>
       <Name>DronePost</Name>
@@ -122,6 +145,27 @@
       <Project>{f1943a0f-bb0c-4608-afcb-7df3fae9699e}</Project>
       <Name>DroneSimulatorService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\CoreServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CoreServiceReference\Core.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CoreServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CoreServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CoreServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

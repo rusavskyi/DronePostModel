@@ -138,7 +138,7 @@ namespace CoreHost
             return 0;
         }
 
-        public void SendDroneOnCharge(Drone drone, Station station)
+        public void SendDroneOnCharge(int idDrone)
         {
             throw new NotImplementedException();
         }
@@ -151,6 +151,11 @@ namespace CoreHost
         public void RequestDroneForPackages(params Package[] packages)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Drone> GetDrones()
+        {
+            return _context.Drones.Include("DroneModels").ToList();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DronePost.DataModel;
 using DronePost.Interfaces;
 using DronePost.SupportClasses;
@@ -50,11 +51,6 @@ namespace CoreService
             return 0;
         }
 
-        public void SendDroneOnCharge(Drone drone, Station station)
-        {
-            Core.SendDroneOnCharge(drone, station);
-        }
-
         public void RequestDroneForPackage(Package package)
         {
             Core.RequestDroneForPackage(package);
@@ -65,7 +61,13 @@ namespace CoreService
             Core.RequestDroneForPackages(packages);
         }
 
-        public void RegisterPackageFromStation(Package package)
+        public int RequestChargeForDrone(int id)
+        {
+            Core.SendDroneOnCharge(id);
+            return 0;
+        }
+
+        public List<Drone> GetDrones()
         {
             throw new NotImplementedException();
         }
