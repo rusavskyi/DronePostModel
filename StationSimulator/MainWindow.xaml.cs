@@ -17,15 +17,13 @@ namespace StationSimulator
         public MainWindow()
         {
             InitializeComponent();
-            
+            _simulation = new Simulation(this);
         }
 
         private void StartSimButton_Click(object sender, RoutedEventArgs e)
         {
             _simulation = new Simulation(this);
             _simulation.StartSimulation();
-            AddStationButton.Visibility = Visibility.Visible;
-           // buttonAddTask.Visibility = Visibility.Visible;
         }
 
         public void Handle(string message)
@@ -51,7 +49,8 @@ namespace StationSimulator
 
         private void AddStationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Station station = new Station(){Id = 1, Address = "Śląska 88"};
+            _simulation.AddStation(station);
         }
     }
 }

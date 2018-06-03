@@ -5,7 +5,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
-using DronePost.DataModel;
+using DronePost.Interfaces;
 using StationService;
 
 namespace StationSimulator
@@ -88,6 +88,33 @@ namespace StationSimulator
             catch (Exception exception)
             {
                 Log("Exception: "+exception.Message);
+            }
+        }
+
+        public void AddStation(Station station)
+        {
+            HostStation(station);
+        }
+
+
+        private void HostStation(Station station)
+        {
+            Uri baseAddress = new Uri("http://localhost:5000/Station/"+station.Id);
+            _host = new StationServiceHost(station, typeof(StationService.StationService), baseAddress);
+
+            try
+            {
+                WSHttpBinding binding = new WSHttpBinding();
+                _host.AddServiceEndpoint(typeof(IStationService), binding, baseAddress);
+                ServiceMetadataBehavior smb = new ServiceMetadataBehavior() { HttpGetEnabled = true };
+                _host.Description.Behaviors.Add(smb);
+                _host.Open();
+                _messageHandler.Handle("Station hosted: "+baseAddress);
+            }
+            catch (CommunicationException ce)
+            {
+                Log(String.Format("Exception: {0}", ce.Message));
+                _host.Abort();
             }
         }
     }

@@ -37,6 +37,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="Simulation.cs" />
+    <Compile Include="Station.cs" />
     <Compile Include="StationServiceHost.cs" />
     <Compile Include="StationSimulation.cs" />
     <Page Include="MainWindow.xaml">

@@ -7,7 +7,7 @@ namespace StationService
 {
     public class StationService : IStationService
     {
-        private IStation _station;
+        private readonly IStation _station;
         public StationService(IStation station)
         {
             _station = station;
