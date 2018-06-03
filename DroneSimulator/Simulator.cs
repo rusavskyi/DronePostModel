@@ -51,7 +51,7 @@ namespace DroneSimulator
 
 			if (_started) {
 
-				StopHost();
+				//StopHost();
 				_started = false;
 				_messageHandler.Handle("Simualtion has stopped");
 			}
@@ -61,7 +61,7 @@ namespace DroneSimulator
 		public async Task LoadDronesFromCore() {
 			_drones.Clear();
 
-			List<Drone> tmpDrones = new List<Drone>(await _coreServiceClient.GetDronesAsync());//await _coreServiceClient.GetDronesAsync();
+			List<Drone> tmpDrones = new List<Drone>((IEnumerable<Drone>) await _coreServiceClient.GetDronesAsync());//await _coreServiceClient.GetDronesAsync();
 			foreach (Drone drone in tmpDrones)
 			{
 				_drones.Add(new DroneSimulation(drone));
@@ -71,7 +71,7 @@ namespace DroneSimulator
 
 		public void HostDrone(Drone drone)
 		{
-		    ServiceHost _host;
+			ServiceHost _host;
 			Uri baseAddress = new Uri("http://localhost:4999/Drone/"+drone.Id);
 			_host = new ServiceHost(typeof(DroneService.DroneService), baseAddress);
 
@@ -82,7 +82,7 @@ namespace DroneSimulator
 				ServiceMetadataBehavior smb = new ServiceMetadataBehavior(){ HttpGetEnabled = true};
 				_host.Description.Behaviors.Add(smb);
 				_host.Open();
-                Log("Drone hosted: "+baseAddress);
+				Log("Drone hosted: "+baseAddress);
 			}
 			catch (CommunicationException ce)
 			{
