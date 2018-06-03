@@ -58,7 +58,7 @@ namespace StationSimulator
             // StationSimulation ss = new StationSimulation(s);
 
             ((MainWindow)Application.Current.MainWindow).stationList.Add(name);
-            ((MainWindow)Application.Current.MainWindow).Simulation.AddStation(s);
+            ((MainWindow)Application.Current.MainWindow).Simulation.AddStation(s, ((MainWindow)Application.Current.MainWindow).Simulation.numOfStations);
 
             NameTextBox.Text = "";
             AddressTextBox.Text = "";

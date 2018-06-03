@@ -18,6 +18,7 @@ namespace StationSimulator
         private readonly CoreServiceClient _coreServiceClient;
         private readonly List<ServiceHost> _hosts;
         private bool _started;
+        public int numOfStations = 0;
 
         public Simulation(IMessageHandler messageHandler)
         {
@@ -36,6 +37,7 @@ namespace StationSimulator
                 try
                 {
                     await LoadStationsFromCore();
+                    ++numOfStations;
                 }
                 catch (Exception e)
                 {
@@ -81,6 +83,7 @@ namespace StationSimulator
             foreach (var station in arrTmpStations)
             {
                 _stations.Add(new Station(station));
+                ++numOfStations;
             }
 
 
@@ -110,6 +113,7 @@ namespace StationSimulator
                 host.Open();
                 _hosts.Add(host);
                 Log("Station hosted: "+baseAddress);
+                ++numOfStations;
             }
             catch (CommunicationException ce)
             {
@@ -118,10 +122,40 @@ namespace StationSimulator
             }
         }
 
+        private void HostStation(Station station, int id)
+        {
+            ServiceHost host = null;
+            Uri baseAddress = new Uri("http://localhost:5000/Station/" + id);
+            host = new StationServiceHost(station, typeof(StationService.StationService), baseAddress);
+
+            try
+            {
+                WSHttpBinding binding = new WSHttpBinding();
+                host.AddServiceEndpoint(typeof(IStationService), binding, baseAddress);
+                ServiceMetadataBehavior smb = new ServiceMetadataBehavior() { HttpGetEnabled = true };
+                host.Description.Behaviors.Add(smb);
+                host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
+
+                host.Open();
+                _hosts.Add(host);
+                Log("Station hosted: " + baseAddress);
+                ++numOfStations;
+            }
+            catch (CommunicationException ce)
+            {
+                Log(String.Format("Exception: {0}", ce.Message));
+                host.Abort();
+            }
+        }
 
         public void AddStation(Station station)
         {
             HostStation(station);
+        }
+
+        public void AddStation(Station station, int id)
+        {
+            HostStation(station, id);
         }
 
         public void Log(string message)
