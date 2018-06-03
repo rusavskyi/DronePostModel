@@ -12,19 +12,21 @@ namespace StationSimulator
     public partial class MainWindow : Window, IMessageHandler
     {
         public List<string> stationList = new List<string>();
-        private Simulation _simulation;
+        private Simulation simulation;
+
+        internal Simulation Simulation { get => simulation; set => simulation = value; }
 
         public MainWindow()
         {
             InitializeComponent();
-            _simulation = new Simulation(this);
+            Simulation = new Simulation(this);
         }
 
         private void StartSimButton_Click(object sender, RoutedEventArgs e)
         {
-            _simulation = new Simulation(this);
+            Simulation = new Simulation(this);
             AddStationButton.Visibility = Visibility.Visible;
-            _simulation.StartSimulation();
+            Simulation.StartSimulation();
         }
 
         public void Handle(string message)
@@ -34,7 +36,7 @@ namespace StationSimulator
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _simulation.StopSimulation();
+            Simulation.StopSimulation();
         }
 
         private void LogTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -44,7 +46,7 @@ namespace StationSimulator
 
         private void StopSimButton_Click(object sender, RoutedEventArgs e)
         {
-            _simulation.StopSimulation();
+            Simulation.StopSimulation();
             AddStationButton.Visibility = Visibility.Hidden;
         }
 
@@ -52,8 +54,10 @@ namespace StationSimulator
         {
             //Station station = new Station(){Id = 1, Address = "Śląska 88"};
             //_simulation.AddStation(station);
+
             AddStation ads = new AddStation();
             ads.Show();
+            
         }
     }
 }

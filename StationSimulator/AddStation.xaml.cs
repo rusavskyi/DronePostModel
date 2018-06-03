@@ -29,6 +29,7 @@ namespace StationSimulator
         {
             InitializeComponent();
         }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -57,7 +58,8 @@ namespace StationSimulator
             StationSimulation ss = new StationSimulation(s);
 
             ((MainWindow)Application.Current.MainWindow).stationList.Add(name);
-            
+            ((MainWindow)Application.Current.MainWindow).Simulation.AddStation(s);
+
             NameTextBox.Text = "";
             AddressTextBox.Text = "";
             LongitudeTextBox.Text = "";
