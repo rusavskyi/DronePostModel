@@ -9,7 +9,7 @@
     <StackPanel>
 
         <Grid Height="460">
-            <TextBox Name="LogTextBox" HorizontalAlignment="Left" Height="339" Margin="253,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="434"/>
+            <TextBox Name="LogTextBox" HorizontalAlignment="Left" Height="339" Margin="253,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="434" VerticalScrollBarVisibility="Auto"/>
             <Label Content="Log" HorizontalAlignment="Left" Margin="253,-1,0,0" VerticalAlignment="Top" RenderTransformOrigin="-8.919,0.74"/>
             <Button Name="StartSimButton" Content="Start core" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimButton_Click"/>
             <Button Name="StopSimButton" Content="Stop core" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopSimButton_Click"/>
