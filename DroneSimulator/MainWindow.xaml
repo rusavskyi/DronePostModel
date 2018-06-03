@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 	<Grid>
-		<Button x:Name="buttonAddDront" Content="Add drone" HorizontalAlignment="Left" Margin="72,57,0,0" VerticalAlignment="Top" Width="75" Click="buttonAddDront_Click" Visibility="Hidden"/>
-		<Button x:Name="buttonAddTask" Content="Add task" HorizontalAlignment="Left" Margin="72,104,0,0" VerticalAlignment="Top" Width="75" Click="buttonAddTask_Click" Visibility="Hidden"/>
-		<TextBlock x:Name="textBlock_log" HorizontalAlignment="Left" Height="380" Margin="510,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274"/>
-		<Label x:Name="label" Content="Log" HorizontalAlignment="Left" Margin="510,4,0,0" VerticalAlignment="Top"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="textBlock_log" HorizontalAlignment="Left" Height="1500" Margin="510,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274"/>
+        </ScrollViewer>
+        <Button x:Name="buttonAddDront" Content="Add drone" HorizontalAlignment="Left" Margin="72,57,0,0" VerticalAlignment="Top" Width="75" Click="buttonAddDront_Click" Visibility="Hidden"/>
+        <Button x:Name="buttonAddTask" Content="Add task" HorizontalAlignment="Left" Margin="72,104,0,0" VerticalAlignment="Top" Width="75" Click="buttonAddTask_Click" Visibility="Hidden"/>
+        <Label x:Name="label" Content="Log" HorizontalAlignment="Left" Margin="510,4,0,0" VerticalAlignment="Top"/>
 		<Button x:Name="button_startSim" Content="Start Simulation" HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" VerticalAlignment="Top" Width="86" Click="button_startSim_Click"/>
 		<Button x:Name="button_stopSim" Content="Stop Simulation" HorizontalAlignment="Left" Height="20" Margin="123,10,0,0" VerticalAlignment="Top" Width="90" Click="button_stopSim_Click"/>
 	</Grid>
