@@ -174,13 +174,28 @@ namespace CoreHost
             List<Station> stations = null;
             try
             {
-                stations = _context.Stations.Include("City").ToList();
+                stations = _context.Stations.ToList();
             }
             catch (Exception e)
             {
                 _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
             }
             return stations;
+        }
+
+        public List<Customer> GetCustomers()
+        {
+            _messageHandler.Handle("GetStatios request...");
+            List<Customer> customers = null;
+            try
+            {
+                customers = _context.Customers.Include("City").ToList();
+            }
+            catch (Exception e)
+            {
+                _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
+            }
+            return customers;
         }
     }
 }

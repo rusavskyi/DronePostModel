@@ -41,5 +41,8 @@ namespace CoreService
 
         [OperationContract]
         List<Station> GetStations();
+
+        [OperationContract]
+        List<Customer> GetCustomers();
     }
 }

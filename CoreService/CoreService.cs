@@ -76,5 +76,10 @@ namespace CoreService
         {
             return Core.GetStations();
         }
+
+        public List<Customer> GetCustomers()
+        {
+            return Core.GetCustomers();
+        }
     }
 }
