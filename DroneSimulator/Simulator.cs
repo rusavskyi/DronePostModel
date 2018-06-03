@@ -17,7 +17,7 @@ namespace DroneSimulator
         private readonly IMessageHandlerDrone _messageHandler;
         private readonly List<Drone> _drones;
         private readonly CoreServiceClient _coreServiceClient;
-        private List<ServiceHost> _hosts;
+        private readonly List<ServiceHost> _hosts;
         private bool _started;
 
         public Simulator(IMessageHandlerDrone messageHandler)
@@ -32,22 +32,20 @@ namespace DroneSimulator
         {
             if (!_started)
             {
-                _started = true;
-                _messageHandler.Handle("Simulation has started\n");
+                _messageHandler.Handle("Simulation has started");
+                Log("Loading drones");
                 try
                 {
                     await LoadDronesFromCore();
                 }
                 catch (Exception e)
                 {
-                    _messageHandler.Handle(String.Format("Exception: {0}\n", e.Message));
-                    _messageHandler.Handle("Stack trace: " + e.StackTrace);
-                    _messageHandler.Handle("Failed to load drones.\n");
-                    _messageHandler.Handle(String.Format("Core client is null: {0}\n", _coreServiceClient == null));
+                    Log("Failed to load drones");
+                    Log(String.Format("Exception: {0}\n", e.Message));
                     return;
                 }
-
-                _messageHandler.Handle("Drones loaded from core, count: " + _drones.Count);
+                Log("Drones loaded from core, count: " + _drones.Count);
+                _started = true;
             }
         }
 
@@ -63,14 +61,14 @@ namespace DroneSimulator
                     }
                     catch (Exception e)
                     {
-                        _messageHandler.Handle("Error: "+e.Message);
+                        Log("Error: "+e.Message);
                     }
                 }
 
                 _hosts.Clear();
 
                 _started = false;
-                _messageHandler.Handle("Simualtion has stopped");
+                Log("Simualtion has stopped");
             }
         }
         public async Task LoadDronesFromCore()
@@ -101,7 +99,6 @@ namespace DroneSimulator
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior() {HttpGetEnabled = true};
                 host.Description.Behaviors.Add(smb);
                 host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
-
 
                 host.Open();
                 _hosts.Add(host);

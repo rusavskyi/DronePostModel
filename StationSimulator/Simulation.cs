@@ -16,7 +16,7 @@ namespace StationSimulator
         private readonly IMessageHandler _messageHandler;
         private readonly List<Station> _stations;
         private readonly CoreServiceClient _coreServiceClient;
-        
+        private readonly List<ServiceHost> _hosts;
         private bool _started;
 
         public Simulation(IMessageHandler messageHandler)
@@ -24,13 +24,13 @@ namespace StationSimulator
             _messageHandler = messageHandler;
             _stations = new List<Station>();
             _coreServiceClient = new CoreServiceClient();
+            _hosts = new List<ServiceHost>();
         }
 
         public async Task StartSimulation()
         {
             if (!_started)
             {
-                _started = true;
                 Log("Simulation has started");
                 Log("Loading stations");
                 try
@@ -39,6 +39,7 @@ namespace StationSimulator
                 }
                 catch (Exception e)
                 {
+                    Log("Failed to load stations");
                     Log(String.Format("Exception: {0}\n", e.Message));
                     return;
                 }
@@ -51,6 +52,20 @@ namespace StationSimulator
         {
             if (_started)
             {
+                foreach (ServiceHost serviceHost in _hosts)
+                {
+                    try
+                    {
+                        serviceHost.Close();
+                    }
+                    catch (Exception e)
+                    {
+                        Log("Error: " + e.Message);
+                    }
+                }
+
+                _hosts.Clear();
+
                 _started = false;
                 Log("Simulation has stopped");
             }
@@ -75,11 +90,33 @@ namespace StationSimulator
             }
         }
 
-        public void Log(string message)
-        {
-            _messageHandler.Handle(message);
-        }
 
+
+
+        private void HostStation(Station station)
+        {
+            ServiceHost host = null;
+            Uri baseAddress = new Uri("http://localhost:5000/Station/"+station.Id);
+            host = new StationServiceHost(station, typeof(StationService.StationService), baseAddress);
+
+            try
+            {
+                WSHttpBinding binding = new WSHttpBinding();
+                host.AddServiceEndpoint(typeof(IStationService), binding, baseAddress);
+                ServiceMetadataBehavior smb = new ServiceMetadataBehavior() { HttpGetEnabled = true };
+                host.Description.Behaviors.Add(smb);
+                host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
+
+                host.Open();
+                _hosts.Add(host);
+                Log("Station hosted: "+baseAddress);
+            }
+            catch (CommunicationException ce)
+            {
+                Log(String.Format("Exception: {0}", ce.Message));
+                host.Abort();
+            }
+        }
 
 
         public void AddStation(Station station)
@@ -87,27 +124,9 @@ namespace StationSimulator
             HostStation(station);
         }
 
-
-        private void HostStation(Station station)
+        public void Log(string message)
         {
-            ServiceHost _host = null;
-            Uri baseAddress = new Uri("http://localhost:5000/Station/"+station.Id);
-            _host = new StationServiceHost(station, typeof(StationService.StationService), baseAddress);
-
-            try
-            {
-                WSHttpBinding binding = new WSHttpBinding();
-                _host.AddServiceEndpoint(typeof(IStationService), binding, baseAddress);
-                ServiceMetadataBehavior smb = new ServiceMetadataBehavior() { HttpGetEnabled = true };
-                _host.Description.Behaviors.Add(smb);
-                _host.Open();
-                Log("Station hosted: "+baseAddress);
-            }
-            catch (CommunicationException ce)
-            {
-                Log(String.Format("Exception: {0}", ce.Message));
-                _host.Abort();
-            }
+            _messageHandler.Handle(message);
         }
     }
 }
