@@ -42,6 +42,7 @@ namespace CoreHost
             {
                 _messageHandler.Handle("Error: " + e.Message);
             }
+            
         }
 
         public void StopHost()
@@ -72,7 +73,7 @@ namespace CoreHost
             _context.Packages.Add(result);
             _context.SaveChanges();
             //List<Package> tmp =
-            result = _context.Packages.Include("Stations").Include("PackageSizes").First(p =>
+            result = _context.Packages.Include("DestinationStation").Include("Size").First(p =>
                 p.DestinationStation.Id == package.DestinationStationId &&
                 p.RecipientPhoneNumber == package.RecipientNumber &&
                 p.Size.Id == package.PackageSizeId &&
@@ -159,7 +160,7 @@ namespace CoreHost
             List<Drone> drones = null;
             try
             {
-                drones = _context.Drones.Include("DroneModels").ToList();
+                drones = _context.Drones.Include("Model").ToList();
             } catch (Exception e)
             {
                 _messageHandler.Handle("Error: "+e.Message + "\nStack trace: " + e.StackTrace);
