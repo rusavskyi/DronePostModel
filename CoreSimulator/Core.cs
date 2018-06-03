@@ -167,5 +167,20 @@ namespace CoreHost
             }
             return drones;
         }
+
+        public List<Station> GetStations()
+        {
+            _messageHandler.Handle("GetStatios request...");
+            List<Station> stations = null;
+            try
+            {
+                stations = _context.Stations.Include("City").ToList();
+            }
+            catch (Exception e)
+            {
+                _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
+            }
+            return stations;
+        }
     }
 }

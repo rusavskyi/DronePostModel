@@ -38,5 +38,8 @@ namespace CoreService
 
         [OperationContract]
         List<Drone> GetDrones();
+
+        [OperationContract]
+        List<Station> GetStations();
     }
 }

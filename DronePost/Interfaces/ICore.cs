@@ -16,6 +16,7 @@ namespace DronePost.Interfaces
         void RequestDroneForPackage(Package package);
         void RequestDroneForPackages(params Package[] packages);
         List<Drone> GetDrones();
+        List<Station> GetStations();
 
         // int RegisterCustumer(Customer customer, Company company); // ?
 

@@ -71,5 +71,10 @@ namespace CoreService
         {
             return Core.GetDrones();
         }
+
+        public List<Station> GetStations()
+        {
+            return Core.GetStations();
+        }
     }
 }
