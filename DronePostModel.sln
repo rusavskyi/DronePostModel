@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreService", "CoreService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerSimulator", "CustomerSimulator\CustomerSimulator.csproj", "{FC9B03DA-323F-4433-8D89-74A1FB75CAD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationSimulatorService", "StationSimulatorService\StationSimulatorService.csproj", "{7B557633-2932-4EE7-B709-C7B9A4C8B98E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationService", "StationSimulatorService\StationService.csproj", "{7B557633-2932-4EE7-B709-C7B9A4C8B98E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneSimulatorService", "DroneSimulatorService\DroneSimulatorService.csproj", "{F1943A0F-BB0C-4608-AFCB-7DF3FAE9699E}"
 EndProject

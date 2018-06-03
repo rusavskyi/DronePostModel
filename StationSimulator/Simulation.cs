@@ -61,12 +61,12 @@ namespace StationSimulator
         public void HostService()
         {
             Uri baseAddress = new Uri("http://localhost:5000/StationSimulator");
-            _host = new ServiceHost(typeof(StationSimulatorService.StationSimulatorService), baseAddress);
+            _host = new ServiceHost(typeof(StationSimulatorService.StationService), baseAddress);
 
             try
             {
                 WSHttpBinding binding = new WSHttpBinding();
-                _host.AddServiceEndpoint(typeof(IStationSimulatorService), binding, baseAddress);
+                _host.AddServiceEndpoint(typeof(IStationService), binding, baseAddress);
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior() {HttpGetEnabled = true};
                 _host.Description.Behaviors.Add(smb);
                 _host.Open();
