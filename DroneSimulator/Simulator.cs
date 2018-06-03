@@ -15,7 +15,6 @@ namespace DroneSimulator
 	{
 		private readonly IMessageHandlerDrone _messageHandler;
 		private List<DroneSimulation> _drones;
-		private ServiceHost _host;
 		private CoreServiceClient _coreServiceClient;
 		private bool _started;
 
@@ -31,7 +30,6 @@ namespace DroneSimulator
 
 			if (!_started)
 			{
-				HostService();
 				_started = true;
 				_messageHandler.Handle("Simulation has started\n");
 				try
@@ -71,9 +69,10 @@ namespace DroneSimulator
 			_messageHandler.Handle("Count: " + _drones.Count);
 		}
 
-		public void HostService()
+		public void HostDrone(Drone drone)
 		{
-			Uri baseAddress = new Uri("http://localhost:4999/DroneSimulator");
+		    ServiceHost _host;
+			Uri baseAddress = new Uri("http://localhost:4999/Drone/"+drone.Id);
 			_host = new ServiceHost(typeof(DroneService.DroneService), baseAddress);
 
 			try
@@ -83,24 +82,12 @@ namespace DroneSimulator
 				ServiceMetadataBehavior smb = new ServiceMetadataBehavior(){ HttpGetEnabled = true};
 				_host.Description.Behaviors.Add(smb);
 				_host.Open();
+                Log("Drone hosted: "+baseAddress);
 			}
 			catch (CommunicationException ce)
 			{
 				Log(String.Format("Exception: {0}", ce.Message));
 				_host.Abort();
-			}
-		}
-
-		public void StopHost()
-		{
-			try
-			{
-				_host.Close();
-				_host = null;
-			}
-			catch (Exception exception)
-			{
-				Log("Exception: " + exception.Message);
 			}
 		}
 
