@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DronePost.SupportClasses
 {
     [DataContract]
-    class CoreTask
+    public class CoreTask
     {
         [DataMember] public CoreTaskType Type { get; }
 
@@ -18,8 +18,9 @@ namespace DronePost.SupportClasses
         }
     }
 
-    enum CoreTaskType
+    public enum CoreTaskType
     {
-        
+        CheckDronesStatus,
+        CheckStationsStatus
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.Threading;
 using CoreService;
 using DronePost.DataModel;
 using DronePost.Interfaces;
@@ -15,6 +16,8 @@ namespace CoreHost
         private IMessageHandler _messageHandler;
         private ServiceHost _host;
         private DronePostContext _context;
+        private bool _isWorking;
+        private Queue<CoreTask> _tasks;
 
         public Core(IMessageHandler messageHandler)
         {
@@ -215,5 +218,41 @@ namespace CoreHost
             }
             return sizes;
         }
+
+        public void StartSimulation()
+        {
+            Thread thread = new Thread(() =>
+            {
+                Simulation();
+            });
+        }
+
+        private void Simulation()
+        {
+            _isWorking = true;
+            while (_isWorking)
+            {
+                if (_tasks.Count > 0)
+                {
+                    CoreTask task = _tasks.Dequeue();
+                    switch (task.Type)
+                    {
+                        case CoreTaskType.CheckDronesStatus:
+
+                            break;
+                        case CoreTaskType.CheckStationsStatus:
+
+                            break;
+                    }
+                }
+                else
+                {
+                   _tasks.Enqueue(new CoreTask(CoreTaskType.CheckDronesStatus));
+                   _tasks.Enqueue(new CoreTask(CoreTaskType.CheckStationsStatus));
+                }
+            }
+        }
+
+
     }
 }

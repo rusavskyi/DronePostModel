@@ -24,6 +24,7 @@ namespace DroneSimulator
         }
         public DroneTechInfo GetTechInfo()
         {
+
             throw new NotImplementedException();
         }
 

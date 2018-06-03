@@ -19,10 +19,6 @@ namespace DroneSimulator
 		private DroneTask _currenTask;
 		private bool _currentTaskIsFinished;
 		
-
-		
-
-
 		public DroneSimulation(Drone drone)
 		{
 			Drone = drone;
