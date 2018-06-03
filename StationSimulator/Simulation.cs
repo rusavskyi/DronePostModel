@@ -16,8 +16,7 @@ namespace StationSimulator
         private readonly IMessageHandler _messageHandler;
         private readonly List<Station> _stations;
         private readonly CoreServiceClient _coreServiceClient;
-
-
+        
         private bool _started;
 
         public Simulation(IMessageHandler messageHandler)
@@ -31,18 +30,20 @@ namespace StationSimulator
         {
             if (!_started)
             {
+                _started = true;
+                Log("Simulation has started");
+                Log("Loading stations");
                 try
                 {
                     await LoadStationsFromCore();
                 }
                 catch (Exception e)
                 {
-                    _messageHandler.Handle(String.Format("Exception: {0}\n", e.Message));
+                    Log(String.Format("Exception: {0}\n", e.Message));
                     return;
                 }
-                _messageHandler.Handle("Stations loaded from core, count: " + _stations.Count);
+                Log("Stations loaded from core, count: " + _stations.Count);
                 _started = true;
-                Log("Simulation has started");
             }
         }
 
@@ -100,7 +101,7 @@ namespace StationSimulator
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior() { HttpGetEnabled = true };
                 _host.Description.Behaviors.Add(smb);
                 _host.Open();
-                _messageHandler.Handle("Station hosted: "+baseAddress);
+                Log("Station hosted: "+baseAddress);
             }
             catch (CommunicationException ce)
             {

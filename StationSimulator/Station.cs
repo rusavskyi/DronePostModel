@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,7 @@ namespace StationSimulator
 {
     class Station : DronePost.DataModel.Station, IStation
     {
-        public Station()
-        {
-
-        }
+        public Station(){}
 
         public Station(DronePost.DataModel.Station station)
         {
@@ -57,7 +55,7 @@ namespace StationSimulator
 
         public void DoNextTask(bool force = false)
         {
-            throw new NotImplementedException();
+            Debug.WriteLine("STATION IS GOOD");
         }
 
         public int RequestChargeSlot()
