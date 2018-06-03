@@ -51,6 +51,7 @@ namespace CustomerSimulator
         public void StartSimulation() // param: StationSimulatorClient
         {
             RequestParamsFromCore();
+            Console.WriteLine("Customers {0}, Station {1}, Sizes {2}", NumberOfCustomers, NumberOfStations, NumberOfPackageSizes);
             if (NumberOfPackageSizes > 0 &&
                 NumberOfStations > 0 &&
                 MaxDelay > MinDelay &&
@@ -68,8 +69,8 @@ namespace CustomerSimulator
                     {
                         DepartureStationId = _stations[departureStationId].Id,
                         DestinationStationId = _stations[PickStationDifferentFrom(departureStationId)].Id,
-                        SenderId = PickCustomer(),
-                        PackageSizeId = PickPackageSize(),
+                        SenderId = _customers[PickCustomer()].Id,
+                        PackageSizeId = _sizes[PickPackageSize()].Id,
                         PackageWeight = (float)GenerateWeight(),
                         RecipientNumber = GenerateRecipientPhoneNumber()
                     };
@@ -93,7 +94,7 @@ namespace CustomerSimulator
 
         protected int PickStation()
         {
-            return _random.Next(NumberOfStations) + 1;
+            return _random.Next(NumberOfStations);
         }
 
         protected int PickStationDifferentFrom(int stationId)
@@ -108,7 +109,7 @@ namespace CustomerSimulator
 
         protected int PickPackageSize()
         {
-            return _random.Next(NumberOfPackageSizes) + 1;
+            return _random.Next(NumberOfPackageSizes);
         }
 
         protected double GenerateWeight()
@@ -121,7 +122,7 @@ namespace CustomerSimulator
 
         protected int PickCustomer()
         {
-            return _random.Next(NumberOfCustomers) + 1;
+            return _random.Next(NumberOfCustomers);
         }
 
         protected string GenerateRecipientPhoneNumber()

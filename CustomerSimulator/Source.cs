@@ -20,7 +20,6 @@ namespace CustomerSimulator
                 PhoneLength = 9
             };
 
-            // sim.RequestParamsFromCore();
 
             Thread thread = new Thread(() =>
             {
