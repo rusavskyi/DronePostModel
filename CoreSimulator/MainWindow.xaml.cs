@@ -46,5 +46,10 @@ namespace CoreHost
         {
             WriteToOutput(message);
         }
+
+        private void TEST_OnClick(object sender, RoutedEventArgs e)
+        {
+            _core.Test();
+        }
     }
 }

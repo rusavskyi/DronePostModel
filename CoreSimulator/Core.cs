@@ -19,7 +19,7 @@ namespace CoreHost
         private bool _isWorking;
         private Queue<CoreTask> _tasks;
 
-        
+
 
         public Core(IMessageHandler messageHandler)
         {
@@ -48,13 +48,28 @@ namespace CoreHost
                 _messageHandler.Handle("Error: " + e.Message);
             }
 
-            string address = "http://localhost:4999/Drone/2";
-            DroneServiceClient _client = new DroneServiceClient(new BasicHttpBinding(), new EndpointAddress(new Uri(address)));
-            _client.DoNextTask(true);
-            
+
+
         }
 
-        public void StopHost()
+        public void Test()
+        {
+            try
+            {
+                string address = "http://localhost:4999/Drone/2";
+                DroneServiceClient _client =
+                    new DroneServiceClient(new WSDualHttpBinding(), new EndpointAddress(new Uri(address)));
+                _client.DoNextTask(true);
+
+            }
+            catch (Exception e)
+            {
+                _messageHandler.Handle("ERROR: "+e.Message);
+            }
+
+        }
+
+    public void StopHost()
         {
             try
             {

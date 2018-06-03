@@ -13,6 +13,7 @@
             <Label Content="Log" HorizontalAlignment="Left" Margin="253,-1,0,0" VerticalAlignment="Top" RenderTransformOrigin="-8.919,0.74"/>
             <Button Name="StartSimButton" Content="Start core" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimButton_Click"/>
             <Button Name="StopSimButton" Content="Stop core" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopSimButton_Click"/>
+            <Button Name="TEST" Content="TEST" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="TEST_OnClick"/>
 
         </Grid>
     </StackPanel>
