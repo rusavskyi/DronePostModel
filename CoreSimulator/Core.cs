@@ -19,6 +19,8 @@ namespace CoreHost
         private bool _isWorking;
         private Queue<CoreTask> _tasks;
 
+        
+
         public Core(IMessageHandler messageHandler)
         {
             _messageHandler = messageHandler;
@@ -45,6 +47,10 @@ namespace CoreHost
             {
                 _messageHandler.Handle("Error: " + e.Message);
             }
+
+            string address = "http://localhost:4999/Drone/2";
+            DroneServiceClient _client = new DroneServiceClient(new BasicHttpBinding(), new EndpointAddress(new Uri(address)));
+            _client.DoNextTask(true);
             
         }
 
@@ -238,12 +244,7 @@ namespace CoreHost
                     switch (task.Type)
                     {
                         case CoreTaskType.CheckDronesStatus:
-                            List<Drone> drones = _context.Drones.Include("Model").ToList();
-                            foreach (Drone drone in drones)
-                            {
-                                Uri uri = new Uri("http://localhost:5000/Drone/" + drone.Id);
-                                
-                            }
+
                             break;
                         case CoreTaskType.CheckStationsStatus:
 
