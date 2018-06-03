@@ -23,6 +23,7 @@ namespace StationSimulator
         private void StartSimButton_Click(object sender, RoutedEventArgs e)
         {
             _simulation = new Simulation(this);
+            AddStationButton.Visibility = Visibility.Visible;
             _simulation.StartSimulation();
         }
 
