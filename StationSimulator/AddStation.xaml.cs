@@ -45,6 +45,7 @@ namespace StationSimulator
             {
                 MessageBox.Show("Float convert exeption");
             }
+
             if (name != null && name != "" && address != null && address != "" && longitude != -1f && latitude != -1f)
             {
                 s.Name = name;
