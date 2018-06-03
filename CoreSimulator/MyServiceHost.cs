@@ -35,7 +35,7 @@ namespace CoreService
         {
             if (dep == null)
             {
-                throw new ArgumentNullException("dep");
+                throw new ArgumentNullException(nameof(dep));
             }
 
             foreach (var cd in this.ImplementedContracts.Values)
