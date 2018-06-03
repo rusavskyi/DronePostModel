@@ -19,6 +19,7 @@ namespace DroneSimulator
         private readonly CoreServiceClient _coreServiceClient;
         private readonly List<ServiceHost> _hosts;
         private bool _started;
+        public int numOfDrones = 0;
 
         public Simulator(IMessageHandlerDrone messageHandler)
         {
@@ -37,6 +38,7 @@ namespace DroneSimulator
                 try
                 {
                     await LoadDronesFromCore();
+                    ++numOfDrones;
                 }
                 catch (Exception e)
                 {
@@ -103,6 +105,32 @@ namespace DroneSimulator
                 host.Open();
                 _hosts.Add(host);
                 Log("Drone hosted: " + baseAddress);
+                ++numOfDrones;
+            }
+            catch (CommunicationException ce)
+            {
+                Log(String.Format("Exception: {0}", ce.Message));
+                host.Abort();
+            }
+        }
+
+        public void HostDrone(Drone drone, int id)
+        {
+            Uri baseAddress = new Uri("http://localhost:4999/Drone/" + id);
+            ServiceHost host = new DroneServiceHost(drone, typeof(DroneService.DroneService), baseAddress);
+
+            try
+            {
+                WSHttpBinding binding = new WSHttpBinding();
+                host.AddServiceEndpoint(typeof(DroneService.IDroneService), binding, baseAddress);
+                ServiceMetadataBehavior smb = new ServiceMetadataBehavior() { HttpGetEnabled = true };
+                host.Description.Behaviors.Add(smb);
+                host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
+
+                host.Open();
+                _hosts.Add(host);
+                Log("Drone hosted: " + baseAddress);
+                ++numOfDrones;
             }
             catch (CommunicationException ce)
             {
