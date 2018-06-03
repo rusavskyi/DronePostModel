@@ -59,16 +59,15 @@ namespace DroneSimulator
 			}
 			if (modelName != null && modelName != "" && maxCarrySize != -1 && maxWeightSize != -1f && maxFlightDistance != -1f)
 			{
-				d.Model.ModelName = modelName;
+                d.Model.ModelName = modelName;
 				d.Model.MaxSizeCarry = new PackageSize();
 				d.Model.MaxFlightDistance = maxFlightDistance;
 				d.Model.MaxWeightCarry = maxWeightSize;
 
 			}
-
-
+            
 			((MainWindow)Application.Current.MainWindow).droneList.Add(modelName);
-            ((MainWindow)Application.Current.MainWindow).Simulator.HostDrone(d);
+            ((MainWindow)Application.Current.MainWindow).Simulator.HostDrone(d, ((MainWindow)Application.Current.MainWindow).Simulator.numOfDrones);
 
 
 
