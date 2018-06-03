@@ -141,7 +141,7 @@ namespace CoreHost
 
         public void SendDroneOnCharge(int idDrone)
         {
-
+            // todo set task for drone to charge at station
             throw new NotImplementedException();
         }
 
@@ -188,7 +188,7 @@ namespace CoreHost
 
         public List<Customer> GetCustomers()
         {
-            _messageHandler.Handle("GetStatios request...");
+            _messageHandler.Handle("GetCustomers request...");
             List<Customer> customers = null;
             try
             {
@@ -203,7 +203,7 @@ namespace CoreHost
 
         public List<PackageSize> GetSizes()
         {
-            _messageHandler.Handle("GetStatios request...");
+            _messageHandler.Handle("GetSizes request...");
             List<PackageSize> sizes = null;
             try
             {
