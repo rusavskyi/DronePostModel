@@ -15,11 +15,19 @@ namespace CoreHost
 {
     class Core : ICore
     {
-        private IMessageHandler _messageHandler;
+        private readonly IMessageHandler _messageHandler;
+
+        // For database
+        private readonly DronePostContext _context;
+
+        //For hosting
         private ServiceHost _host;
-        private DronePostContext _context;
+        private readonly string coreAddress = "http://localhost:8888/Core";
+
+        //Additional
         private bool _isWorking;
         private Queue<CoreTask> _tasks;
+
 
         public Core(IMessageHandler messageHandler)
         {
@@ -29,24 +37,35 @@ namespace CoreHost
 
         public void StartHost()
         {
-            Uri baseAddress = new Uri("http://localhost:8888/Core");
+            Uri baseAddress = new Uri(coreAddress);
             _host = new MyServiceHost(this, typeof(CoreService.CoreService), baseAddress);
 
             try
             {
-                ServiceEndpoint endpoint = _host.AddServiceEndpoint(typeof(ICoreService), new WSHttpBinding(), "");
-                ServiceMetadataBehavior bechavior = new ServiceMetadataBehavior()
-                {
-                    HttpGetEnabled = true
-                };
+                _host.AddServiceEndpoint(typeof(ICoreService), new WSHttpBinding(), "");
+                ServiceMetadataBehavior bechavior = new ServiceMetadataBehavior(){HttpGetEnabled = true};
                 _host.Description.Behaviors.Add(bechavior);
                 _host.Open();
-                _messageHandler.Handle("Core has started on address: " + baseAddress.ToString());
+                Log("Core has started on address: " + baseAddress);
             }
             catch (Exception e)
             {
-                _messageHandler.Handle("Error: " + e.Message);
+                Log("Error: " + e.Message);
             }
+        }
+
+        public void StopHost()
+        {
+            try
+            {
+                _host.Close();
+                Log("Core has stopped");
+            }
+            catch (Exception e)
+            {
+                Log("Error: " + e.Message);
+            }
+            _isWorking = false;
         }
 
         public void Test()
@@ -68,27 +87,14 @@ namespace CoreHost
             //}
             //catch (Exception e)
             //{
-            //    _messageHandler.Handle("ERROR: " + e.Message);
+            //    Log("ERROR: " + e.Message);
             //}
-            _messageHandler.Handle("Test started...");
+            Log("Test started...");
             StartSimulation();
 
         }
 
-        public void StopHost()
-        {
-            try
-            {
-                _host.Close();
-                _messageHandler.Handle("Core has stopped");
-            }
-            catch (Exception e)
-            {
-                _messageHandler.Handle("Error: " + e.Message);
-            }
 
-            _isWorking = false;
-        }
 
         // need testing
 
@@ -134,7 +140,7 @@ namespace CoreHost
                 ArrivalTime = DateTime.Now,
                 Package = result
             };
-            _messageHandler.Handle("Package from " + customer.Id + " to " + package.RecipientNumber + " registred with id: " + result.Id + ".");
+            Log("Package from " + customer.Id + " to " + package.RecipientNumber + " registred with id: " + result.Id + ".");
             RegisterTransfer(transfer);
             return result;
         }
@@ -143,7 +149,7 @@ namespace CoreHost
         {
             _context.Transfers.Add(transfer);
             _context.SaveChanges();
-            _messageHandler.Handle("Transfer registred.");
+            Log("Transfer registred.");
             return 0;
         }
 
@@ -151,7 +157,7 @@ namespace CoreHost
         {
             _context.Drones.Add(drone);
             _context.SaveChanges();
-            _messageHandler.Handle("Drone registred.");
+            Log("Drone registred.");
             return 0;
         }
 
@@ -159,7 +165,7 @@ namespace CoreHost
         {
             _context.Stations.Add(station);
             _context.SaveChanges();
-            _messageHandler.Handle("Station registred.");
+            Log("Station registred.");
             return 0;
         }
 
@@ -167,7 +173,7 @@ namespace CoreHost
         {
             _context.Customers.Add(customer);
             _context.SaveChanges();
-            _messageHandler.Handle("Customer registred.");
+            Log("Customer registred.");
             return 0;
         }
 
@@ -191,7 +197,7 @@ namespace CoreHost
 
         public List<Drone> GetDrones()
         {
-            _messageHandler.Handle("GetDrones request...");
+            Log("GetDrones request...");
             List<Drone> drones = null;
             try
             {
@@ -199,14 +205,14 @@ namespace CoreHost
             }
             catch (Exception e)
             {
-                _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
+                Log("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
             }
             return drones;
         }
 
         public List<Station> GetStations()
         {
-            _messageHandler.Handle("GetStatios request...");
+            Log("GetStatios request...");
             List<Station> stations = null;
             try
             {
@@ -214,14 +220,14 @@ namespace CoreHost
             }
             catch (Exception e)
             {
-                _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
+                Log("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
             }
             return stations;
         }
 
         public List<Customer> GetCustomers()
         {
-            _messageHandler.Handle("GetCustomers request...");
+            Log("GetCustomers request...");
             List<Customer> customers = null;
             try
             {
@@ -229,14 +235,14 @@ namespace CoreHost
             }
             catch (Exception e)
             {
-                _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
+                Log("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
             }
             return customers;
         }
 
         public List<PackageSize> GetSizes()
         {
-            _messageHandler.Handle("GetSizes request...");
+            Log("GetSizes request...");
             List<PackageSize> sizes = null;
             try
             {
@@ -244,14 +250,14 @@ namespace CoreHost
             }
             catch (Exception e)
             {
-                _messageHandler.Handle("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
+                Log("Error: " + e.Message + "\nStack trace: " + e.StackTrace);
             }
             return sizes;
         }
 
         public void StartSimulation()
         {
-            _messageHandler.Handle("Starting simulation thread...");
+            Log("Starting simulation thread...");
             Thread thread = new Thread(Simulation);
             thread.Start();
         }
@@ -259,7 +265,7 @@ namespace CoreHost
         private void Simulation()
         {
             _isWorking = true;
-            _messageHandler.Handle("Simulation started");
+            Log("Simulation started");
             while (_isWorking)
             {
                 if (_tasks.Count > 0)
@@ -284,7 +290,7 @@ namespace CoreHost
                                             s.Id == FindClosestStation(info.Longitude, info.Latitude));
                                     }
                                     client.AddTask(new DroneTask(DroneTaskType.GoToStation, station));
-                                    _messageHandler.Handle(String.Format("Added task for drone {0} {1} to go to station {2}.", drone.Model.ModelName, drone.Id, station.Id));;
+                                    Log(String.Format("Added task for drone {0} {1} to go to station {2}.", drone.Model.ModelName, drone.Id, station.Id));;
                                 }
                             }
                             break;
@@ -330,5 +336,8 @@ namespace CoreHost
             if(station == null) return -1;
             return station.Id;
         }
+
+
+        private void Log(string message) { _messageHandler.Handle(message);}
     }
 }
