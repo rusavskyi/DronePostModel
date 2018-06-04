@@ -23,7 +23,7 @@ namespace CoreHost
 
         public void WriteToOutput(string message)
         {
-            Dispatcher.Invoke(() => { LogTextBox.AppendText(message + "\n"); });
+            Dispatcher.BeginInvoke((Action)(() => { LogTextBox.AppendText(message + "\n"); }));
         }
 
 

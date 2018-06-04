@@ -55,6 +55,11 @@ namespace DroneSimulator
         {
             if (_started)
             {
+                foreach (Drone drone in _drones)
+                {
+                    drone.Stop();
+                }
+
                 foreach (ServiceHost serviceHost in _hosts)
                 {
                     try
@@ -106,6 +111,7 @@ namespace DroneSimulator
                 _hosts.Add(host);
                 Log("Drone hosted: " + baseAddress);
                 ++numOfDrones;
+                drone.Start();
             }
             catch (CommunicationException ce)
             {

@@ -4,6 +4,8 @@ using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Threading;
+using System.Windows;
+using System.Windows.Threading;
 using CoreService;
 using DronePost.DataModel;
 using DronePost.Interfaces;
@@ -70,6 +72,7 @@ namespace CoreHost
             //{
             //    _messageHandler.Handle("ERROR: " + e.Message);
             //}
+            _messageHandler.Handle("Test started...");
             StartSimulation();
 
         }
@@ -250,6 +253,7 @@ namespace CoreHost
 
         public void StartSimulation()
         {
+            _messageHandler.Handle("Starting simulation thread...");
             Thread thread = new Thread(() =>
             {
                 Simulation();
@@ -259,6 +263,8 @@ namespace CoreHost
         private void Simulation()
         {
             _isWorking = true;
+            ((MainWindow)(Application.Current.MainWindow)).Handle("!!!");
+            _messageHandler.Handle("Simulation started");
             while (_isWorking)
             {
                 if (_tasks.Count > 0)
@@ -283,6 +289,7 @@ namespace CoreHost
                                             s.Id == FindClosestStation(info.Longitude, info.Latitude));
                                     }
                                     client.AddTask(new DroneTask(DroneTaskType.GoToStation, station));
+                                    _messageHandler.Handle(String.Format("Added task for drone {0} {1} to go to station {2}.", drone.Model.ModelName, drone.Id, station.Id));;
                                 }
                             }
                             break;
