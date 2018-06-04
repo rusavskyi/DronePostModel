@@ -83,7 +83,6 @@ namespace StationSimulator
             foreach (var station in arrTmpStations)
             {
                 _stations.Add(new Station(station));
-                ++numOfStations;
             }
 
 
