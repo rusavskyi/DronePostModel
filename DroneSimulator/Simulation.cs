@@ -12,7 +12,7 @@ using DroneSimulator.CoreServiceReference;
 
 namespace DroneSimulator
 {
-    public class Simulator
+    public class Simulation
     {
         private readonly IMessageHandlerDrone _messageHandler;
         private readonly List<Drone> _drones;
@@ -21,7 +21,7 @@ namespace DroneSimulator
         private bool _started;
         public int numOfDrones = 0;
 
-        public Simulator(IMessageHandlerDrone messageHandler)
+        public Simulation(IMessageHandlerDrone messageHandler)
         {
             _messageHandler = messageHandler;
             _drones = new List<Drone>();

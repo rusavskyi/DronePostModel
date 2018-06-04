@@ -104,7 +104,7 @@ namespace StationSimulator
             try
             {
                 WSHttpBinding binding = new WSHttpBinding();
-                host.AddServiceEndpoint(typeof(IStationService), binding, baseAddress);
+                host.AddServiceEndpoint(typeof(StationService.IStationService), binding, baseAddress);
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior() { HttpGetEnabled = true };
                 host.Description.Behaviors.Add(smb);
                 host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;

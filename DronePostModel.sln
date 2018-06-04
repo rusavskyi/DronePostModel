@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneSimulator", "DroneSimu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DronePost", "DronePost\DronePost.csproj", "{1EB06752-71D3-4DF7-8B4D-7295B4C1A7B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreHost", "CoreSimulator\CoreHost.csproj", "{03681661-2973-4FE9-BA51-D40C3BDAE0A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreHost", "CoreHost\CoreHost.csproj", "{03681661-2973-4FE9-BA51-D40C3BDAE0A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationSimulator", "StationSimulator\StationSimulator.csproj", "{49E5B070-9BE3-49A8-9903-C8CA0DC09C74}"
 EndProject
@@ -15,9 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreService", "CoreService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerSimulator", "CustomerSimulator\CustomerSimulator.csproj", "{FC9B03DA-323F-4433-8D89-74A1FB75CAD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationService", "StationSimulatorService\StationService.csproj", "{7B557633-2932-4EE7-B709-C7B9A4C8B98E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationService", "StationService\StationService.csproj", "{7B557633-2932-4EE7-B709-C7B9A4C8B98E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneService", "DroneSimulatorService\DroneService.csproj", "{F1943A0F-BB0C-4608-AFCB-7DF3FAE9699E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneService", "DroneService\DroneService.csproj", "{F1943A0F-BB0C-4608-AFCB-7DF3FAE9699E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

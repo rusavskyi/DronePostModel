@@ -136,7 +136,7 @@
       <Project>{1eb06752-71d3-4df7-8b4d-7295b4c1a7b8}</Project>
       <Name>DronePost</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StationSimulatorService\StationService.csproj">
+    <ProjectReference Include="..\StationService\StationService.csproj">
       <Project>{7b557633-2932-4ee7-b709-c7b9a4c8b98e}</Project>
       <Name>StationService</Name>
     </ProjectReference>
