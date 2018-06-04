@@ -18,7 +18,7 @@ namespace CoreHost
         private readonly IMessageHandler _messageHandler;
 
         // For database
-        private readonly DronePostContext _context;
+        private readonly DronePostContext _db;
 
         //For hosting
         private ServiceHost _host;
@@ -32,7 +32,7 @@ namespace CoreHost
         public Core(IMessageHandler messageHandler)
         {
             _messageHandler = messageHandler;
-            _context = new DronePostContext();
+            _db = new DronePostContext();
         }
 
         public void StartHost()
@@ -102,41 +102,41 @@ namespace CoreHost
         {
             Package result = new Package
             {
-                DestinationStation = _context.Stations.First(s => s.Id == package.DestinationStationId),
+                DestinationStation = _db.Stations.First(s => s.Id == package.DestinationStationId),
                 //Id = context.Stations.ToList().Count,
                 RecipientPhoneNumber = package.RecipientNumber,
-                Size = _context.PackageSizes.First(ps => ps.Id == package.PackageSizeId),
+                Size = _db.PackageSizes.First(ps => ps.Id == package.PackageSizeId),
                 Weight = package.PackageWeight
             };
-            _context.Packages.Add(result);
-            _context.SaveChanges();
+            _db.Packages.Add(result);
+            _db.SaveChanges();
             //List<Package> tmp =
-            result = _context.Packages.Include("DestinationStation").Include("Size").First(p =>
+            result = _db.Packages.Include("DestinationStation").Include("Size").First(p =>
                 p.DestinationStation.Id == package.DestinationStationId &&
                 p.RecipientPhoneNumber == package.RecipientNumber &&
                 p.Size.Id == package.PackageSizeId &&
                 p.Weight == package.PackageWeight);
-            Customer customer = _context.Customers.First(c => c.Id == package.SenderId);
+            Customer customer = _db.Customers.First(c => c.Id == package.SenderId);
             if (customer != null)
             {
-                _context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
+                _db.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
             }
             else
             {
-                if (_context.Customers.Count() > package.SenderId)
+                if (_db.Customers.Count() > package.SenderId)
                 {
-                    customer = _context.Customers.ToList()[package.SenderId];
+                    customer = _db.Customers.ToList()[package.SenderId];
                 }
                 else
                 {
-                    customer = _context.Customers.ToList()[0];
+                    customer = _db.Customers.ToList()[0];
                 }
-                _context.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
+                _db.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
             }
-            _context.SaveChanges();
+            _db.SaveChanges();
             Transfer transfer = new Transfer()
             {
-                ArrivalStation = _context.Stations.First(s => s.Id == package.DestinationStationId),
+                ArrivalStation = _db.Stations.First(s => s.Id == package.DestinationStationId),
                 ArrivalTime = DateTime.Now,
                 Package = result
             };
@@ -147,32 +147,32 @@ namespace CoreHost
 
         public int RegisterTransfer(Transfer transfer)
         {
-            _context.Transfers.Add(transfer);
-            _context.SaveChanges();
+            _db.Transfers.Add(transfer);
+            _db.SaveChanges();
             Log("Transfer registred.");
             return 0;
         }
 
         public int RegisterDrone(Drone drone)
         {
-            _context.Drones.Add(drone);
-            _context.SaveChanges();
+            _db.Drones.Add(drone);
+            _db.SaveChanges();
             Log("Drone registred.");
             return 0;
         }
 
         public int RegisterStation(Station station)
         {
-            _context.Stations.Add(station);
-            _context.SaveChanges();
+            _db.Stations.Add(station);
+            _db.SaveChanges();
             Log("Station registred.");
             return 0;
         }
 
         public int RegisterCustomer(Customer customer)
         {
-            _context.Customers.Add(customer);
-            _context.SaveChanges();
+            _db.Customers.Add(customer);
+            _db.SaveChanges();
             Log("Customer registred.");
             return 0;
         }
@@ -201,7 +201,7 @@ namespace CoreHost
             List<Drone> drones = null;
             try
             {
-                drones = _context.Drones.Include("Model").ToList();
+                drones = _db.Drones.Include("Model").ToList();
             }
             catch (Exception e)
             {
@@ -216,7 +216,7 @@ namespace CoreHost
             List<Station> stations = null;
             try
             {
-                stations = _context.Stations.ToList();
+                stations = _db.Stations.ToList();
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace CoreHost
             List<Customer> customers = null;
             try
             {
-                customers = _context.Customers.Include("City").ToList();
+                customers = _db.Customers.Include("City").ToList();
             }
             catch (Exception e)
             {
@@ -246,7 +246,7 @@ namespace CoreHost
             List<PackageSize> sizes = null;
             try
             {
-                sizes = _context.PackageSizes.ToList();
+                sizes = _db.PackageSizes.ToList();
             }
             catch (Exception e)
             {
@@ -274,7 +274,7 @@ namespace CoreHost
                     switch (task.Type)
                     {
                         case CoreTaskType.CheckDronesStatus:
-                            List<Drone> drones = _context.Drones.Include("Model").ToList();
+                            List<Drone> drones = _db.Drones.Include("Model").ToList();
                             foreach (Drone drone in drones)
                             {
                                 string address = "http://localhost:4999/Drone/" + drone.Id;
@@ -282,11 +282,11 @@ namespace CoreHost
                                 DroneTechInfo info = client.GetTechInfo();
                                 if (info.CountOfTasks == 0)
                                 {
-                                    Station station = _context.Stations.First(s =>
+                                    Station station = _db.Stations.First(s =>
                                         s.Latitude == info.Latitude && s.Longitude == info.Longitude);
                                     if (station == null)
                                     {
-                                        station = _context.Stations.First(s =>
+                                        station = _db.Stations.First(s =>
                                             s.Id == FindClosestStation(info.Longitude, info.Latitude));
                                     }
                                     client.AddTask(new DroneTask(DroneTaskType.GoToStation, station));
@@ -312,7 +312,7 @@ namespace CoreHost
             Station station = null;
             float x = float.MaxValue, y = float.MaxValue, dist = float.MaxValue, bestDist = float.MaxValue;
 
-            foreach (Station s in _context.Stations.ToList())
+            foreach (Station s in _db.Stations.ToList())
             {
                 if (station == null)
                 {
