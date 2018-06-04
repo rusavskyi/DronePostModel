@@ -126,8 +126,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\CoreServiceReference\CoreService.wsdl" />
+    <None Include="Properties\DataSources\DronePost.DataModel.Customer.datasource" />
     <None Include="Properties\DataSources\DronePost.DataModel.Drone.datasource" />
     <None Include="Properties\DataSources\DronePost.DataModel.Package.datasource" />
+    <None Include="Properties\DataSources\DronePost.DataModel.PackageSize.datasource" />
+    <None Include="Properties\DataSources\DronePost.DataModel.Station.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -137,6 +140,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreService\CoreService.csproj">
+      <Project>{7d5ebe3b-a980-4ff1-801a-1363f28a8db2}</Project>
+      <Name>CoreService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DronePost\DronePost.csproj">
       <Project>{1eb06752-71d3-4df7-8b4d-7295b4c1a7b8}</Project>
       <Name>DronePost</Name>

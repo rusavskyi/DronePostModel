@@ -29,6 +29,9 @@ namespace DroneSimulator.CoreServiceReference {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Company))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Package[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Drone[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Station[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.Customer[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DronePost.DataModel.PackageSize[]))]
         void AssignCore(object core);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/AssignCore", ReplyAction="http://tempuri.org/ICoreService/AssignCoreResponse")]
@@ -87,6 +90,24 @@ namespace DroneSimulator.CoreServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetDrones", ReplyAction="http://tempuri.org/ICoreService/GetDronesResponse")]
         System.Threading.Tasks.Task<DronePost.DataModel.Drone[]> GetDronesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetStations", ReplyAction="http://tempuri.org/ICoreService/GetStationsResponse")]
+        DronePost.DataModel.Station[] GetStations();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetStations", ReplyAction="http://tempuri.org/ICoreService/GetStationsResponse")]
+        System.Threading.Tasks.Task<DronePost.DataModel.Station[]> GetStationsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetCustomers", ReplyAction="http://tempuri.org/ICoreService/GetCustomersResponse")]
+        DronePost.DataModel.Customer[] GetCustomers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetCustomers", ReplyAction="http://tempuri.org/ICoreService/GetCustomersResponse")]
+        System.Threading.Tasks.Task<DronePost.DataModel.Customer[]> GetCustomersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetSizes", ReplyAction="http://tempuri.org/ICoreService/GetSizesResponse")]
+        DronePost.DataModel.PackageSize[] GetSizes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICoreService/GetSizes", ReplyAction="http://tempuri.org/ICoreService/GetSizesResponse")]
+        System.Threading.Tasks.Task<DronePost.DataModel.PackageSize[]> GetSizesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -194,6 +215,30 @@ namespace DroneSimulator.CoreServiceReference {
         
         public System.Threading.Tasks.Task<DronePost.DataModel.Drone[]> GetDronesAsync() {
             return base.Channel.GetDronesAsync();
+        }
+        
+        public DronePost.DataModel.Station[] GetStations() {
+            return base.Channel.GetStations();
+        }
+        
+        public System.Threading.Tasks.Task<DronePost.DataModel.Station[]> GetStationsAsync() {
+            return base.Channel.GetStationsAsync();
+        }
+        
+        public DronePost.DataModel.Customer[] GetCustomers() {
+            return base.Channel.GetCustomers();
+        }
+        
+        public System.Threading.Tasks.Task<DronePost.DataModel.Customer[]> GetCustomersAsync() {
+            return base.Channel.GetCustomersAsync();
+        }
+        
+        public DronePost.DataModel.PackageSize[] GetSizes() {
+            return base.Channel.GetSizes();
+        }
+        
+        public System.Threading.Tasks.Task<DronePost.DataModel.PackageSize[]> GetSizesAsync() {
+            return base.Channel.GetSizesAsync();
         }
     }
 }

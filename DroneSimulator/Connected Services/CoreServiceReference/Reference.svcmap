@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="39c4d81a-ed78-4cd6-b664-5db1dfd7d42f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ce9f4e91-690e-4d87-bae3-5e50566f21dd" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,12 +22,12 @@
     <MetadataSource Address="http://localhost:8888/Core" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Core.xsd" MetadataType="Schema" ID="6a13e599-eb3d-4ade-a4a1-30a4bf89861b" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd0" />
-    <MetadataFile FileName="Core1.xsd" MetadataType="Schema" ID="60e641f6-fa8c-4d88-afba-c7cb0114b9ef" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd1" />
-    <MetadataFile FileName="Core.disco" MetadataType="Disco" ID="534f708d-63e3-45fc-b3b9-d99843ad9f0f" SourceId="1" SourceUrl="http://localhost:8888/Core?disco" />
-    <MetadataFile FileName="Core2.xsd" MetadataType="Schema" ID="62c4c385-027a-4770-a7fe-abd8f6038191" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd2" />
-    <MetadataFile FileName="Core3.xsd" MetadataType="Schema" ID="a3603feb-f7a3-496c-8c77-edbefa3b3bd8" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd3" />
-    <MetadataFile FileName="CoreService.wsdl" MetadataType="Wsdl" ID="2d00203c-8110-42b6-8d1a-a13b0bf0e583" SourceId="1" SourceUrl="http://localhost:8888/Core?wsdl" />
+    <MetadataFile FileName="Core.xsd" MetadataType="Schema" ID="cc5a6033-3fc3-40ef-a4a0-9414c3f9856a" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd0" />
+    <MetadataFile FileName="Core1.xsd" MetadataType="Schema" ID="b8472029-50f1-4d20-a4c8-f5dea9d4904d" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd1" />
+    <MetadataFile FileName="Core.disco" MetadataType="Disco" ID="e10c389d-ea44-4bd9-abea-14a8b3cedc80" SourceId="1" SourceUrl="http://localhost:8888/Core?disco" />
+    <MetadataFile FileName="Core2.xsd" MetadataType="Schema" ID="1daef514-cc26-4161-aee1-48ea561919d1" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd2" />
+    <MetadataFile FileName="Core3.xsd" MetadataType="Schema" ID="39aa71f6-c1d6-4585-986c-92ef656a43ed" SourceId="1" SourceUrl="http://localhost:8888/Core?xsd=xsd3" />
+    <MetadataFile FileName="CoreService.wsdl" MetadataType="Wsdl" ID="5d2f4c2b-6715-43a0-b635-8695fe0aa631" SourceId="1" SourceUrl="http://localhost:8888/Core?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
