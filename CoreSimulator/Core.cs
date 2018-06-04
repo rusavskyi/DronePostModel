@@ -21,8 +21,6 @@ namespace CoreHost
         private bool _isWorking;
         private Queue<CoreTask> _tasks;
 
-
-
         public Core(IMessageHandler messageHandler)
         {
             _messageHandler = messageHandler;
@@ -254,16 +252,13 @@ namespace CoreHost
         public void StartSimulation()
         {
             _messageHandler.Handle("Starting simulation thread...");
-            Thread thread = new Thread(() =>
-            {
-                Simulation();
-            });
+            Thread thread = new Thread(Simulation);
+            thread.Start();
         }
 
         private void Simulation()
         {
             _isWorking = true;
-            ((MainWindow)(Application.Current.MainWindow)).Handle("!!!");
             _messageHandler.Handle("Simulation started");
             while (_isWorking)
             {
