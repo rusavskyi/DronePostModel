@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CoreHost"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="704.646" Closing="Window_Closing">
+        Title="Core Host" Height="450" Width="704.646">
     <StackPanel>
 
         <Grid Height="460">

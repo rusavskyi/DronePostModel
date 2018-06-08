@@ -20,7 +20,7 @@ namespace DroneSimulator
 			InitializeComponent();
 		}
 
-		private void buttonAddDront_Click(object sender, RoutedEventArgs e)
+		private void buttonAddDrone_Click(object sender, RoutedEventArgs e)
 		{
 			AddDrone ad = new AddDrone();
 			//ad.DataContext = this;

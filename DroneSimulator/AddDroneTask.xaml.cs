@@ -45,7 +45,7 @@ namespace DroneSimulator
 		private void button_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("Task is added");
-		
+			((MainWindow)Application.Current.MainWindow).textBlock_log.Text += ("New task is added \n");
 			this.Close();
 		}
 

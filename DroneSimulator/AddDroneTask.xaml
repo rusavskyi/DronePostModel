@@ -5,15 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DroneSimulator"
         mc:Ignorable="d"
-        Title="AddDroneTask" Height="300" Width="300">
-    <Grid>
-		<Button x:Name="button" Content="Add" HorizontalAlignment="Left" Margin="194,228,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-		<Label x:Name="label" Content="Drone" HorizontalAlignment="Left" Margin="46,50,0,0" VerticalAlignment="Top"/>
-		<Label x:Name="label1" Content="Task Type" HorizontalAlignment="Left" Margin="28,81,0,0" VerticalAlignment="Top"/>
-		<Label x:Name="label2" Content="Station" HorizontalAlignment="Left" Margin="42,122,0,0" VerticalAlignment="Top"/>
-		<ComboBox x:Name="comboBoxDrone" HorizontalAlignment="Left" Margin="110,50,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBox_SelectionChanged"/>
-		<ComboBox x:Name="comboBoxDroneTask" HorizontalAlignment="Left" Margin="110,84,0,0" VerticalAlignment="Top" Width="120"/>
-		<ComboBox x:Name="comboBoxStation" HorizontalAlignment="Left" Margin="110,125,0,0" VerticalAlignment="Top" Width="120"/>
+        Title="New DroneTask" Height="450" Width="704.646">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="64*"/>
+			<ColumnDefinition Width="29*"/>
+			<ColumnDefinition Width="256*"/>
+		</Grid.ColumnDefinitions>
+		<Button x:Name="button" Content="Add" HorizontalAlignment="Left" Margin="7.815,214,0,0" VerticalAlignment="Top" Width="75" Click="button_Click" Grid.ColumnSpan="2" Grid.Column="1"/>
+		<Label x:Name="label" Content="Drone" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+			<Label.RenderTransform>
+				<TransformGroup>
+					<ScaleTransform/>
+					<SkewTransform/>
+					<RotateTransform Angle="-1.18"/>
+					<TranslateTransform/>
+				</TransformGroup>
+			</Label.RenderTransform>
+		</Label>
+		<Label x:Name="label1" Content="Task Type" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top"/>
+		<Label x:Name="label2" Content="Station" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top"/>
+		<ComboBox x:Name="comboBoxDrone" HorizontalAlignment="Left" Margin="91,76,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBox_SelectionChanged" Grid.ColumnSpan="3"/>
+		<ComboBox x:Name="comboBoxDroneTask" HorizontalAlignment="Left" Margin="91,107,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="3"/>
+		<ComboBox x:Name="comboBoxStation" HorizontalAlignment="Left" Margin="91,138,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="3"/>
 
 	</Grid>
 </Window>
