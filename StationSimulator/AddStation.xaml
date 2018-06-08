@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StationSimulator"
         mc:Ignorable="d"
-        Title="New Station" Height="300" Width="300">
+        Title="New Station" Height="450" Width="704.646">
     <Grid>
         <TextBox Name="NameTextBox" HorizontalAlignment="Left" Height="23" Margin="136,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="AddressTextBox" HorizontalAlignment="Left" Height="23" Margin="136,80,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="120"/>

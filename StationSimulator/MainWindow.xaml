@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StationSimulator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="645" Width="951">
+        Title="Station Simulation" Height="450" Width="704.646">
 
     <Grid RenderTransformOrigin="0.451,0.436">
         <Grid.RowDefinitions>
@@ -14,10 +14,10 @@
         </Grid.RowDefinitions>
 
 
-        <Label Content="Log" HorizontalAlignment="Left" Margin="570,6,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="LogTextBox" HorizontalAlignment="Left" Height="376" Margin="570,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="353" Grid.RowSpan="2" TextChanged="LogTextBox_TextChanged" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        <Button Name="StartSimButton" Content="Start simulation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimButton_Click"/>
-        <Button Name="StopSimButton"  Content="Stop simulation" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopSimButton_Click"/>
+		<Label Content="Log" HorizontalAlignment="Left" Margin="253,-1,0,0" VerticalAlignment="Top" RenderTransformOrigin="-8.919,0.74"/>
+		<TextBox Name="LogTextBox" HorizontalAlignment="Left" Height="339" Margin="253,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="434" VerticalScrollBarVisibility="Auto"/>
+		<Button Name="StartSimButton" Content="Start simulation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimButton_Click"/>
+		<Button Name="StopSimButton"  Content="Stop simulation" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopSimButton_Click"/>
         <Button Name="AddStationButton" Content="Add station" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="84" Height="28" Click="AddStationButton_Click" Visibility="Hidden"/>
 
 
