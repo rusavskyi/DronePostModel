@@ -42,6 +42,7 @@ namespace CoreHost
 
             try
             {
+                _tasks = new Queue<CoreTask>();
                 _host.AddServiceEndpoint(typeof(ICoreService), new WSHttpBinding(), "");
                 ServiceMetadataBehavior bechavior = new ServiceMetadataBehavior(){HttpGetEnabled = true};
                 _host.Description.Behaviors.Add(bechavior);
@@ -266,6 +267,7 @@ namespace CoreHost
         {
             _isWorking = true;
             Log("Simulation started");
+
             while (_isWorking)
             {
                 if (_tasks.Count > 0)
@@ -290,7 +292,7 @@ namespace CoreHost
                                             s.Id == FindClosestStation(info.Longitude, info.Latitude));
                                     }
                                     client.AddTask(new DroneTask(DroneTaskType.GoToStation, station));
-                                    Log(String.Format("Added task for drone {0} {1} to go to station {2}.", drone.Model.ModelName, drone.Id, station.Id));;
+                                    Log(String.Format("Added task for drone {0} {1} to go to station {2}.", drone.Model.ModelName, drone.Id, station.Id)); ;
                                 }
                             }
                             break;
