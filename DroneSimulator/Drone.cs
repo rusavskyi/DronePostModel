@@ -18,6 +18,7 @@ namespace DroneSimulator
         private DroneTask _currentTask;
         private bool _currentTaskIsFinished;
         private float _batteryCharge;
+        private IMessageHandlerDrone _messageHandler;
 
 
         public Drone()
@@ -57,6 +58,11 @@ namespace DroneSimulator
             }
         }
 
+        public void SetMessageHandler(IMessageHandlerDrone handler)
+        {
+            _messageHandler = handler;
+        }
+
         public bool Start()
         {
             _isWorking = true;
@@ -85,7 +91,7 @@ namespace DroneSimulator
 
                             break;
                         case DroneTaskType.GoToStation:
-                            Debug.WriteLine("Drone {0} {1} moved to statation {2}", Model, Id, _currentTask.Station.Id);
+                            _messageHandler.Handle(String.Format("Drone {0} {1} moved to statation {2}", Model, Id, _currentTask.Station.Id));
                             // todo over time
                             Latitude = _currentTask.Station.Latitude;
                             Longitude = _currentTask.Station.Longitude;

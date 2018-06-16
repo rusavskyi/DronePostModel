@@ -373,14 +373,14 @@ namespace CoreHost
                         int closestStationId = FindClosestStation(_lastDroneTechInfosUpdate[drone.Id].Longitude,
                             _lastDroneTechInfosUpdate[drone.Id].Latitude);
 
-                        _messageHandler.Handle("Client = " + (client == null));
 
                         client.AddTask(new DroneTask(DroneTaskType.GoToStation, _db.Stations.First(s => s.Id == closestStationId)));
+                        _messageHandler.Handle(String.Format("Drone {0} set to go to station {1}.", drone.Id,
+                            closestStationId));
                     }
                 }
                 catch (Exception e)
                 {
-
                     _messageHandler.Handle(e.Message);
                     _messageHandler.Handle(e.StackTrace);
                 }

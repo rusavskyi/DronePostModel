@@ -12,7 +12,7 @@ namespace DroneSimulator
 	public partial class MainWindow : Window, IMessageHandlerDrone
 	{
 
-		public List<string> droneList = new List<string>();
+		public List<string> DroneList = new List<string>();
 		public Simulation Simulation;
 
 		public MainWindow()
@@ -36,11 +36,11 @@ namespace DroneSimulator
 
 		public void Handle(string s)
 		{
-		    Dispatcher.Invoke(() =>
-		    {
-		        LogTextBox.Text += s + "\n";
-                LogTextBox.ScrollToEnd();
-            });
+			Dispatcher.Invoke(() =>
+			{
+				LogTextBox.Text += s + "\n";
+				LogTextBox.ScrollToEnd();
+			});
 		}
 
 		private void button_startSim_Click(object sender, RoutedEventArgs e)

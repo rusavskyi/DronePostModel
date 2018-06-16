@@ -35,7 +35,7 @@ namespace DroneSimulator
 			comboBoxStation.Items.Insert(4, "StationE");
 			comboBoxStation.Items.Insert(5, "StationF");
 
-			foreach (string droneName in ((MainWindow)Application.Current.MainWindow).droneList) {
+			foreach (string droneName in ((MainWindow)Application.Current.MainWindow).DroneList) {
 				comboBoxDrone.Items.Add(droneName);
 			}
 

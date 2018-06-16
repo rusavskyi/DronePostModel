@@ -66,7 +66,7 @@ namespace DroneSimulator
 
 			}
 			
-			((MainWindow)Application.Current.MainWindow).droneList.Add(modelName);
+			((MainWindow)Application.Current.MainWindow).DroneList.Add(modelName);
 			((MainWindow)Application.Current.MainWindow).Simulation.HostDrone(d, ((MainWindow)Application.Current.MainWindow).Simulation.numOfDrones);
 
 

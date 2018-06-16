@@ -91,6 +91,7 @@ namespace DroneSimulator
 
             foreach (var drone in _drones)
             {
+                drone.SetMessageHandler(_messageHandler);
                 HostDrone(drone);
             }
         }
