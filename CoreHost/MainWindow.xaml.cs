@@ -53,7 +53,12 @@ namespace CoreHost
 
         private void StartSimulationButton_OnClick(object sender, RoutedEventArgs e)
         {
-            _core.Test();
+            _core.StartSimulation();
+        }
+
+        private void StopSimulationButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _core.StopSimulation();
         }
     }
 }

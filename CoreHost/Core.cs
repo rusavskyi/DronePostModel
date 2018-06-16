@@ -278,7 +278,7 @@ namespace CoreHost
         private void Simulation()
         {
             _isWorking = true;
-            Log("Simulation started");
+            Log("Simulation started.");
 
             while (_isWorking)
             {
@@ -302,6 +302,7 @@ namespace CoreHost
                     _tasks.Enqueue(new CoreTask(CoreTaskType.CheckStationsStatus));
                 }
             }
+            _messageHandler.Handle("Simulation stoped.");
         }
 
         private void CheckStationsStatus()
@@ -385,6 +386,11 @@ namespace CoreHost
                     _messageHandler.Handle(e.StackTrace);
                 }
             }
+        }
+
+        public void StopSimulation()
+        {
+            _isWorking = false;
         }
     }
 }

@@ -13,6 +13,7 @@
         <Button Name="StartCoreButton" Content="Start core" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartCoreButton_Click"/>
         <Button Name="StopCoreButton" Content="Stop core" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopCoreButton_Click"/>
         <Button Name="StartSimulation" Content="Start simulation" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimulationButton_OnClick"/>
+        <Button Name="StopSimulation" Content="Stop simulation" HorizontalAlignment="Left" Margin="125,40,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopSimulationButton_OnClick"/>
     </Grid>
 
 </Window>
