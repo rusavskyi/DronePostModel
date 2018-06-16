@@ -16,7 +16,7 @@ namespace DroneService
 
         public DroneTechInfo GetTechInfo()
         {
-            return new DroneTechInfo(null, 100, 0, 0, 0);
+             return new DroneTechInfo(null, 100, 0, 0, 0);
             //return _drone.GetTechInfo();
         }
 

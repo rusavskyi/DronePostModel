@@ -5,6 +5,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Threading;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Threading;
 using CoreService;
 using DronePost.DataModel;
@@ -27,7 +28,7 @@ namespace CoreHost
         //Additional
         private bool _isWorking;
         private Queue<CoreTask> _tasks;
-        private SortedList<int, DroneTechInfo> _lastTechInfosUpdate; // <droneId, droneInfo>
+        private SortedList<int, DroneTechInfo> _lastDroneTechInfosUpdate; // <droneId, droneInfo>
         private SortedList<int, StationTechInfo> _lasStationTechInfosUpdate;
 
         public Core(IMessageHandler messageHandler)
@@ -345,9 +346,10 @@ namespace CoreHost
 
         private void CheckDronesStatus()
         {
-            if (_lastTechInfosUpdate == null)
+
+            if (_lastDroneTechInfosUpdate == null)
             {
-                _lastTechInfosUpdate = new SortedList<int, DroneTechInfo>();
+                _lastDroneTechInfosUpdate = new SortedList<int, DroneTechInfo>();
             }
             List<Drone> drones = _db.Drones.Include("Model").ToList();
             foreach (Drone drone in drones)
@@ -357,26 +359,21 @@ namespace CoreHost
 
                 try
                 {
-                    if (_lastTechInfosUpdate.ContainsKey(drone.Id))
+                    if (_lastDroneTechInfosUpdate.ContainsKey(drone.Id))
                     {
-                        _lastTechInfosUpdate[drone.Id] = client.GetTechInfo();
+                        _lastDroneTechInfosUpdate[drone.Id] = client.GetTechInfo();
                     }
                     else
                     {
-                        _lastTechInfosUpdate.Add(drone.Id, client.GetTechInfo());
+                        _lastDroneTechInfosUpdate.Add(drone.Id, client.GetTechInfo());
                     }
                     
-                    if ( _lastTechInfosUpdate[drone.Id].CountOfTasks == 0)
+                    if ( _lastDroneTechInfosUpdate[drone.Id].CountOfTasks == 0)
                     {
-                        Station station = _db.Stations.First(s =>
-                            s.Latitude == _lastTechInfosUpdate[drone.Id].Latitude && s.Longitude ==  _lastTechInfosUpdate[drone.Id].Longitude);
-                        if (station == null)
-                        {
-                            station = _db.Stations.First(s =>
-                                s.Id == FindClosestStation(_lastTechInfosUpdate[drone.Id].Longitude, _lastTechInfosUpdate[drone.Id].Latitude));
-                        }
-                        client.AddTask(new DroneTask(DroneTaskType.GoToStation, station));
-                        Log(String.Format("Added task for drone {0} {1} to go to station {2}.", drone.Model.ModelName, drone.Id, station.Id)); ;
+                        int closestStationId = FindClosestStation(_lastDroneTechInfosUpdate[drone.Id].Longitude,
+                            _lastDroneTechInfosUpdate[drone.Id].Latitude);
+
+                        client.AddTask(new DroneTask(DroneTaskType.GoToStation, _db.Stations.First(s => s.Id == closestStationId)));
                     }
                 }
                 catch (Exception e)
