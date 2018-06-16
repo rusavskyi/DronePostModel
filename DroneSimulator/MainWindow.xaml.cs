@@ -34,8 +34,13 @@ namespace DroneSimulator
 			adt.Show();
 		}
 
-		public void Handle(string s) {
-			textBlock_log.Text += s + "\n";
+		public void Handle(string s)
+		{
+		    Dispatcher.Invoke(() =>
+		    {
+		        TextBoxLog.Text += s + "\n";
+                TextBoxLog.ScrollToEnd();
+            });
 		}
 
 		private void button_startSim_Click(object sender, RoutedEventArgs e)
