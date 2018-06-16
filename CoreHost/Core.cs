@@ -27,6 +27,7 @@ namespace CoreHost
         //Additional
         private bool _isWorking;
         private Queue<CoreTask> _tasks;
+        private SortedList<int, DroneTechInfo> _lastTechInfosUpdate; // <droneId, droneInfo>
 
 
         public Core(IMessageHandler messageHandler)
@@ -44,7 +45,7 @@ namespace CoreHost
             {
                 _tasks = new Queue<CoreTask>();
                 _host.AddServiceEndpoint(typeof(ICoreService), new WSHttpBinding(), "");
-                ServiceMetadataBehavior bechavior = new ServiceMetadataBehavior(){HttpGetEnabled = true};
+                ServiceMetadataBehavior bechavior = new ServiceMetadataBehavior() { HttpGetEnabled = true };
                 _host.Description.Behaviors.Add(bechavior);
                 _host.Open();
                 Log("Core has started on address: " + baseAddress);
@@ -104,20 +105,22 @@ namespace CoreHost
             Package result = new Package
             {
                 DestinationStation = _db.Stations.First(s => s.Id == package.DestinationStationId),
-                //Id = context.Stations.ToList().Count,
                 RecipientPhoneNumber = package.RecipientNumber,
                 Size = _db.PackageSizes.First(ps => ps.Id == package.PackageSizeId),
                 Weight = package.PackageWeight
             };
+
             _db.Packages.Add(result);
             _db.SaveChanges();
-            //List<Package> tmp =
+
             result = _db.Packages.Include("DestinationStation").Include("Size").First(p =>
                 p.DestinationStation.Id == package.DestinationStationId &&
                 p.RecipientPhoneNumber == package.RecipientNumber &&
                 p.Size.Id == package.PackageSizeId &&
                 p.Weight == package.PackageWeight);
+
             Customer customer = _db.Customers.First(c => c.Id == package.SenderId);
+
             if (customer != null)
             {
                 _db.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
@@ -134,13 +137,16 @@ namespace CoreHost
                 }
                 _db.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
             }
+
             _db.SaveChanges();
+
             Transfer transfer = new Transfer()
             {
                 ArrivalStation = _db.Stations.First(s => s.Id == package.DestinationStationId),
                 ArrivalTime = DateTime.Now,
                 Package = result
             };
+
             Log("Package from " + customer.Id + " to " + package.RecipientNumber + " registred with id: " + result.Id + ".");
             RegisterTransfer(transfer);
             return result;
@@ -182,18 +188,24 @@ namespace CoreHost
         {
             // todo set task for drone to charge at station
             throw new NotImplementedException();
+            int stationId = FindClosestStation(0, 0);
         }
 
         public void RequestDroneForPackage(Package package)
         {
             // todo add task for drone to take package
             throw new NotImplementedException();
+            // select drones with less tasks
+            // find closest
+            // give task to get package
         }
 
         public void RequestDroneForPackages(params Package[] packages)
         {
-            // todo add tasks for drones to take packages
-            throw new NotImplementedException();
+            foreach (Package package in packages)
+            {
+                RequestDroneForPackage(package);
+            }
         }
 
         public List<Drone> GetDrones()
@@ -276,44 +288,7 @@ namespace CoreHost
                     switch (task.Type)
                     {
                         case CoreTaskType.CheckDronesStatus:
-                            List<Drone> drones = _db.Drones.Include("Model").ToList();
-                            foreach (Drone drone in drones)
-                            {
-                                string address = "http://localhost:4999/Drone/" + drone.Id;
-                                DroneServiceClient client = new DroneServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
-
-                                try
-                                {
-                                    _messageHandler.Handle("Drone service client is ok.");
-                                    if (client.GetTechInfo() == null)
-                                    {
-                                        _messageHandler.Handle("Get info is lame.");
-                                        break;
-
-                                    }
-                                    _messageHandler.Handle("Get info is not lame.");
-
-                                    DroneTechInfo info = client.GetTechInfo();
-                                    if (info.CountOfTasks == 0)
-                                    {
-                                        Station station = _db.Stations.First(s =>
-                                            s.Latitude == info.Latitude && s.Longitude == info.Longitude);
-                                        if (station == null)
-                                        {
-                                            station = _db.Stations.First(s =>
-                                                s.Id == FindClosestStation(info.Longitude, info.Latitude));
-                                        }
-                                        client.AddTask(new DroneTask(DroneTaskType.GoToStation, station));
-                                        Log(String.Format("Added task for drone {0} {1} to go to station {2}.", drone.Model.ModelName, drone.Id, station.Id)); ;
-                                    }
-                                }
-                                catch (Exception e)
-                                {
-
-                                    _messageHandler.Handle(e.Message);
-                                    _messageHandler.Handle(e.StackTrace);
-                                }
-                            }
+                            CheckDronesStatus();
                             break;
                         case CoreTaskType.CheckStationsStatus:
 
@@ -354,11 +329,56 @@ namespace CoreHost
                     }
                 }
             }
-            if(station == null) return -1;
+            if (station == null) return -1;
             return station.Id;
         }
 
 
-        private void Log(string message) { _messageHandler.Handle(message);}
+        private void Log(string message) { _messageHandler.Handle(message); }
+
+        private void CheckDronesStatus()
+        {
+            if (_lastTechInfosUpdate == null)
+            {
+                _lastTechInfosUpdate = new SortedList<int, DroneTechInfo>();
+            }
+            List<Drone> drones = _db.Drones.Include("Model").ToList();
+            foreach (Drone drone in drones)
+            {
+                string address = "http://localhost:4999/Drone/" + drone.Id;
+                DroneServiceClient client = new DroneServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
+
+                try
+                {
+                    if (_lastTechInfosUpdate.ContainsKey(drone.Id))
+                    {
+                        _lastTechInfosUpdate[drone.Id] = client.GetTechInfo();
+                    }
+                    else
+                    {
+                        _lastTechInfosUpdate.Add(drone.Id, client.GetTechInfo());
+                    }
+                    
+                    if ( _lastTechInfosUpdate[drone.Id].CountOfTasks == 0)
+                    {
+                        Station station = _db.Stations.First(s =>
+                            s.Latitude == _lastTechInfosUpdate[drone.Id].Latitude && s.Longitude ==  _lastTechInfosUpdate[drone.Id].Longitude);
+                        if (station == null)
+                        {
+                            station = _db.Stations.First(s =>
+                                s.Id == FindClosestStation(_lastTechInfosUpdate[drone.Id].Longitude, _lastTechInfosUpdate[drone.Id].Latitude));
+                        }
+                        client.AddTask(new DroneTask(DroneTaskType.GoToStation, station));
+                        Log(String.Format("Added task for drone {0} {1} to go to station {2}.", drone.Model.ModelName, drone.Id, station.Id)); ;
+                    }
+                }
+                catch (Exception e)
+                {
+
+                    _messageHandler.Handle(e.Message);
+                    _messageHandler.Handle(e.StackTrace);
+                }
+            }
+        }
     }
 }
