@@ -10,9 +10,9 @@
     <Grid>
         <TextBox Name="LogTextBox" HorizontalAlignment="Left" Width="425" Height="325" Margin="253,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
         <Label Content="Log" HorizontalAlignment="Left" Margin="249,3,0,0" VerticalAlignment="Top" RenderTransformOrigin="-8.919,0.74"/>
-        <Button Name="StartSimButton" Content="Start core" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimButton_Click"/>
-        <Button Name="StopSimButton" Content="Stop core" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopSimButton_Click"/>
-        <Button Name="Test" Content="Test" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="TEST_OnClick"/>
+        <Button Name="StartCoreButton" Content="Start core" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartCoreButton_Click"/>
+        <Button Name="StopCoreButton" Content="Stop core" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopCoreButton_Click"/>
+        <Button Name="StartSimulation" Content="Start simulation" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimulationButton_OnClick"/>
     </Grid>
 
 </Window>

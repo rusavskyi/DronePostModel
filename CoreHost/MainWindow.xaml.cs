@@ -36,12 +36,12 @@ namespace CoreHost
             _core.StopHost();
         }
 
-        private void StartSimButton_Click(object sender, RoutedEventArgs e)
+        private void StartCoreButton_Click(object sender, RoutedEventArgs e)
         {
             _core.StartHost();
         }
 
-        private void StopSimButton_Click(object sender, RoutedEventArgs e)
+        private void StopCoreButton_Click(object sender, RoutedEventArgs e)
         {
             _core.StopHost();
         }
@@ -51,7 +51,7 @@ namespace CoreHost
             WriteToOutput(message);
         }
 
-        private void TEST_OnClick(object sender, RoutedEventArgs e)
+        private void StartSimulationButton_OnClick(object sender, RoutedEventArgs e)
         {
             _core.Test();
         }

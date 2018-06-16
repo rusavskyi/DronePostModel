@@ -25,6 +25,7 @@ namespace CustomerSimulator
             {
                 sim.StartSimulation();
             });
+            thread.Start();
             Console.WriteLine(@"Press 'Enter' to stop.");
             Console.ReadLine();
             sim.StopSimulation();

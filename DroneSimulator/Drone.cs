@@ -45,8 +45,7 @@ namespace DroneSimulator
 
         public void SetTask(DroneTask task)
         {
-            
-            throw new NotImplementedException();
+            _currentTask = task;
         }
 
         public void DoNextTask(bool force = false)
@@ -77,25 +76,32 @@ namespace DroneSimulator
         {
             while (_isWorking)
             {
-                switch (_currentTask.Type)
+                if (_tasks.Count > 0)
                 {
-                    case DroneTaskType.TakePackage:
+                    switch (_currentTask.Type)
+                    {
+                        case DroneTaskType.TakePackage:
 
-                        break;
-                    case DroneTaskType.GoToStation:
-                        Debug.WriteLine("Drone {0} {1} moved to statation {2}", Model, Id, _currentTask.Station.Id);
-                        // todo over time
-                        Latitude = _currentTask.Station.Latitude;
-                        Longitude = _currentTask.Station.Longitude;
-                        // todo commit arrival
-                        DoNextTask();
-                        break;
-                    case DroneTaskType.LeavePackage:
+                            break;
+                        case DroneTaskType.GoToStation:
+                            Debug.WriteLine("Drone {0} {1} moved to statation {2}", Model, Id, _currentTask.Station.Id);
+                            // todo over time
+                            Latitude = _currentTask.Station.Latitude;
+                            Longitude = _currentTask.Station.Longitude;
+                            // todo commit arrival
+                            DoNextTask();
+                            break;
+                        case DroneTaskType.LeavePackage:
 
-                        break;
-                    case DroneTaskType.ChargeAtStation:
+                            break;
+                        case DroneTaskType.ChargeAtStation:
 
-                        break;
+                            break;
+                    }
+                }
+                else
+                {
+                    Thread.Sleep(5000); // Wait 5 secends for new tasks.
                 }
             }
         }

@@ -40,9 +40,13 @@ namespace CustomerSimulator
 
         public void RequestParamsFromCore()
         {
+            Console.WriteLine("Requesting data frome core...");
             _customers = new List<Customer>(_coreServiceClient.GetCustomers());
+            Console.WriteLine(@"Recived {0} costumers.", _customers.Count);
             _stations = new List<Station>(_coreServiceClient.GetStations());
+            Console.WriteLine(@"Recived {0} stations.", _stations.Count);
             _sizes = new List<PackageSize>(_coreServiceClient.GetSizes());
+            Console.WriteLine(@"Recived {0} package sizes.", _sizes.Count);
             NumberOfPackageSizes = _sizes.Count;
             NumberOfCustomers = _customers.Count;
             NumberOfStations = _stations.Count;
@@ -51,7 +55,7 @@ namespace CustomerSimulator
         public void StartSimulation() // param: StationSimulatorClient
         {
             RequestParamsFromCore();
-            Console.WriteLine("Customers {0}, Station {1}, Sizes {2}", NumberOfCustomers, NumberOfStations, NumberOfPackageSizes);
+            //Console.WriteLine("Customers {0}, Station {1}, Sizes {2}", NumberOfCustomers, NumberOfStations, NumberOfPackageSizes);
             if (NumberOfPackageSizes > 0 &&
                 NumberOfStations > 0 &&
                 MaxDelay > MinDelay &&
@@ -61,6 +65,7 @@ namespace CustomerSimulator
                 PhoneLength >= 7 &&
                 NumberOfCustomers > 0)
             {
+                Console.WriteLine("Simulation started...");
                 _isWorking = true;
                 while (_isWorking)
                 {
@@ -79,7 +84,7 @@ namespace CustomerSimulator
 
                     Thread.Sleep(GenerateDelay());
                 }
-
+                Console.WriteLine("Simulation stoped...");
             }
             else
             {
