@@ -35,28 +35,12 @@ namespace DroneSimulator
             Model = drone.Model;
             _batteryCharge = drone.Model.BatteryCapacity;
             _handler = handler;
+            _tasks = new Queue<DroneTask>();
         }
         public DroneTechInfo GetTechInfo()
         {
             DroneTechInfo info = null;
-
-
-            try
-            {
-                _handler.Handle("CALLING GetTechInfo");
-                info = new DroneTechInfo(new DroneModel() {ModelName = "here"}, 1, 1, 1, 1);
-
-            }
-            catch (Exception e)
-            {
-                _handler.Handle(e.Message);
-            }
-
-
-            if (Model == null) _handler.Handle("Model is null");
             info = new DroneTechInfo(Model, 0, _tasks.Count, Longitude, Latitude);
-
-
             return info;
         }
 

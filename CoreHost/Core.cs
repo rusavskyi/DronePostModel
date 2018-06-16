@@ -360,10 +360,12 @@ namespace CoreHost
                     if (_lastTechInfosUpdate.ContainsKey(drone.Id))
                     {
                         _lastTechInfosUpdate[drone.Id] = client.GetTechInfo();
+                        Log("Calling GetTechInfo()");
                     }
                     else
                     {
                         _lastTechInfosUpdate.Add(drone.Id, client.GetTechInfo());
+                        Log("Calling GetTechInfo()");
                     }
                     
                     if ( _lastTechInfosUpdate[drone.Id].CountOfTasks == 0)
