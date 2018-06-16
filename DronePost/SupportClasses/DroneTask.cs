@@ -8,11 +8,11 @@ namespace DronePost.SupportClasses
 	public class DroneTask
 	{
 		[DataMember]
-		public DroneTaskType Type { get; }
+		public DroneTaskType Type { get; protected set; }
 		[DataMember()]
-		public Package Package { get; }
+		public Package Package { get; protected set; }
 		[DataMember()]
-		public Station Station { get; }
+		public Station Station { get; protected set; }
 
 
 		public DroneTask(DroneTaskType type, Package package, Station station)
