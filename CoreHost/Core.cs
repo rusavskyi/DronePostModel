@@ -281,18 +281,37 @@ namespace CoreHost
                             {
                                 string address = "http://localhost:4999/Drone/" + drone.Id;
                                 DroneServiceClient client = new DroneServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
-                                DroneTechInfo info = client.GetTechInfo();
-                                if (info.CountOfTasks == 0)
+
+                                try
                                 {
-                                    Station station = _db.Stations.First(s =>
-                                        s.Latitude == info.Latitude && s.Longitude == info.Longitude);
-                                    if (station == null)
+                                    _messageHandler.Handle("Drone service client is ok.");
+                                    if (client.GetTechInfo() == null)
                                     {
-                                        station = _db.Stations.First(s =>
-                                            s.Id == FindClosestStation(info.Longitude, info.Latitude));
+                                        _messageHandler.Handle("Get info is lame.");
+                                        break;
+
                                     }
-                                    client.AddTask(new DroneTask(DroneTaskType.GoToStation, station));
-                                    Log(String.Format("Added task for drone {0} {1} to go to station {2}.", drone.Model.ModelName, drone.Id, station.Id)); ;
+                                    _messageHandler.Handle("Get info is not lame.");
+
+                                    DroneTechInfo info = client.GetTechInfo();
+                                    if (info.CountOfTasks == 0)
+                                    {
+                                        Station station = _db.Stations.First(s =>
+                                            s.Latitude == info.Latitude && s.Longitude == info.Longitude);
+                                        if (station == null)
+                                        {
+                                            station = _db.Stations.First(s =>
+                                                s.Id == FindClosestStation(info.Longitude, info.Latitude));
+                                        }
+                                        client.AddTask(new DroneTask(DroneTaskType.GoToStation, station));
+                                        Log(String.Format("Added task for drone {0} {1} to go to station {2}.", drone.Model.ModelName, drone.Id, station.Id)); ;
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+
+                                    _messageHandler.Handle(e.Message);
+                                    _messageHandler.Handle(e.StackTrace);
                                 }
                             }
                             break;
