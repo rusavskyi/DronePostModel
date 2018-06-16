@@ -28,7 +28,7 @@ namespace CoreHost
         private bool _isWorking;
         private Queue<CoreTask> _tasks;
         private SortedList<int, DroneTechInfo> _lastTechInfosUpdate; // <droneId, droneInfo>
-
+        private SortedList<int, StationTechInfo> _lasStationTechInfosUpdate;
 
         public Core(IMessageHandler messageHandler)
         {
@@ -291,16 +291,22 @@ namespace CoreHost
                             CheckDronesStatus();
                             break;
                         case CoreTaskType.CheckStationsStatus:
-
+                            CheckStationsStatus();
                             break;
                     }
                 }
                 else
                 {
+                    Thread.Sleep(5000);
                     _tasks.Enqueue(new CoreTask(CoreTaskType.CheckDronesStatus));
                     _tasks.Enqueue(new CoreTask(CoreTaskType.CheckStationsStatus));
                 }
             }
+        }
+
+        private void CheckStationsStatus()
+        {
+            // todo
         }
 
         int FindClosestStation(float longitude, float latitude)

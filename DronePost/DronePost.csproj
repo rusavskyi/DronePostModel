@@ -70,5 +70,8 @@
     <Compile Include="SupportClasses\GeneratedPackage.cs" />
     <Compile Include="SupportClasses\StationTask.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SupportClasses\StationTechInfo.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
