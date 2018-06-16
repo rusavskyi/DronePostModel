@@ -1,4 +1,5 @@
 ﻿using System;
+using DronePost.DataModel;
 using DronePost.Interfaces;
 using DronePost.SupportClasses;
 
@@ -14,6 +15,7 @@ namespace DroneService
 
         public DroneTechInfo GetTechInfo()
         {
+            //return new DroneTechInfo(new DroneModel(){ModelName = "hahaha"}, 0,0,0,0);
             return _drone.GetTechInfo();
         }
 

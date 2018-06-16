@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DronePost.DataModel;
 using DronePost.Interfaces;
 using DronePost.SupportClasses;
 
@@ -25,17 +26,38 @@ namespace DroneSimulator
             
         }
 
-        public Drone(DronePost.DataModel.Drone drone)
+        private IMessageHandlerDrone _handler;
+        public Drone(DronePost.DataModel.Drone drone, IMessageHandlerDrone handler)
         {
             Id = drone.Id;
             Latitude = drone.Latitude;
             Longitude = drone.Longitude;
             Model = drone.Model;
             _batteryCharge = drone.Model.BatteryCapacity;
+            _handler = handler;
         }
         public DroneTechInfo GetTechInfo()
         {
-            return new DroneTechInfo(Model, 0, _tasks.Count, Longitude, Latitude);
+            DroneTechInfo info = null;
+
+
+            try
+            {
+                _handler.Handle("CALLING GetTechInfo");
+                info = new DroneTechInfo(new DroneModel() {ModelName = "here"}, 1, 1, 1, 1);
+
+            }
+            catch (Exception e)
+            {
+                _handler.Handle(e.Message);
+            }
+
+
+            if (Model == null) _handler.Handle("Model is null");
+            info = new DroneTechInfo(Model, 0, _tasks.Count, Longitude, Latitude);
+
+
+            return info;
         }
 
         public void AddTask(DroneTask task)
