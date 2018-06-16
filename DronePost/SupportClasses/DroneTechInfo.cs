@@ -7,15 +7,15 @@ namespace DronePost.SupportClasses
     public class DroneTechInfo
     {
         [DataMember]
-        public DroneModel Model { get; }
+        public DroneModel Model { get; protected set; }
         [DataMember]
-        public double BatteryCharge { get; }
+        public double BatteryCharge { get; protected set; }
         [DataMember]
-        public int CountOfTasks { get; }
+        public int CountOfTasks { get; protected set; }
         [DataMember]
-        public float Longitude { get; }
+        public float Longitude { get; protected set; }
         [DataMember]
-        public float Latitude { get; }
+        public float Latitude { get; protected set; }
 
         public DroneTechInfo(DroneModel model, double batteryCharge, int countOfTasks, float longitude, float latitude)
         {
