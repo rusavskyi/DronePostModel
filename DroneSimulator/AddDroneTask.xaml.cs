@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DronePost.DataModel;
+using DroneSimulator.CoreServiceReference;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +21,10 @@ namespace DroneSimulator
 	/// </summary>
 	public partial class AddDroneTask : Window
 	{
+		private List<Station> _stations;
+		private List<Drone> _drones;
+		private CoreServiceClient _coreServiceClient;
+		
 		public AddDroneTask()
 		{
 			InitializeComponent();
@@ -28,18 +34,32 @@ namespace DroneSimulator
 			comboBoxDroneTask.Items.Insert(2, "LeavePackage");
 			comboBoxDroneTask.Items.Insert(3, "ChargeAtStation");
 
-			comboBoxStation.Items.Insert(0, "StationA");
-			comboBoxStation.Items.Insert(1, "StationB");
-			comboBoxStation.Items.Insert(2, "StationC");
-			comboBoxStation.Items.Insert(3, "StationD");
-			comboBoxStation.Items.Insert(4, "StationE");
-			comboBoxStation.Items.Insert(5, "StationF");
 
-			foreach (string droneName in ((MainWindow)Application.Current.MainWindow).droneList) {
+
+			_coreServiceClient = new CoreServiceClient();
+			_stations = new List<Station>(_coreServiceClient.GetStations());
+			for (int i = 0; i < _stations.Count; i++)
+			{
+				comboBoxStation.Items.Insert(i, _stations.ElementAt(i).Name);
+			}
+
+			if (!((MainWindow)Application.Current.MainWindow).isAddedDrone)
+			{
+				_coreServiceClient = new CoreServiceClient();
+				_drones = ((MainWindow)Application.Current.MainWindow).Simulation._drones;
+				foreach (Drone drone in _drones)
+				{
+					((MainWindow)Application.Current.MainWindow).droneList.Add(drone.Model.ModelName);
+				}
+				((MainWindow)Application.Current.MainWindow).isAddedDrone = true;
+			}
+
+			foreach (string droneName in ((MainWindow)Application.Current.MainWindow).droneList)
+			{
 				comboBoxDrone.Items.Add(droneName);
 			}
 
-			
+
 		}
 
 		private void button_Click(object sender, RoutedEventArgs e)

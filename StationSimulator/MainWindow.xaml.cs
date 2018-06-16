@@ -14,12 +14,15 @@ namespace StationSimulator
         public List<string> stationList = new List<string>();
         private Simulation simulation;
 
-        internal Simulation Simulation { get => simulation; set => simulation = value; }
+		internal Simulation Simulation{ get => simulation; set => simulation = value; }
 
-        public MainWindow()
+
+		public MainWindow()
         {
             InitializeComponent();
             Simulation = new Simulation(this);
+
+
         }
 
         private void StartSimButton_Click(object sender, RoutedEventArgs e)

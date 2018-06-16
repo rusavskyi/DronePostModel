@@ -16,7 +16,7 @@ namespace DroneSimulator
     public class Simulation
     {
         private readonly IMessageHandlerDrone _messageHandler;
-        private readonly List<Drone> _drones;
+        public readonly List<Drone> _drones;
         private readonly CoreServiceClient _coreServiceClient;
         private readonly List<ServiceHost> _hosts;
         private bool _started;

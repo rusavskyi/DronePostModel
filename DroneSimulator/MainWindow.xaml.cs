@@ -1,4 +1,5 @@
 ﻿using DronePost.DataModel;
+using DroneSimulator.CoreServiceReference;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -14,10 +15,14 @@ namespace DroneSimulator
 
 		public List<string> droneList = new List<string>();
 		public Simulation Simulation;
-
+		private List<Drone> _drones;
+		private CoreServiceClient _coreServiceClient;
+		public bool isAddedDrone = false;
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			
 		}
 
 		private void buttonAddDrone_Click(object sender, RoutedEventArgs e)
@@ -49,7 +54,9 @@ namespace DroneSimulator
 			Simulation.StartSimulation();
 			ButtonAddDront.Visibility = Visibility.Visible;
 			ButtonAddTask.Visibility = Visibility.Visible;
+
 			
+
 		}
 
 		private void button_stopSim_Click(object sender, RoutedEventArgs e)
