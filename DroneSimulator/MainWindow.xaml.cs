@@ -38,8 +38,8 @@ namespace DroneSimulator
 		{
 		    Dispatcher.Invoke(() =>
 		    {
-		        TextBoxLog.Text += s + "\n";
-                TextBoxLog.ScrollToEnd();
+		        LogTextBox.Text += s + "\n";
+                LogTextBox.ScrollToEnd();
             });
 		}
 
@@ -47,16 +47,16 @@ namespace DroneSimulator
 		{
 			Simulation = new Simulation(this);
 			Simulation.StartSimulation();
-			buttonAddDront.Visibility = Visibility.Visible;
-			buttonAddTask.Visibility = Visibility.Visible;
+			ButtonAddDront.Visibility = Visibility.Visible;
+			ButtonAddTask.Visibility = Visibility.Visible;
 			
 		}
 
 		private void button_stopSim_Click(object sender, RoutedEventArgs e)
 		{
 			Simulation.StopSimulation();
-			buttonAddDront.Visibility = Visibility.Hidden;
-			buttonAddTask.Visibility = Visibility.Hidden;
+			ButtonAddDront.Visibility = Visibility.Hidden;
+			ButtonAddTask.Visibility = Visibility.Hidden;
 		}
 	}
 }

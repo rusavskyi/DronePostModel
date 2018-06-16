@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DroneSimulator"
         mc:Ignorable="d"
-        Title="Drone Simulation" Height="450" Width="704.646">
+        Title="Drone Simulation" Height="400" Width="700" MinHeight="400" MinWidth="700">
+    
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-			<TextBlock x:Name="textBlock_log" HorizontalAlignment="Left" Height="339" Margin="253,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="434" />
-        </ScrollViewer>
-		<Button x:Name="buttonAddDront" Content="Add drone" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="buttonAddDrone_Click" Visibility="Hidden"  />
-		<Button x:Name="buttonAddTask" Content="Add task" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="buttonAddTask_Click" Visibility="Hidden"/>
-		<Label x:Name="label" Content="Log" HorizontalAlignment="Left" Margin="253,-1,0,0" VerticalAlignment="Top" RenderTransformOrigin="-8.919,0.74"/>
-		<Button x:Name="button_startSim" Content="Start Simulation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="button_startSim_Click"/>
-		<Button x:Name="button_stopSim" Content="Stop Simulation" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="button_stopSim_Click"/>
+        <TextBox x:Name="LogTextBox" HorizontalAlignment="Left" Width="425" Height="325" Margin="253,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
+        <Label Content="Log" HorizontalAlignment="Left" Margin="249,3,0,0" VerticalAlignment="Top" RenderTransformOrigin="-8.919,0.74"/>
+        <Button x:Name="ButtonAddDront" Content="Add drone" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="buttonAddDrone_Click" Visibility="Hidden"/>
+		<Button x:Name="ButtonAddTask" Content="Add task" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="buttonAddTask_Click" Visibility="Hidden"/>
+		<Button x:Name="ButtonStartSim" Content="Start Simulation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="button_startSim_Click"/>
+		<Button x:Name="ButtonStopSim" Content="Stop Simulation" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="button_stopSim_Click"/>
     </Grid>
+
 </Window>

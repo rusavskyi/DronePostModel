@@ -13,6 +13,6 @@
         <Button Name="StartSimButton" Content="Start core" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimButton_Click"/>
         <Button Name="StopSimButton" Content="Stop core" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopSimButton_Click"/>
         <Button Name="Test" Content="Test" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="TEST_OnClick"/>
-
     </Grid>
+
 </Window>
