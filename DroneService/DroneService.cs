@@ -13,6 +13,7 @@ namespace DroneService
             _drone = drone;
         }
 
+
         public DroneTechInfo GetTechInfo()
         {
             return new DroneTechInfo(null, 100, 0, 0, 0);
