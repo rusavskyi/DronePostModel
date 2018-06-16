@@ -32,6 +32,7 @@ namespace DroneSimulator
             Longitude = drone.Longitude;
             Model = drone.Model;
             _batteryCharge = drone.Model.BatteryCapacity;
+            _tasks = new Queue<DroneTask>();
         }
         public DroneTechInfo GetTechInfo()
         {
