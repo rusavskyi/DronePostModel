@@ -5,16 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CoreHost"
         mc:Ignorable="d"
-        Title="Core Host" Height="450" Width="704.646">
-    <StackPanel>
+        Title="Core Host" Height="400" Width="700" MinHeight="400" MinWidth="700">
 
-        <Grid Height="460">
-            <TextBox Name="LogTextBox" HorizontalAlignment="Left" Height="339" Margin="253,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="434" VerticalScrollBarVisibility="Auto"/>
-            <Label Content="Log" HorizontalAlignment="Left" Margin="253,-1,0,0" VerticalAlignment="Top" RenderTransformOrigin="-8.919,0.74"/>
-            <Button Name="StartSimButton" Content="Start core" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimButton_Click"/>
-            <Button Name="StopSimButton" Content="Stop core" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopSimButton_Click"/>
-            <Button Name="TEST" Content="TEST" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="TEST_OnClick"/>
+    <Grid>
+        <TextBox Name="LogTextBox" HorizontalAlignment="Left" Width="425" Height="325" Margin="253,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
+        <Label Content="Log" HorizontalAlignment="Left" Margin="249,3,0,0" VerticalAlignment="Top" RenderTransformOrigin="-8.919,0.74"/>
+        <Button Name="StartSimButton" Content="Start core" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StartSimButton_Click"/>
+        <Button Name="StopSimButton" Content="Stop core" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="StopSimButton_Click"/>
+        <Button Name="Test" Content="Test" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="TEST_OnClick"/>
+    </Grid>
 
-        </Grid>
-    </StackPanel>
 </Window>

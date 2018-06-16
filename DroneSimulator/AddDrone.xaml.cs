@@ -77,7 +77,7 @@ namespace DroneSimulator
 			comboBoxMaxSizeCarry.SelectedIndex = 0;
 			
 			MessageBox.Show("Drone is added");
-			((MainWindow)Application.Current.MainWindow).textBlock_log.Text +=( "Drone "+modelName +" is added \n");
+			((MainWindow)Application.Current.MainWindow).LogTextBox.Text +=( "Drone "+modelName +" is added \n");
 			this.Close();
 		}
 	}

@@ -31,7 +31,11 @@ namespace StationSimulator
 
         public void Handle(string message)
         {
-            Dispatcher.Invoke(() => { LogTextBox.AppendText(message+"\n");});
+            Dispatcher.Invoke(() =>
+            {
+                LogTextBox.AppendText(message+"\n");
+                LogTextBox.ScrollToEnd();
+            });
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
