@@ -55,10 +55,6 @@ namespace CustomerSimulator
         public void StartSimulation() // param: StationSimulatorClient
         {
 
-            string address = "http://localhost:5000/Station/1";
-            StationServiceClient stationServiceClient = new StationServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
-            stationServiceClient.DoNextTask(true);
-
             RequestParamsFromCore();
             //Console.WriteLine("Customers {0}, Station {1}, Sizes {2}", NumberOfCustomers, NumberOfStations, NumberOfPackageSizes);
             if (NumberOfPackageSizes > 0 &&
@@ -160,9 +156,10 @@ namespace CustomerSimulator
         {
             try
             {
-                //StationSimulatorServiceClient client = new StationSimulatorServiceClient();
-                //client.RegisterPackageFromClient(package);
-                //client.Close();
+                string address = "http://localhost:5000/Station/"+package.DepartureStationId;
+                StationServiceClient station = new StationServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
+                station.GetPackageFromCustomer(package);
+                station.Close();
             }
             catch (Exception exception)
             {

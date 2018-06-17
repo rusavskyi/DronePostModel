@@ -96,7 +96,8 @@ namespace StationSimulator
 
         public bool GetPackageFromCustomer(GeneratedPackage package)
         {
-            throw new NotImplementedException();
+            Log($"Get package from customer, but dont know what to do :D");
+            return true;
         }
 
         public void SetTask(StationTask stationTask)
