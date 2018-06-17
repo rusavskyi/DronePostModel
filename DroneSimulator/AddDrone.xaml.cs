@@ -1,4 +1,5 @@
 ﻿using DronePost.DataModel;
+using DroneSimulator.CoreServiceReference;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,18 +29,22 @@ namespace DroneSimulator
 		private int maxCarrySize = -1;
 		private float maxWeightSize = -1f;
 		private float maxFlightDistance = -1f;
-
+		private CoreServiceClient _coreServiceClient;
+		private List<PackageSize> _maxCarrySize;
 		
-
 		public AddDrone()
 		{
 			InitializeComponent();
-			
-			comboBoxMaxSizeCarry.Items.Insert(0, "A");
-			comboBoxMaxSizeCarry.Items.Insert(1, "B");
-			comboBoxMaxSizeCarry.Items.Insert(2, "C");
-			comboBoxMaxSizeCarry.Items.Insert(3, "D");
+
+			_coreServiceClient = new CoreServiceClient();
+			_maxCarrySize = ((MainWindow)Application.Current.MainWindow).Simulation._packageSize;
+			for (int i = 0; i < _maxCarrySize.Count; i++)
+			{
+				comboBoxMaxSizeCarry.Items.Insert(i, _maxCarrySize.ElementAt(i).SizeName);
+			}
+
 		}
+
 
 		private void button_Click(object sender, RoutedEventArgs e)
 		{

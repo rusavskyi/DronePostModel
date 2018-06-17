@@ -14,6 +14,7 @@ namespace DroneSimulator
 
 		public List<string> DroneList = new List<string>();
 		public Simulation Simulation;
+		public bool isAddedDrone = false;
 
 		public MainWindow()
 		{

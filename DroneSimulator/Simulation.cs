@@ -16,10 +16,11 @@ namespace DroneSimulator
     public class Simulation
     {
         private readonly IMessageHandlerDrone _messageHandler;
-        private readonly List<Drone> _drones;
+        public readonly List<Drone> _drones;
         private readonly CoreServiceClient _coreServiceClient;
         private readonly List<ServiceHost> _hosts;
         private bool _started;
+		public readonly List<PackageSize> _packageSize;
         public int numOfDrones = 0;
 
         public Simulation(IMessageHandlerDrone messageHandler)
@@ -28,6 +29,7 @@ namespace DroneSimulator
             _drones = new List<Drone>();
             _coreServiceClient = new CoreServiceClient();
             _hosts = new List<ServiceHost>();
+			_packageSize = new List<PackageSize>();
         }
 
         public async Task StartSimulation()
@@ -39,6 +41,7 @@ namespace DroneSimulator
                 try
                 {
                     await LoadDronesFromCore();
+					await LoadPackageSizeFromCore();
                     ++numOfDrones;
                 }
                 catch (Exception e)
@@ -79,7 +82,21 @@ namespace DroneSimulator
                 Log("Simualtion has stopped");
             }
         }
-        public async Task LoadDronesFromCore()
+
+		public async Task LoadPackageSizeFromCore()
+		{
+			_packageSize.Clear();
+
+			DronePost.DataModel.PackageSize[] arrTmpPackageSize = await _coreServiceClient.GetSizesAsync();
+			foreach (var packageSize in arrTmpPackageSize)
+			{
+				_packageSize.Add(packageSize);
+			}
+
+		
+		}
+
+		public async Task LoadDronesFromCore()
         {
             _drones.Clear();
 

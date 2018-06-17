@@ -14,7 +14,7 @@ namespace StationSimulator
         public List<string> stationList = new List<string>();
         private Simulation simulation;
 
-        internal Simulation Simulation { get => simulation; set => simulation = value; }
+        internal Simulation Simulation { get; set; }
 
         public MainWindow()
         {
