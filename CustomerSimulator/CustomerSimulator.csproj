@@ -50,11 +50,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\StationSimulatorReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="CustomerSimulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source.cs" />
@@ -89,19 +84,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\CoreServiceReference\CoreService.wsdl" />
-    <None Include="Connected Services\StationSimulatorReference\StationSimulator.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\StationSimulatorReference\StationSimulator1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\StationSimulatorReference\StationSimulator2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\StationSimulatorReference\StationSimulator3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\StationSimulatorReference\StationSimulatorService.wsdl" />
     <None Include="Properties\DataSources\DronePost.DataModel.Customer.datasource" />
     <None Include="Properties\DataSources\DronePost.DataModel.Drone.datasource" />
     <None Include="Properties\DataSources\DronePost.DataModel.Package.datasource" />
@@ -111,22 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\CoreServiceReference\" />
-    <WCFMetadataStorage Include="Connected Services\StationSimulatorReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\StationSimulatorReference\StationSimulator.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\StationSimulatorReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\StationSimulatorReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\StationSimulatorReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\CoreServiceReference\Core.disco" />
