@@ -159,6 +159,13 @@ namespace CoreHost
             _db.Transfers.Add(transfer);
             _db.SaveChanges();
             Log("Transfer registred.");
+            if (transfer.Drone != null)
+            {
+                DronePost.DataModel.Drone droneInBase = _db.Drones.Include("Model").First(d => d.Id == transfer.Drone.Id);
+                droneInBase.Latitude = transfer.Drone.Latitude;
+                droneInBase.Longitude = transfer.Drone.Longitude;
+                _db.SaveChanges();
+            }
             return 0;
         }
 
@@ -216,7 +223,7 @@ namespace CoreHost
             List<Drone> drones = null;
             try
             {
-                drones = _db.Drones.Include("Model").ToList();
+                drones = _db.Drones.Include("Model").Include("Model.MaxSizeCarry").ToList();
             }
             catch (Exception e)
             {
@@ -377,11 +384,12 @@ namespace CoreHost
                         Transfer transfer = null;
                         foreach (Transfer t in transfers)
                         {
-                            if (transfer.Drone.Id == drone.Id)
-                            {
-                                transfer = t;
-                                break;
-                            }
+                            if (t.Drone != null)
+                                if (transfer.Drone.Id == drone.Id)
+                                {
+                                    transfer = t;
+                                    break;
+                                }
                         }
                         if (transfer == null)
                         {
@@ -402,9 +410,9 @@ namespace CoreHost
                 }
                 catch (Exception e)
                 {
-                     Log(e.GetType().ToString());
-                     Log(e.Message);
-                     Log(e.StackTrace);
+                    Log(e.GetType().ToString());
+                    Log(e.Message);
+                    Log(e.StackTrace);
                 }
             }
         }
