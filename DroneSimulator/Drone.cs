@@ -21,7 +21,7 @@ namespace DroneSimulator
         private IMessageHandlerDrone _messageHandler;
 
 
-        public Drone(){}
+        public Drone() { }
 
         public Drone(DronePost.DataModel.Drone drone, IMessageHandlerDrone handler)
         {
@@ -35,13 +35,13 @@ namespace DroneSimulator
         }
         public DroneTechInfo GetTechInfo()
         {
-            return new DroneTechInfo(Model, 0, _tasks.Count, Longitude, Latitude);
+            return new DroneTechInfo(Model, 0, _tasks.Count + (_currentTaskIsFinished ? 0 : 1), Longitude, Latitude);
         }
 
         public void AddTask(DroneTask task)
         {
             _tasks.Enqueue(task);
-            Log("received task: "+task.Type);
+            Log("received task: " + task.Type);
         }
 
         public void SetTask(DroneTask task)
@@ -87,7 +87,8 @@ namespace DroneSimulator
             {
                 if (_tasks.Count > 0)
                 {
-                    _currentTask = _tasks.Dequeue();
+                    DoNextTask();
+                    _currentTaskIsFinished = false;
                     switch (_currentTask.Type)
                     {
                         case DroneTaskType.TakePackage:
@@ -96,11 +97,23 @@ namespace DroneSimulator
                         case DroneTaskType.GoToStation:
                             Log($"started moving to statation {_currentTask.Station.Id}");
                             // todo over time
+                            float distanceLat = Math.Abs(_currentTask.Station.Latitude - Latitude);
+                            float distanceLon = Math.Abs(_currentTask.Station.Longitude - Longitude);
+                            int ticks = (int)Math.Sqrt(Math.Pow(distanceLat, 2) + Math.Pow(distanceLon, 2));
+                            distanceLat *= Latitude > _currentTask.Station.Latitude ? 1 : -1;
+                            distanceLon *= Longitude > _currentTask.Station.Longitude ? 1 : -1;
+                            ticks %= 100;
+                            _messageHandler.Handle("Ticks " + ticks);
+                            for (int i = 0; i < ticks; i++)
+                            {
+                                Latitude += distanceLat / 100;
+                                Longitude += distanceLon / 100;
+                            }
+
                             Latitude = _currentTask.Station.Latitude;
                             Longitude = _currentTask.Station.Longitude;
                             // todo commit arrival
                             Log($"moved to statation {_currentTask.Station.Id}");
-                            DoNextTask();
                             break;
                         case DroneTaskType.LeavePackage:
 
@@ -110,6 +123,8 @@ namespace DroneSimulator
                             break;
 
                     }
+                    _currentTaskIsFinished = true;
+
                 }
                 else
                 {
@@ -123,7 +138,7 @@ namespace DroneSimulator
 
         private void Log(string message)
         {
-            _messageHandler.Handle("Drone "+Model.ModelName+" "+Id+": "+message);
+            _messageHandler.Handle("Drone " + Model.ModelName + " " + Id + ": " + message);
         }
     }
 }
