@@ -83,6 +83,7 @@ namespace DroneSimulator
 
         private void Simulation()
         {
+            _currentTaskIsFinished = true;
             while (_isWorking)
             {
                 if (_tasks.Count > 0)
@@ -124,7 +125,6 @@ namespace DroneSimulator
 
                     }
                     _currentTaskIsFinished = true;
-
                 }
                 else
                 {
