@@ -23,7 +23,7 @@ namespace DroneSimulator
 
         public Drone(){}
 
-        public Drone(DronePost.DataModel.Drone drone)
+        public Drone(DronePost.DataModel.Drone drone, IMessageHandlerDrone handler)
         {
             Id = drone.Id;
             Latitude = drone.Latitude;
@@ -31,6 +31,7 @@ namespace DroneSimulator
             Model = drone.Model;
             _batteryCharge = drone.Model.BatteryCapacity;
             _tasks = new Queue<DroneTask>();
+            _messageHandler = handler;
         }
         public DroneTechInfo GetTechInfo()
         {
@@ -56,10 +57,6 @@ namespace DroneSimulator
             }
         }
 
-        public void SetMessageHandler(IMessageHandlerDrone handler)
-        {
-            _messageHandler = handler;
-        }
 
         public bool Start()
         {

@@ -86,12 +86,11 @@ namespace DroneSimulator
             DronePost.DataModel.Drone[] arrTmpDrones = await _coreServiceClient.GetDronesAsync();
             foreach (var drone in arrTmpDrones)
             {
-                _drones.Add(new Drone(drone));
+                _drones.Add(new Drone(drone, _messageHandler));
             }
 
             foreach (var drone in _drones)
             {
-                drone.SetMessageHandler(_messageHandler);
                 HostDrone(drone);
             }
         }
