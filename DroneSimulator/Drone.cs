@@ -96,7 +96,7 @@ namespace DroneSimulator
 
                             break;
                         case DroneTaskType.GoToStation:
-                            Log($"started moving to statation {_currentTask.Station.Id}");
+                            Log($"Drone {Id} moving to statation {_currentTask.Station.Id}");
                             // todo over time
                             float distanceLat = Math.Abs(_currentTask.Station.Latitude - Latitude);
                             float distanceLon = Math.Abs(_currentTask.Station.Longitude - Longitude);
@@ -104,7 +104,6 @@ namespace DroneSimulator
                             distanceLat *= Latitude > _currentTask.Station.Latitude ? 1 : -1;
                             distanceLon *= Longitude > _currentTask.Station.Longitude ? 1 : -1;
                             ticks %= 100;
-                            _messageHandler.Handle("Ticks " + ticks);
                             for (int i = 0; i < ticks; i++)
                             {
                                 Thread.Sleep(5000);
@@ -115,7 +114,7 @@ namespace DroneSimulator
                             Latitude = _currentTask.Station.Latitude;
                             Longitude = _currentTask.Station.Longitude;
                             // todo commit arrival
-                            Log($"moved to statation {_currentTask.Station.Id}");
+                            Log($"Arrived to statation {_currentTask.Station.Id}");
                             break;
                         case DroneTaskType.LeavePackage:
 
