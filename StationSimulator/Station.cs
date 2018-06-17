@@ -66,10 +66,24 @@ namespace StationSimulator
 
         public void GivePackageToRecipient(Customer customer, Package package)
         {
-            throw new NotImplementedException();
+            CoreServiceClient core = new CoreServiceClient();
+            DronePost.DataModel.Station departureStation = new DronePost.DataModel.Station()
+            {
+                Address = this.Address,
+                Id = this.Id,
+                Latitude = this.Latitude,
+                Longitude = this.Longitude,
+                Name = this.Name
+            };
+            core.RegisterTransfer(new Transfer()
+            {
+                DepartureStation = departureStation,
+                DepartureTime = DateTime.Now,
+                Package = package
+            });
         }
 
-        public bool GetPackageFromCustomer(Package package)
+        public bool GetPackageFromCustomer(GeneratedPackage package)
         {
             throw new NotImplementedException();
         }

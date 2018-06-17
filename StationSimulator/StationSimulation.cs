@@ -137,7 +137,7 @@ namespace StationSimulator
 			
 		}
 
-		bool IStation.GetPackageFromCustomer(Package package)
+		bool IStation.GetPackageFromCustomer(GeneratedPackage package)
 		{
 			throw new NotImplementedException();
 		}

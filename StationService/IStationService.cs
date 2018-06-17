@@ -18,7 +18,7 @@ namespace StationService
         void GivePackageToRecipient(Customer customer, Package package);
 
         [OperationContract]
-        bool GetPackageFromCustomer(Package package);
+        bool GetPackageFromCustomer(GeneratedPackage package);
 
         [OperationContract]
         void SetTask(StationTask stationTask);

@@ -33,7 +33,7 @@ namespace StationService
             _station.DoNextTask(force);
         }
 
-        public bool GetPackageFromCustomer(Package package)
+        public bool GetPackageFromCustomer(GeneratedPackage package)
         {
             return _station.GetPackageFromCustomer(package);
         }
