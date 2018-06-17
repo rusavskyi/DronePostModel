@@ -116,7 +116,14 @@ namespace DroneSimulator
                             Longitude = _currentTask.Station.Longitude;
                             string address = "http://localhost:5000/Station/" + _currentTask.Station.Id;
                             StationServiceClient stationServiceClient = new StationServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
-                            stationServiceClient.CheckIn(this);
+                            DronePost.DataModel.Drone tmpDrone = new DronePost.DataModel.Drone()
+                            {
+                                Id = this.Id,
+                                Longitude = this.Longitude,
+                                Latitude = this.Latitude,
+                                Model = this.Model
+                            };
+                            stationServiceClient.CheckIn(tmpDrone);
                             Log($"arrived to statation {_currentTask.Station.Id}");
                             break;
                         case DroneTaskType.LeavePackage:

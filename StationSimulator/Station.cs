@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DronePost.DataModel;
 using DronePost.Interfaces;
 using DronePost.SupportClasses;
+using StationSimulator.CoreServiceReference;
 
 namespace StationSimulator
 {
@@ -25,12 +26,42 @@ namespace StationSimulator
 
         public void CheckIn(Drone drone)
         {
-            throw new NotImplementedException();
+            CoreServiceClient core = new CoreServiceClient();
+            DronePost.DataModel.Station arrivalStation = new DronePost.DataModel.Station()
+            {
+                Address = this.Address,
+                Id = this.Id,
+                Latitude = this.Latitude,
+                Longitude = this.Longitude,
+                Name = this.Name
+            };
+            core.RegisterTransfer(new Transfer()
+            {
+                ArrivalStation = arrivalStation,
+                ArrivalTime = DateTime.Now,
+                Drone = drone
+            });
+
         }
 
         public void CheckOut(Drone drone)
         {
-            throw new NotImplementedException();
+            CoreServiceClient core = new CoreServiceClient();
+            DronePost.DataModel.Station departureStation = new DronePost.DataModel.Station()
+            {
+                Address = this.Address,
+                Id = this.Id,
+                Latitude = this.Latitude,
+                Longitude = this.Longitude,
+                Name = this.Name
+            };
+            core.RegisterTransfer(new Transfer()
+            {
+                DepartureStation = departureStation,
+                DepartureTime = DateTime.Now,
+                Drone = drone
+            });
+
         }
 
         public void GivePackageToRecipient(Customer customer, Package package)

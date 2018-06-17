@@ -372,8 +372,16 @@ namespace CoreHost
                     {
                         int closestStationId = FindClosestStation(_lastDroneTechInfosUpdate[drone.Id].Longitude,
                             _lastDroneTechInfosUpdate[drone.Id].Latitude);
-
-                        Transfer transfer = _db.Transfers.Include("Drone").Last(t => t.Drone.Id == drone.Id);
+                        List<Transfer> transfers = _db.Transfers.Include("Drone").ToList();
+                        Transfer transfer = null;
+                        foreach (Transfer t in transfers)
+                        {
+                            if (transfer.Drone.Id == drone.Id)
+                            {
+                                transfer = t;
+                                break;
+                            }
+                        }
                         if (transfer == null)
                         {
                             client.AddTask(new DroneTask(DroneTaskType.GoToStation,
