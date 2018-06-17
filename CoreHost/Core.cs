@@ -367,22 +367,28 @@ namespace CoreHost
                     {
                         _lastDroneTechInfosUpdate.Add(drone.Id, client.GetTechInfo());
                     }
-                    
-                    if ( _lastDroneTechInfosUpdate[drone.Id].CountOfTasks == 0)
+
+                    if (_lastDroneTechInfosUpdate[drone.Id].CountOfTasks == 0)
                     {
                         int closestStationId = FindClosestStation(_lastDroneTechInfosUpdate[drone.Id].Longitude,
                             _lastDroneTechInfosUpdate[drone.Id].Latitude);
 
 
-                        client.AddTask(new DroneTask(DroneTaskType.GoToStation, _db.Stations.First(s => s.Id == closestStationId)));
+                        client.AddTask(new DroneTask(DroneTaskType.GoToStation,
+                            _db.Stations.First(s => s.Id == closestStationId)));
                         _messageHandler.Handle(String.Format("Drone {0} set to go to station {1}.", drone.Id,
                             closestStationId));
                     }
                 }
+                catch (EndpointNotFoundException e)
+                {
+                    Log("Could not connect to drone");
+                }
                 catch (Exception e)
                 {
-                    _messageHandler.Handle(e.Message);
-                    _messageHandler.Handle(e.StackTrace);
+                     Log(e.GetType().ToString());
+                     Log(e.Message);
+                     Log(e.StackTrace);
                 }
             }
         }
@@ -391,5 +397,6 @@ namespace CoreHost
         {
             _isWorking = false;
         }
+
     }
 }
