@@ -96,7 +96,9 @@ namespace StationSimulator
 
         public bool GetPackageFromCustomer(GeneratedPackage package)
         {
-            Log($"Get package from customer, but dont know what to do :D");
+            Log($"get package from customer, registering it in core");
+            CoreServiceClient coreClient = new CoreServiceClient();
+            coreClient.RegisterPackage(package);
             return true;
         }
 
