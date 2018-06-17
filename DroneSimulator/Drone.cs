@@ -107,6 +107,7 @@ namespace DroneSimulator
                             _messageHandler.Handle("Ticks " + ticks);
                             for (int i = 0; i < ticks; i++)
                             {
+                                Thread.Sleep(5000);
                                 Latitude += distanceLat / 100;
                                 Longitude += distanceLon / 100;
                             }
