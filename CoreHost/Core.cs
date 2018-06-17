@@ -156,8 +156,6 @@ namespace CoreHost
 
         public int RegisterTransfer(Transfer transfer)
         {
-            _db.Transfers.Add(transfer);
-            _db.SaveChanges();
             Log("Transfer registred.");
             if (transfer.Drone != null)
             {
@@ -165,7 +163,22 @@ namespace CoreHost
                 droneInBase.Latitude = transfer.Drone.Latitude;
                 droneInBase.Longitude = transfer.Drone.Longitude;
                 _db.SaveChanges();
+                transfer.Drone = droneInBase;
             }
+
+            if (transfer.ArrivalStation != null)
+            {
+                DronePost.DataModel.Station stationInBase = _db.Stations.First(s => s.Id == transfer.ArrivalStation.Id);
+                transfer.ArrivalStation = stationInBase;
+            }
+            if(transfer.DepartureStation != null)
+            {
+                DronePost.DataModel.Station stationInBase = _db.Stations.First(s => s.Id == transfer.DepartureStation.Id);
+                transfer.DepartureStation = stationInBase;
+            }
+
+            _db.Transfers.Add(transfer);
+            _db.SaveChanges();
             return 0;
         }
 
@@ -289,6 +302,21 @@ namespace CoreHost
             _isWorking = true;
             Log("Simulation started.");
 
+            List<Drone> drones = _db.Drones.Include("Model").ToList();
+            Random random = new Random(DateTime.Now.GetHashCode());
+            int max = _db.Stations.ToList().Count;
+            foreach (Drone drone in drones)
+            {
+                string address = "http://localhost:4999/Drone/" + drone.Id;
+                DroneServiceClient client =
+                    new DroneServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
+                int closestStationId = random.Next(max) + 1;
+                client.AddTask(new DroneTask(DroneTaskType.GoToStation,
+                    _db.Stations.First(s => s.Id == closestStationId)));
+                _messageHandler.Handle(String.Format("Drone {0} set to go to station {1}.", drone.Id,
+                    closestStationId));
+            }
+
             while (_isWorking)
             {
                 if (_tasks.Count > 0)
@@ -378,8 +406,7 @@ namespace CoreHost
 
                     if (_lastDroneTechInfosUpdate[drone.Id].CountOfTasks == 0)
                     {
-                        int closestStationId = FindClosestStation(_lastDroneTechInfosUpdate[drone.Id].Longitude,
-                            _lastDroneTechInfosUpdate[drone.Id].Latitude);
+                        
                         List<Transfer> transfers = _db.Transfers.Include("Drone").ToList();
                         Transfer transfer = null;
                         foreach (Transfer t in transfers)
@@ -393,10 +420,7 @@ namespace CoreHost
                         }
                         if (transfer == null)
                         {
-                            client.AddTask(new DroneTask(DroneTaskType.GoToStation,
-                                _db.Stations.First(s => s.Id == closestStationId)));
-                            _messageHandler.Handle(String.Format("Drone {0} set to go to station {1}.", drone.Id,
-                                closestStationId));
+                            
                         }
                     }
                 }
