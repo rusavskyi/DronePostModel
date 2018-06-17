@@ -382,7 +382,11 @@ namespace CoreHost
                 }
                 catch (EndpointNotFoundException e)
                 {
-                    Log("Could not connect to drone");
+                    Log("Could not connect to drone (EndpointNotFoundException)");
+                }
+                catch (CommunicationException e)
+                {
+                    Log("Could not connect to drone (CommunicationException)");
                 }
                 catch (Exception e)
                 {
