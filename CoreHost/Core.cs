@@ -373,11 +373,14 @@ namespace CoreHost
                         int closestStationId = FindClosestStation(_lastDroneTechInfosUpdate[drone.Id].Longitude,
                             _lastDroneTechInfosUpdate[drone.Id].Latitude);
 
-
-                        client.AddTask(new DroneTask(DroneTaskType.GoToStation,
-                            _db.Stations.First(s => s.Id == closestStationId)));
-                        _messageHandler.Handle(String.Format("Drone {0} set to go to station {1}.", drone.Id,
-                            closestStationId));
+                        Transfer transfer = _db.Transfers.Include("Drone").Last(t => t.Drone.Id == drone.Id);
+                        if (transfer == null)
+                        {
+                            client.AddTask(new DroneTask(DroneTaskType.GoToStation,
+                                _db.Stations.First(s => s.Id == closestStationId)));
+                            _messageHandler.Handle(String.Format("Drone {0} set to go to station {1}.", drone.Id,
+                                closestStationId));
+                        }
                     }
                 }
                 catch (EndpointNotFoundException e)
