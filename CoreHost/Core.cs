@@ -104,54 +104,54 @@ namespace CoreHost
 
         public Package RegisterPackage(GeneratedPackage package)
         {
-            Package result = new Package
-            {
-                DestinationStation = _db.Stations.First(s => s.Id == package.DestinationStationId),
-                RecipientPhoneNumber = package.RecipientNumber,
-                Size = _db.PackageSizes.First(ps => ps.Id == package.PackageSizeId),
-                Weight = package.PackageWeight
-            };
+            //Package result = new Package
+            //{
+            //    DestinationStation = _db.Stations.First(s => s.Id == package.DestinationStationId),
+            //    RecipientPhoneNumber = package.RecipientNumber,
+            //    Size = _db.PackageSizes.First(ps => ps.Id == package.PackageSizeId),
+            //    Weight = package.PackageWeight
+            //};
 
-            _db.Packages.Add(result);
-            _db.SaveChanges();
+            //_db.Packages.Add(result);
+            //_db.SaveChanges();
 
-            result = _db.Packages.Include("DestinationStation").Include("Size").First(p =>
-                p.DestinationStation.Id == package.DestinationStationId &&
-                p.RecipientPhoneNumber == package.RecipientNumber &&
-                p.Size.Id == package.PackageSizeId &&
-                p.Weight == package.PackageWeight);
+            //result = _db.Packages.Include("DestinationStation").Include("Size").First(p =>
+            //    p.DestinationStation.Id == package.DestinationStationId &&
+            //    p.RecipientPhoneNumber == package.RecipientNumber &&
+            //    p.Size.Id == package.PackageSizeId &&
+            //    p.Weight == package.PackageWeight);
 
-            Customer customer = _db.Customers.First(c => c.Id == package.SenderId);
+            //Customer customer = _db.Customers.First(c => c.Id == package.SenderId);
 
-            if (customer != null)
-            {
-                _db.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
-            }
-            else
-            {
-                if (_db.Customers.Count() > package.SenderId)
-                {
-                    customer = _db.Customers.ToList()[package.SenderId];
-                }
-                else
-                {
-                    customer = _db.Customers.ToList()[0];
-                }
-                _db.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
-            }
+            //if (customer != null)
+            //{
+            //    _db.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
+            //}
+            //else
+            //{
+            //    if (_db.Customers.Count() > package.SenderId)
+            //    {
+            //        customer = _db.Customers.ToList()[package.SenderId];
+            //    }
+            //    else
+            //    {
+            //        customer = _db.Customers.ToList()[0];
+            //    }
+            //    _db.CustomerPackages.Add(new CustomerPackage { Package = result, Sender = customer });
+            //}
 
-            _db.SaveChanges();
+            //_db.SaveChanges();
 
-            Transfer transfer = new Transfer()
-            {
-                ArrivalStation = _db.Stations.First(s => s.Id == package.DestinationStationId),
-                ArrivalTime = DateTime.Now,
-                Package = result
-            };
+            //Transfer transfer = new Transfer()
+            //{
+            //    ArrivalStation = _db.Stations.First(s => s.Id == package.DestinationStationId),
+            //    ArrivalTime = DateTime.Now,
+            //    Package = result
+            //};
 
-            Log("Package from " + customer.Id + " to " + package.RecipientNumber + " registred with id: " + result.Id + ".");
-            RegisterTransfer(transfer);
-            return result;
+            Log("Package from " + package.SenderId + " to " + package.RecipientNumber + " registered.");
+            //RegisterTransfer(transfer);
+            return null;
         }
 
         public int RegisterTransfer(Transfer transfer)
