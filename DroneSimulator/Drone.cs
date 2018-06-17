@@ -67,7 +67,7 @@ namespace DroneSimulator
             {
                 _isWorking = true;
                 _thread = new Thread(Simulation);
-                //todo Thread start
+                _thread.Start();
                 return true;
             }
             return false;
