@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -113,7 +114,8 @@ namespace DroneSimulator
 
                             Latitude = _currentTask.Station.Latitude;
                             Longitude = _currentTask.Station.Longitude;
-                            StationServiceClient stationServiceClient = new StationServiceClient("http://localhost:5000/Station/" + _currentTask.Station.Id);
+                            string address = "http://localhost:5000/Station/" + _currentTask.Station.Id;
+                            StationServiceClient stationServiceClient = new StationServiceClient(new WSHttpBinding(), new EndpointAddress(new Uri(address)));
                             stationServiceClient.CheckIn(this);
                             Log($"arrived to statation {_currentTask.Station.Id}");
                             break;
