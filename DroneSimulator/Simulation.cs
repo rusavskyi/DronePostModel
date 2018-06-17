@@ -121,30 +121,22 @@ namespace DroneSimulator
             }
         }
 
-        public void HostDrone(Drone drone, int id)
-        {
-            Uri baseAddress = new Uri("http://localhost:4999/Drone/" + id);
-            ServiceHost host = new DroneServiceHost(drone, typeof(DroneService.DroneService), baseAddress);
 
+        public bool AddDrone(DronePost.DataModel.Drone drone)
+        {
             try
             {
-                WSHttpBinding binding = new WSHttpBinding();
-                host.AddServiceEndpoint(typeof(DroneService.IDroneService), binding, baseAddress);
-                ServiceMetadataBehavior smb = new ServiceMetadataBehavior() { HttpGetEnabled = true };
-                host.Description.Behaviors.Add(smb);
-                host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
-
-                host.Open();
-                _hosts.Add(host);
-                Log("Drone hosted: " + baseAddress);
-                ++numOfDrones;
+                Drone newDrone = new Drone(drone, _messageHandler);
+                _drones.Add(newDrone);
+                HostDrone(newDrone);
+                return true;
             }
-            catch (CommunicationException ce)
+            catch (Exception ex)
             {
-                Log($"Exception: {0} {ce.Message}");
-                host.Abort();
+                return false;
             }
         }
+
 
         public void Log(string message)
         {
