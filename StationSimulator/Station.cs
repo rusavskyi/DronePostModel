@@ -13,6 +13,8 @@ namespace StationSimulator
 {
     class Station : DronePost.DataModel.Station, IStation
     {
+        private IMessageHandler _messageHandler;
+
         public Station(){}
 
         public Station(DronePost.DataModel.Station station)
@@ -24,8 +26,14 @@ namespace StationSimulator
             Name = station.Name;
         }
 
+        public void SetMessageHandler(IMessageHandler _handler)
+        {
+            _messageHandler = _handler;
+        }
+
         public void CheckIn(Drone drone)
         {
+            Log($"drone {drone.Id} trying to check in.");
             CoreServiceClient core = new CoreServiceClient();
             DronePost.DataModel.Station arrivalStation = new DronePost.DataModel.Station()
             {
@@ -41,11 +49,12 @@ namespace StationSimulator
                 ArrivalTime = DateTime.Now,
                 Drone = drone
             });
-
+            Log($"drone {drone.Id} checked in.");
         }
 
         public void CheckOut(Drone drone)
         {
+            Log($"drone {drone.Id} trying to check out.");
             CoreServiceClient core = new CoreServiceClient();
             DronePost.DataModel.Station departureStation = new DronePost.DataModel.Station()
             {
@@ -61,11 +70,12 @@ namespace StationSimulator
                 DepartureTime = DateTime.Now,
                 Drone = drone
             });
-
+            Log($"drone {drone.Id} checked out.");
         }
 
         public void GivePackageToRecipient(Customer customer, Package package)
         {
+            Log($"customer {customer.Id} trying to take package {package.Id}.");
             CoreServiceClient core = new CoreServiceClient();
             DronePost.DataModel.Station departureStation = new DronePost.DataModel.Station()
             {
@@ -81,6 +91,7 @@ namespace StationSimulator
                 DepartureTime = DateTime.Now,
                 Package = package
             });
+            Log($"package {package.Id} was given to customer.");
         }
 
         public bool GetPackageFromCustomer(GeneratedPackage package)
@@ -106,6 +117,11 @@ namespace StationSimulator
         public int RequestChargeSlot()
         {
             throw new NotImplementedException();
+        }
+
+        private void Log(string message)
+        {
+            _messageHandler.Handle($"Station {Id}: " + message);
         }
     }
 }

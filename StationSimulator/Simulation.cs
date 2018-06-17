@@ -88,6 +88,7 @@ namespace StationSimulator
 
             foreach (var station in _stations)
             {
+                station.SetMessageHandler(_messageHandler);
                 HostStation(station);
             }
         }
