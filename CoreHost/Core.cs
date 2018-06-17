@@ -385,7 +385,7 @@ namespace CoreHost
                         foreach (Transfer t in transfers)
                         {
                             if (t.Drone != null)
-                                if (transfer.Drone.Id == drone.Id)
+                                if (t.Drone.Id == drone.Id)
                                 {
                                     transfer = t;
                                     break;
