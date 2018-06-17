@@ -111,13 +111,13 @@ namespace DroneSimulator
 
                 host.Open();
                 _hosts.Add(host);
-                Log("Drone hosted: " + baseAddress);
+                Log("Drone has been started, waiting for commands on: " + baseAddress);
                 ++numOfDrones;
                 drone.Start();
             }
             catch (CommunicationException ce)
             {
-                Log(String.Format("Exception: {0}", ce.Message));
+                Log($"Exception: {ce.Message}");
                 host.Abort();
             }
         }
@@ -142,7 +142,7 @@ namespace DroneSimulator
             }
             catch (CommunicationException ce)
             {
-                Log(String.Format("Exception: {0}", ce.Message));
+                Log($"Exception: {0} {ce.Message}");
                 host.Abort();
             }
         }
