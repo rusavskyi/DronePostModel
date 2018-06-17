@@ -48,6 +48,7 @@ namespace CoreHost
                 _host.AddServiceEndpoint(typeof(ICoreService), new WSHttpBinding(), "");
                 ServiceMetadataBehavior bechavior = new ServiceMetadataBehavior() { HttpGetEnabled = true };
                 _host.Description.Behaviors.Add(bechavior);
+                _host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
                 _host.Open();
                 Log("Core has started on address: " + baseAddress);
             }
