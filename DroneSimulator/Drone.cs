@@ -21,10 +21,7 @@ namespace DroneSimulator
         private IMessageHandlerDrone _messageHandler;
 
 
-        public Drone()
-        {
-            
-        }
+        public Drone(){}
 
         public Drone(DronePost.DataModel.Drone drone)
         {
@@ -43,6 +40,7 @@ namespace DroneSimulator
         public void AddTask(DroneTask task)
         {
             _tasks.Enqueue(task);
+            Log("received task: "+task.Type);
         }
 
         public void SetTask(DroneTask task)
@@ -65,17 +63,24 @@ namespace DroneSimulator
 
         public bool Start()
         {
-            _isWorking = true;
-            _thread = new Thread(() =>
+            if (!_isWorking)
             {
-                Simulation();
-            });
-            return true;
+                _isWorking = true;
+                _thread = new Thread(Simulation);
+                //todo Thread start
+                return true;
+            }
+            return false;
         }
 
         public bool Stop()
         {
-            _isWorking = false;
+            if (_isWorking)
+            {
+                _isWorking = false;
+                //todo Thread stop
+            }
+
             return true;
         }
 
@@ -91,11 +96,12 @@ namespace DroneSimulator
 
                             break;
                         case DroneTaskType.GoToStation:
-                            _messageHandler.Handle(String.Format("Drone {0} {1} moved to statation {2}", Model, Id, _currentTask.Station.Id));
+                            Log($"started moving to statation {_currentTask.Station.Id}");
                             // todo over time
                             Latitude = _currentTask.Station.Latitude;
                             Longitude = _currentTask.Station.Longitude;
                             // todo commit arrival
+                            Log($"moved to statation {_currentTask.Station.Id}");
                             DoNextTask();
                             break;
                         case DroneTaskType.LeavePackage:
@@ -104,6 +110,7 @@ namespace DroneSimulator
                         case DroneTaskType.ChargeAtStation:
 
                             break;
+
                     }
                 }
                 else
@@ -111,6 +118,14 @@ namespace DroneSimulator
                     Thread.Sleep(5000); // Wait 5 secends for new tasks.
                 }
             }
+        }
+
+
+
+
+        private void Log(string message)
+        {
+            _messageHandler.Handle("Drone "+Model.ModelName+" "+Id+": "+message);
         }
     }
 }
