@@ -71,7 +71,6 @@
     </Compile>
     <Compile Include="Drone.cs" />
     <Compile Include="DroneServiceHost.cs" />
-    <Compile Include="DroneSimulation.cs" />
     <Compile Include="IMessageHandlerDrone.cs" />
     <Compile Include="Simulation.cs" />
     <Page Include="AddDrone.xaml">

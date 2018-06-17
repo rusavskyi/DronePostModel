@@ -87,6 +87,7 @@ namespace DroneSimulator
             {
                 if (_tasks.Count > 0)
                 {
+                    _currentTask = _tasks.Dequeue();
                     switch (_currentTask.Type)
                     {
                         case DroneTaskType.TakePackage:
