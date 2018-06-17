@@ -96,7 +96,7 @@ namespace DroneSimulator
 
                             break;
                         case DroneTaskType.GoToStation:
-                            Log($"Drone {Id} moving to statation {_currentTask.Station.Id}");
+                            Log($"moving to statation {_currentTask.Station.Id}");
                             // todo over time
                             float distanceLat = Math.Abs(_currentTask.Station.Latitude - Latitude);
                             float distanceLon = Math.Abs(_currentTask.Station.Longitude - Longitude);
@@ -113,8 +113,9 @@ namespace DroneSimulator
 
                             Latitude = _currentTask.Station.Latitude;
                             Longitude = _currentTask.Station.Longitude;
-                            // todo commit arrival
-                            Log($"Arrived to statation {_currentTask.Station.Id}");
+                            StationServiceClient stationServiceClient = new StationServiceClient("http://localhost:5000/Station/" + _currentTask.Station.Id);
+                            stationServiceClient.CheckIn(this);
+                            Log($"arrived to statation {_currentTask.Station.Id}");
                             break;
                         case DroneTaskType.LeavePackage:
 

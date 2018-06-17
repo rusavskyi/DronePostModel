@@ -73,6 +73,7 @@
     <Compile Include="DroneServiceHost.cs" />
     <Compile Include="IMessageHandlerDrone.cs" />
     <Compile Include="Simulation.cs" />
+    <Compile Include="StationService.cs" />
     <Page Include="AddDrone.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
