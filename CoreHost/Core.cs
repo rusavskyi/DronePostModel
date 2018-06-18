@@ -156,7 +156,7 @@ namespace CoreHost
 
         public int RegisterTransfer(Transfer transfer)
         {
-            Log("Transfer registred.");
+            Log("Transfer registered.");
             if (transfer.Drone != null)
             {
                 DronePost.DataModel.Drone droneInBase = _db.Drones.Include("Model").First(d => d.Id == transfer.Drone.Id);
@@ -186,7 +186,7 @@ namespace CoreHost
         {
             _db.Drones.Add(drone);
             _db.SaveChanges();
-            Log("Drone registred.");
+            Log("Drone registered.");
             return 0;
         }
 
@@ -194,7 +194,7 @@ namespace CoreHost
         {
             _db.Stations.Add(station);
             _db.SaveChanges();
-            Log("Station registred.");
+            Log("Station registered.");
             return 0;
         }
 
@@ -202,7 +202,7 @@ namespace CoreHost
         {
             _db.Customers.Add(customer);
             _db.SaveChanges();
-            Log("Customer registred.");
+            Log("Customer registered.");
             return 0;
         }
 
